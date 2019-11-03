@@ -1,0 +1,21 @@
+@import "../../styles/variables";
+.input {
+  width: 100%;
+  padding: 1rem;
+  background-color: $color-light;
+  border: 0.2rem solid $color-primary-darker;
+  border-radius: 0.2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.4);
+  &::placeholder {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+  &:focus {
+    border: 0.2rem solid $color-secondary;
+
+    &::placeholder {
+      color: $color-secondary;
+    }
+  }
+}
