@@ -1,0 +1,24 @@
+{
+  "name": "utfpr-final-paper",
+  "version": "1.0.0",
+  "description": "## UTFPR - Universidade Tecnológica Federal do Paraná",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev-api\" \"npm run dev-client\"",
+    "dev-client": "cd fp-client && npm start",
+    "dev-api": "cd fp-api && npm run dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hrozan/utfpr-final-paper.git"
+  },
+  "author": "Higor Rozan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hrozan/utfpr-final-paper/issues"
+  },
+  "homepage": "https://github.com/hrozan/utfpr-final-paper#readme",
+  "dependencies": {
+    "concurrently": "^5.0.0"
+  }
+}

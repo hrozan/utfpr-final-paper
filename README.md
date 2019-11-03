@@ -19,6 +19,6 @@ This is repo contains all source code from my implementation
 ### Getting Started
 
 ```bash
-cd fp-api && npm run dev # run ao in development
+cd fp-api && npm run dev # run api in development
 cd fp-client && npm start # run pwa in development
 ```
