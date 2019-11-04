@@ -13,6 +13,12 @@ This is repo contains all source code from my implementation
 
 ### Getting Started
 
+Intall dependencies
+
+```bash
+npm i && cd fp-client && npm i && cd ../fp-api && npm i 
+```
+
 Run project in developmet
 
 ```bash
