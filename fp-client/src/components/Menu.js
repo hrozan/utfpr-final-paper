@@ -3,21 +3,17 @@ import Link from "./layout/atoms/Link"
 import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome"
 import { faHome, faSignOutAlt } from "@fortawesome/free-solid-svg-icons"
 import Navbar from "./layout/molecules/Navbar"
-import { useSelector, useDispatch } from "react-redux"
-import { logout } from "./auth/authActions"
+import { useSelector } from "react-redux"
+import authService from "./auth/authService"
 
 const Menu = () => {
   const auth = useSelector(state => state.auth)
-  const dispatch = useDispatch()
   const { isAuthenticated } = auth
-
-  const onLogout = () => {
-    dispatch(logout())
-  }
+  const { logout } = authService
 
   return (
     <Navbar show={isAuthenticated}>
-      <Link onClick={onLogout}>
+      <Link onClick={logout}>
         <Icon to={"/login"} icon={faSignOutAlt} size={"lg"} />
       </Link>
       <Link to={"/"}>

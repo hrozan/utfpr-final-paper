@@ -1,7 +1,7 @@
 import axios from "axios"
 import urlJoin from "url-join"
 import { API_URL } from "../../config"
-import store from "../../store"
+import { store } from "../../store"
 import { login as actionLogin, logout as actionLogout } from "./authActions"
 
 export const TOKEN_KEY = "jwt_token"

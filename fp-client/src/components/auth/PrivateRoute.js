@@ -9,7 +9,6 @@ const PrivateRoute = props => {
   const auth = useSelector(state => state.auth)
   const { isAuthenticated } = auth
 
-
   return (
     <Route
       {...rest}
