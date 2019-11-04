@@ -38,6 +38,34 @@ npm run dev-client # run just client
 npm run dev-api # run just api
 ```
 
+###  :seedling: Seed
+
+To seed the database:
+
+Create _users.json_
+```
+touch fp-api/database/seed/users.json
+```
+
+Enter  users credential:
+```json
+// users.json
+[
+  {
+    "username": "<username>",
+    "email": "<email>",
+    "password": "<password>"
+  }
+]
+
+```
+
+Run seed:
+
+```bash
+npm run seed
+```
+
 ###  :page_facing_up: License
 
 This project is licensed under the terms of the [MIT license](/LICENSE)
