@@ -1,36 +1,21 @@
 import React from "react"
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
-import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome"
-import { faHome, faSignOutAlt } from "@fortawesome/free-solid-svg-icons"
+import { BrowserRouter as Router } from "react-router-dom"
+import { Provider } from "react-redux"
+import store from "./store"
 
-import Home from "./pages/home"
-import Login from "./pages/login"
-import PrivateRoute from "./components/PrivateRoute"
-import Navbar from "./components/molecules/Navbar"
-import Link from "./components/atoms/Link"
+import Menu from "./components/Menu"
+import Routes from "./routes"
 
 function App() {
   return (
-    <Router>
-      <div>
-        <Navbar>
-          <Link to={"/login"}>
-            <Icon icon={faSignOutAlt} size={"lg"} />
-          </Link>
-          <Link to={"/"}>
-            <Icon icon={faHome} size={"lg"} />
-          </Link>
-        </Navbar>
-        <Switch>
-          <PrivateRoute exact path={"/"}>
-            <Home />
-          </PrivateRoute>
-          <Route path={"/login"}>
-            <Login />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <div>
+          <Menu />
+          <Routes />
+        </div>
+      </Router>
+    </Provider>
   )
 }
 

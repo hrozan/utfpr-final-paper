@@ -1,12 +1,12 @@
 import React, { useState } from "react"
 import * as PropTypes from "prop-types"
 import { withRouter } from "react-router-dom"
-import Button from "../../components/atoms/Button"
-import Card from "../../components/atoms/Card"
-import TextInput from "../../components/molecules/TextInput"
+import Button from "../../components/layout/atoms/Button"
+import Card from "../../components/layout/atoms/Card"
+import TextInput from "../../components/layout/molecules/TextInput"
 import styles from "./styles.module.scss"
-import Form from "../../components/molecules/Form"
-import authService from "../../services/authService"
+import Form from "../../components/layout/molecules/Form"
+import authService from "../../components/auth/authService"
 
 const Login = props => {
   const [loading, setLoading] = useState(false)
