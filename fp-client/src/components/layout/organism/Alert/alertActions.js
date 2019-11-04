@@ -1,5 +1,3 @@
-import { func } from "prop-types"
-
 export const SHOW = "SHOW"
 export const HIDE = "HIDE"
 
