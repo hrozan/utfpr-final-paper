@@ -1,6 +1,6 @@
-# Computer Engineer Final Paper
+# :computer: Computer Engineer Final Paper  
 
-## UTFPR - Universidade Tecnológica Federal do Paraná
+##  :mortar_board: UTFPR - Universidade Tecnológica Federal do Paraná
 
 This is repo contains all source code from my implementation
 
@@ -11,34 +11,34 @@ This is repo contains all source code from my implementation
 
 ```
 
-### Getting Started
+### :rocket: Getting Started
 
-1. Intall dependencies
+Install dependencies
 
 ```bash
 npm i && cd fp-client && npm i && cd ../fp-api && npm i
 ```
 
-1. Set __.env__ 
+Set Up __.env__ 
 
 ```bash
 cp fp-api/.env.example fp-api/.env
 ```
 
-1. Run project in developmet
+Run project in developmet
 
 ```bash
 npm run dev
 ```
 
-1. Single project
+Single project
 
 ```bash
 npm run dev-client # run just client  
 npm run dev-api # run just api
 ```
 
-### License
+###  :page_facing_up: License
 
 This project is licensed under the terms of the [MIT license](/LICENSE)
 
@@ -48,4 +48,4 @@ This project is licensed under the terms of the [MIT license](/LICENSE)
 * [Express](https://expressjs.com/)
 
 ---
-__Author__: [Higor Augusto Bassi Rozan](https://github.com/hrozan)
+  __Author__: :busts_in_silhouette: [Higor Augusto Bassi Rozan](https://github.com/hrozan)
