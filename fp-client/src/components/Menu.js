@@ -13,8 +13,8 @@ const Menu = () => {
 
   return (
     <Navbar show={isAuthenticated}>
-      <Link onClick={logout}>
-        <Icon to={"/login"} icon={faSignOutAlt} size={"lg"} />
+      <Link to={"/login"} onClick={logout}>
+        <Icon icon={faSignOutAlt} size={"lg"} />
       </Link>
       <Link to={"/"}>
         <Icon icon={faHome} size={"lg"} />

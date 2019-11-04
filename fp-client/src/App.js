@@ -5,7 +5,8 @@ import { Provider } from "react-redux"
 import { PersistGate } from "redux-persist/integration/react"
 
 import Menu from "./components/Menu"
-import Routes from "./routes"
+import Routes from "./components/Routes"
+import Alert from "./components/layout/organism/Alert/AlertModal"
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <div>
             <Menu />
             <Routes />
+            <Alert />
           </div>
         </Router>
       </PersistGate>

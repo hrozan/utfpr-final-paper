@@ -7,6 +7,7 @@ import TextInput from "../../components/layout/molecules/TextInput"
 import styles from "./styles.module.scss"
 import Form from "../../components/layout/molecules/Form"
 import authService from "../../components/auth/authService"
+import alert from "../../components/layout/organism/Alert"
 
 const Login = props => {
   const [loading, setLoading] = useState(false)
@@ -21,7 +22,7 @@ const Login = props => {
         console.error(error)
       } else {
         const { message } = error.response.data
-        alert(message)
+        alert.show(message)
       }
       setLoading(false)
     }

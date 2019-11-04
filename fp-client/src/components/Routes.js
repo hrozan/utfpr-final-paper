@@ -1,7 +1,7 @@
 import React from "react"
-import PrivateRoute from "./components/auth/PrivateRoute"
-import Home from "./pages/home"
-import Login from "./pages/login"
+import PrivateRoute from "./auth/PrivateRoute"
+import Home from "../pages/home"
+import Login from "../pages/login"
 import { Route, Switch } from "react-router-dom"
 
 const Routes = () => {

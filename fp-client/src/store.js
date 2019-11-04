@@ -3,12 +3,14 @@ import { persistStore, persistReducer } from "redux-persist"
 import storage from "redux-persist/lib/storage/session" // defaults to localStorage for web
 
 import authReducer from "./components/auth/authReducer"
+import alertReducer from "./components/layout/organism/Alert/alertReducer"
 
-const rootReducer = combineReducers({ auth: authReducer })
+const rootReducer = combineReducers({ auth: authReducer, alert: alertReducer })
 
 const persistConfig = {
   key: "root",
-  storage
+  storage,
+  whitelist: ["auth"]
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
