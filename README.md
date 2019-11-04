@@ -13,19 +13,25 @@ This is repo contains all source code from my implementation
 
 ### Getting Started
 
-Intall dependencies
+1. Intall dependencies
 
 ```bash
-npm i && cd fp-client && npm i && cd ../fp-api && npm i 
+npm i && cd fp-client && npm i && cd ../fp-api && npm i
 ```
 
-Run project in developmet
+1. Set __.env__ 
+
+```bash
+cp fp-api/.env.example fp-api/.env
+```
+
+1. Run project in developmet
 
 ```bash
 npm run dev
 ```
 
-Single project
+1. Single project
 
 ```bash
 npm run dev-client # run just client  
