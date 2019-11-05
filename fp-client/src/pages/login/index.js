@@ -4,10 +4,10 @@ import { withRouter } from "react-router-dom"
 import Button from "../../components/layout/atoms/Button"
 import Card from "../../components/layout/atoms/Card"
 import TextInput from "../../components/layout/molecules/TextInput"
-import styles from "./styles.module.scss"
 import Form from "../../components/layout/molecules/Form"
 import authService from "../../components/auth/authService"
 import alert from "../../components/layout/organism/Alert"
+import LoginPage from "../../components/layout/template/LoginPage"
 
 const Login = props => {
   const [loading, setLoading] = useState(false)
@@ -29,7 +29,7 @@ const Login = props => {
   }
 
   return (
-    <div className={styles.container}>
+    <LoginPage>
       <Form onSubmit={submitHandler}>
         <Card>
           <h1>Welcome {"👨‍🚀️"}</h1>
@@ -38,7 +38,7 @@ const Login = props => {
           <Button loading={loading}>Login</Button>
         </Card>
       </Form>
-    </div>
+    </LoginPage>
   )
 }
 
