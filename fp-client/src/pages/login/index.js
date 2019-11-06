@@ -20,10 +20,11 @@ const Login = props => {
     } catch (error) {
       if (!error.response) {
         console.error(error)
-      } else {
-        const { message } = error.response.data
-        alert.show(message)
+        alert.show("Ops, something went wrong 🙁")
+        return setLoading(false)
       }
+      const { message } = error.response.data
+      alert.show(message)
       setLoading(false)
     }
   }

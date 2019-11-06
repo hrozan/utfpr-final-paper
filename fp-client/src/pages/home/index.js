@@ -3,6 +3,7 @@ import Card from "../../components/layout/atoms/Card"
 import DashboardPage from "../../components/layout/template/CardDisplay"
 import Page from "../../components/layout/template/Page"
 import smartObjectService from "../../services/smartObjectService"
+import MQTTProvider from "../../providers/mqtt"
 
 const Home = () => {
   const [smartObject, setSmartObject] = useState({})
@@ -10,6 +11,9 @@ const Home = () => {
     smartObjectService.read().then(smartObject => {
       setSmartObject(smartObject)
     })
+
+    // init mqtt
+    MQTTProvider.init()
   }, [])
   return (
     <Page>

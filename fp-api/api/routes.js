@@ -7,7 +7,7 @@ const authentication = require("./middleware/authentication")
 /* GET home page. */
 api.route("/").get((req, res) => res.json({ status: "ok" }))
 /* POST login resource */
-api.route("/middleware/login").post(auth.login)
+api.route("/auth/login").post(auth.login)
 /* GET smart-object resource */
 api.route("/smart-object").get(authentication.middleware, smartObject.read)
 
