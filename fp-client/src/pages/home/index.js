@@ -1,9 +1,16 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import Card from "../../components/layout/atoms/Card"
 import DashboardPage from "../../components/layout/template/CardDisplay"
 import Page from "../../components/layout/template/Page"
+import smartObjectService from "../../services/smartObjectService"
 
 const Home = () => {
+  const [smartObject, setSmartObject] = useState({})
+  useEffect(() => {
+    smartObjectService.read().then(smartObject => {
+      setSmartObject(smartObject)
+    })
+  }, [])
   return (
     <Page>
       <Card title={"Monitor"}>
@@ -13,13 +20,13 @@ const Home = () => {
       </Card>
       <DashboardPage>
         <Card title="CPU">
-          <p>23%</p>
+          <p>{smartObject.cpu}%</p>
         </Card>
         <Card title="Temp">
-          <p>23 C</p>
+          <p>{smartObject.temp} C</p>
         </Card>
         <Card title="Memory">
-          <p>23%</p>
+          <p>{smartObject.memory}%</p>
         </Card>
       </DashboardPage>
     </Page>

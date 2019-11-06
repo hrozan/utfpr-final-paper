@@ -4,7 +4,7 @@ import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome"
 import { faHome, faSignOutAlt } from "@fortawesome/free-solid-svg-icons"
 import Navbar from "./layout/molecules/Navbar"
 import { useSelector } from "react-redux"
-import authService from "./auth/authService"
+import authService from "../services/authService"
 
 const Menu = () => {
   const auth = useSelector(state => state.auth)

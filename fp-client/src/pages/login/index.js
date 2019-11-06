@@ -5,7 +5,7 @@ import Button from "../../components/layout/atoms/Button"
 import Card from "../../components/layout/atoms/Card"
 import TextInput from "../../components/layout/molecules/TextInput"
 import Form from "../../components/layout/molecules/Form"
-import authService from "../../components/auth/authService"
+import authService from "../../services/authService"
 import alert from "../../components/layout/organism/Alert"
 import LoginPage from "../../components/layout/template/LoginPage"
 
