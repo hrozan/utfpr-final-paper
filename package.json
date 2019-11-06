@@ -7,7 +7,8 @@
     "dev": "concurrently \"npm run dev-api\" \"npm run dev-client\"",
     "dev-client": "cd fp-client && npm start",
     "dev-api": "cd fp-api && npm run dev",
-    "seed": "node fp-api/database/seed/user.js"
+    "seed": "node fp-api/database/seed/user.js",
+    "deploy-client": "bash ./deploy/client.sh"
   },
   "repository": {
     "type": "git",
