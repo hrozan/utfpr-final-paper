@@ -4,6 +4,7 @@ import DashboardPage from "../../components/layout/template/CardDisplay"
 import Page from "../../components/layout/template/Page"
 import smartObjectService from "../../services/smartObjectService"
 import MQTTProvider from "../../providers/mqtt"
+import Button from "../../components/layout/atoms/Button"
 
 const Home = () => {
   const [smartObject, setSmartObject] = useState({})
@@ -11,12 +12,17 @@ const Home = () => {
     smartObjectService.read().then(smartObject => {
       setSmartObject(smartObject)
     })
-
-    // init mqtt
-    MQTTProvider.init()
   }, [])
+
+  const onConnect = () => {
+    MQTTProvider.init()
+  }
+
   return (
     <Page>
+      <Card>
+        <Button onClick={onConnect}>Connect</Button>
+      </Card>
       <Card title={"Monitor"}>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto blanditiis consectetur dolor, explicabo
         fugit iste laborum minus nostrum obcaecati placeat provident quam quo saepe suscipit veniam! Architecto
