@@ -32,6 +32,7 @@ def connect_broker():
 
 def run():
     client = connect_broker()
+    client.publish(topic="test", payload="Deu Bom", qos=0, retain=False)
     client.loop_forever()
 
 

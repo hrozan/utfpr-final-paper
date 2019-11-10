@@ -4,8 +4,9 @@ import storage from "redux-persist/lib/storage/session" // defaults to localStor
 
 import authReducer from "./components/auth/authReducer"
 import alertReducer from "./components/layout/organism/Alert/alertReducer"
+import mqttReducer from "./providers/mqtt/mqttReducer"
 
-const rootReducer = combineReducers({ auth: authReducer, alert: alertReducer })
+const rootReducer = combineReducers({ auth: authReducer, alert: alertReducer, mqtt: mqttReducer })
 
 const persistConfig = {
   key: "root",

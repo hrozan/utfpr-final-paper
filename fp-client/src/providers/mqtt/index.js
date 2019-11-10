@@ -1,6 +1,7 @@
 import MQTT from "paho-mqtt/paho-mqtt"
 import { store } from "../../store"
 import { BROKER_URL, BROKER_PORT, MQTT_PASSWORD } from "../../config"
+import { onConnected } from "./mqttActions"
 
 const MQTTProvider = {
   init(password = MQTT_PASSWORD) {
@@ -27,6 +28,7 @@ const MQTTProvider = {
   },
   onConnect() {
     console.info("MQTT Connected")
+    store.dispatch(onConnected())
     this.client.subscribe("test")
   }
 }

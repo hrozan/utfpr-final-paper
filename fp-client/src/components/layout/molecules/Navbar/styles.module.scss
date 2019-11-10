@@ -3,15 +3,20 @@
 .navbar {
   width: 100%;
   position: fixed;
-  bottom: 0;
   padding: 1rem 2rem;
   background-color: $color-secondary;
   color: $color-light;
   display: flex;
-  flex-direction: column;
+  bottom: 0;
   align-items: center;
   border-bottom: 0.2rem solid $color-light;
-
+  justify-content: space-between;
+  flex-direction: column-reverse;
+  .content-menu{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
   .content {
     margin-top: 0.5rem;
     padding: 1rem 0.5rem;
@@ -37,11 +42,17 @@
   }
 }
 
+.connected-icon {
+  font-size: 2rem;
+}
+
 @media screen and (min-width: $break-point-desktop) {
   .navbar {
     position: initial;
     border-bottom: unset;
-    align-items: flex-start;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 
     .content {
       position: absolute;
