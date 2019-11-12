@@ -8,20 +8,30 @@ import Button from "../../components/layout/atoms/Button"
 
 const Home = () => {
   const [smartObject, setSmartObject] = useState({})
+  const [loading, setLoading] = useState(false)
   useEffect(() => {
     smartObjectService.read().then(smartObject => {
       setSmartObject(smartObject)
     })
   }, [])
 
-  const onConnect = () => {
-    MQTTProvider.init()
+  const onConnect = async () => {
+    try {
+      setLoading(true)
+      await MQTTProvider.connect()
+    } catch (e) {
+      console.log(e.message)
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
     <Page>
       <Card>
-        <Button onClick={onConnect}>Connect</Button>
+        <Button loading={loading} onClick={onConnect}>
+          Connect
+        </Button>
       </Card>
       <Card title={"Monitor"}>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto blanditiis consectetur dolor, explicabo
