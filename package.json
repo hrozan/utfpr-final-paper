@@ -8,7 +8,8 @@
     "dev-client": "cd fp-client && npm start",
     "dev-api": "cd fp-api && npm run dev",
     "seed": "node fp-api/database/seed/user.js",
-    "deploy-client": "bash ./deploy/client.sh"
+    "deploy-client": "bash ./deploy/client.sh",
+    "deploy-api": "bash ./deploy/api.sh"
   },
   "repository": {
     "type": "git",

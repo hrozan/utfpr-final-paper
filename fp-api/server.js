@@ -1,3 +1,4 @@
+require("dotenv").config()
 const app = require("./api/app")
 const debug = require("debug")("api:server")
 const http = require("http")

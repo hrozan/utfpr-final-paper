@@ -2,11 +2,13 @@ import React, { useState } from "react"
 import * as PropTypes from "prop-types"
 import styles from "./styles.module.scss"
 import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome"
-import { faBars } from "@fortawesome/free-solid-svg-icons"
+import { faBars, faLaughWink, faSadTear } from "@fortawesome/free-solid-svg-icons"
+import { useSelector } from "react-redux"
 
 const Navbar = props => {
   const { children, show } = props
   const [isOpen, setIsOpen] = useState(false)
+  const mqtt = useSelector(state => state.mqtt)
 
   const onClickHandler = () => {
     setIsOpen(!isOpen)
@@ -18,9 +20,12 @@ const Navbar = props => {
 
   return (
     <nav className={styles.navbar}>
-      <button className={styles["menu-button"]} onClick={onClickHandler}>
-        <Icon size="lg" icon={faBars} />
-      </button>
+      <div className={styles["content-menu"]}>
+        <button className={styles["menu-button"]} onClick={onClickHandler}>
+          <Icon size="lg" icon={faBars} />
+        </button>
+        <Icon className={styles["connected-icon"]} icon={mqtt.connected ? faLaughWink : faSadTear} />
+      </div>
       {isOpen && <div className={styles.content}>{children}</div>}
     </nav>
   )
