@@ -10,5 +10,7 @@ api.route("/").get((req, res) => res.json({ status: "ok" }))
 api.route("/auth/login").post(auth.login)
 /* GET smart-object resource */
 api.route("/smart-object").get(authentication.middleware, smartObject.read)
+/* GET mqtt broker con credentials */
+api.route("/mqtt/credentials").get(authentication.middleware, smartObject.getCredentials)
 
 module.exports = api

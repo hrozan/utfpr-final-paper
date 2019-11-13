@@ -1,7 +1,8 @@
-import { ON_CONNECTED, ON_DISCONNECTED } from "./mqttActions"
+import { ON_CONNECTED, ON_DISCONNECTED, ON_MESSAGE } from "./mqttActions"
 
 const initialState = {
-  connected: false
+  connected: false,
+  data: {}
 }
 
 function mqttReducer(state = initialState, action) {
@@ -15,6 +16,11 @@ function mqttReducer(state = initialState, action) {
       return {
         ...state,
         connected: false
+      }
+    case ON_MESSAGE:
+      return {
+        ...state,
+        data: action.payload
       }
     default:
       return state
