@@ -1,6 +1,6 @@
 # :computer: Computer Engineer Final Paper  
 
-##  :mortar_board: UTFPR - Universidade Tecnológica Federal do Paraná
+## :mortar_board: UTFPR - Universidade Tecnológica Federal do Paraná
 
 This is repo contains all source code from my implementation
 
@@ -13,13 +13,15 @@ This is repo contains all source code from my implementation
 
 ### :rocket: Getting Started
 
+### Client and API
+
 Install dependencies
 
 ```bash
 npm i && cd fp-client && npm i && cd ../fp-api && npm i
 ```
 
-Set Up __.env__ 
+Set Up __.env__
 
 ```bash
 cp fp-api/.env.example fp-api/.env
@@ -38,11 +40,31 @@ npm run dev-client # run just client
 npm run dev-api # run just api
 ```
 
-###  :seedling: Seed
+#### Smart Object
+
+Create _credentials.json_
+
+```
+touch fp-rasp/credentials.json
+```
+
+
+```json
+[
+  {
+    "username": "<username>",
+    "password": "<password>"
+  }
+]
+
+```
+
+### :seedling: Seed
 
 To seed the database:
 
 Create _users.json_
+
 ```
 touch fp-api/database/seed/users.json
 ```
