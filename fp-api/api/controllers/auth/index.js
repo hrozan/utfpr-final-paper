@@ -7,7 +7,7 @@ const LOGIN_ERROR_RESPONSE = { message: "Ops, your credential are wrong, try aga
 const authController = {
 	async login(req, res) {
 		const { username, password } = req.body
-
+		console.log(`Login attempt: ${username} `)
 		try {
 			const user = await User.findOne({ username })
 			if (!user) {
