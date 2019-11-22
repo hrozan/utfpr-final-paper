@@ -6,6 +6,7 @@ import time
 import json
 import requests
 import logging
+import bluetooth
 
 MQTT_HOST = 'hrozan.xyz'
 MQTT_PORT = 8883
@@ -16,8 +17,8 @@ logging.basicConfig(level=logging.DEBUG)
 
 
 def get_broker_credentials():
-    login_url = "http://localhost:5000/auth/login"
-    credential_url = "http://localhost:5000/mqtt/credentials"
+    login_url = "https://api.hrozan.xyz/auth/login"
+    credential_url = "https://api.hrozan.xyz/mqtt/credentials"
 
     with open('credentials.json', 'r') as file:
         data = file.read()
@@ -32,15 +33,15 @@ def get_broker_credentials():
     return response.json()
 
 
-def main():
-    logging.debug("Start Connection")
-    credentials = get_broker_credentials()
-
+def connect_mqtt(credentials):
     client = mqtt.Client(client_id=CLIENT_ID, clean_session=False)
     client.username_pw_set(credentials["userName"], credentials["password"])
     client.tls_set(CERTIFICATE_PATH, tls_version=ssl.PROTOCOL_TLSv1_2)
     client.connect(host=MQTT_HOST, port=MQTT_PORT)
+    return client
 
+
+def send_data(client):
     while True:
         data = {
             'cpu': psutil.cpu_percent(),
@@ -53,7 +54,14 @@ def main():
         client.publish(topic="main", payload=payload, qos=0, retain=False)
         time.sleep(2)
 
-    pass
+
+def main():
+    logging.debug("Start Connection")
+    credentials = get_broker_credentials()
+    logging.debug("Credentials Success")
+    client = connect_mqtt(credentials)
+    logging.debug("Connected Success")
+    send_data(client)
 
 
 if __name__ == '__main__':

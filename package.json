@@ -9,7 +9,8 @@
     "dev-api": "cd fp-api && npm run dev",
     "seed": "node fp-api/database/seed/user.js",
     "deploy-client": "bash ./deploy/client.sh",
-    "deploy-api": "bash ./deploy/api.sh"
+    "deploy-api": "bash ./deploy/api.sh",
+    "dev-rasp": "cd fp-rasp/ && nodemon --exec \"./venv/bin/python3\" main.py"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,7 @@
   },
   "homepage": "https://github.com/hrozan/utfpr-final-paper#readme",
   "dependencies": {
-    "concurrently": "^5.0.0"
+    "concurrently": "^5.0.0",
+    "nodemon": "^1.19.4"
   }
 }

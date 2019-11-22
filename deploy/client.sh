@@ -6,6 +6,8 @@ HOST="hrozan@hrozan.xyz"
 echo "🏁 Start Client Deploy"
 cd fp-client/
 
+mv .env.local temp
+
 echo "⚙️ Building"
 npm run build --env production
 
@@ -22,3 +24,4 @@ echo "🗑 Cleaning"
 rm $FILE_NAME
 rm -rf client
 ssh $HOST "rm ${FILE_NAME}"
+mv temp .env.local
