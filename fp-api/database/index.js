@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 const debug = require("debug")("api:database")
-const { DB_NAME } = process.env
+const { MONGO_URL } = process.env
 
 exports.init = async function() {
 	try {
@@ -8,7 +8,7 @@ exports.init = async function() {
 		mongoose.set("useFindAndModify", false)
 		mongoose.set("useUnifiedTopology", true)
 		mongoose.set("useCreateIndex", true)
-		await mongoose.connect(`mongodb://localhost/${DB_NAME}`)
+		await mongoose.connect(MONGO_URL)
 		debug("connected")
 	} catch (error) {
 		debug(error.message)

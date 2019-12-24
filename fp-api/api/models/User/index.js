@@ -4,13 +4,13 @@ const saltRounds = 10
 
 const MODEL_NAME = "User"
 
-const user = {
+const index = {
 	username: { type: String, required: true, unique: true },
 	email: { type: String, required: true, unique: true },
 	password: { type: String, required: true }
 }
 
-const userSchema = new mongoose.Schema(user)
+const userSchema = new mongoose.Schema(index)
 
 userSchema.pre("save", async function save(next) {
 	if (!this.isModified("password")) return next()

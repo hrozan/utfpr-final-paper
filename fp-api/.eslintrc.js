@@ -4,7 +4,7 @@ module.exports = {
 		es6: true,
 		node: true
 	},
-	extends: "eslint:recommended",
+	extends: ["eslint:recommended", "plugin:jest/recommended"],
 	globals: {
 		Atomics: "readonly",
 		SharedArrayBuffer: "readonly"
@@ -19,5 +19,5 @@ module.exports = {
 		semi: ["error", "never"],
 		"prettier/prettier": "error"
 	},
-	plugins: ["prettier"]
+	plugins: ["prettier", "jest"]
 }

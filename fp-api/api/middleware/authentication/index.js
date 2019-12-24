@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken")
 const { JWT_KEY } = process.env
 
-const authentication = {
+const index = {
 	async middleware(req, res, next) {
 		const token = req.headers.authorization
 		if (!token) {
@@ -14,4 +14,4 @@ const authentication = {
 		})
 	}
 }
-module.exports = authentication
+module.exports = index

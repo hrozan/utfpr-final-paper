@@ -6,10 +6,7 @@ const debug = require("debug")("api:seed")
 const users = require("./users")
 
 async function createAdmin() {
-	const promises = users.map(user => {
-		const u = new User(user)
-		return u.save()
-	})
+	const promises = users.map(user => new User(user).save())
 	const result = await Promise.all(promises)
 	result.map(user => debug("user created id:", user._id))
 }
@@ -19,7 +16,7 @@ async function run() {
 		await database.init()
 		await createAdmin()
 	} catch (e) {
-		console.log(e.errmsg)
+		console.error(e.errmsg)
 	} finally {
 		await mongoose.connection.close()
 	}
