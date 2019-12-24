@@ -3,24 +3,19 @@ name: Node CI
 on: [push]
 
 jobs:
-  build:
-
+  test:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [8.x, 10.x, 12.x]
-
     steps:
     - uses: actions/checkout@v1
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: setup node 12
       uses: actions/setup-node@v1
       with:
-        node-version: ${{ matrix.node-version }}
-    - name: npm install, build, and test
+        node-version: 12
+    - name: install api dependencies 
       run: |
-        npm ci
-        npm run build --if-present
-        npm test
+        cd fp-api/
+        npm i
       env:
         CI: true
+    - name: run test
+      run: npm test    

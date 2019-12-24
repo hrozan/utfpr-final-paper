@@ -1,6 +1,4 @@
-require("dotenv").config()
-// Remove Log on Testing
-process.env.DEBUG = undefined
+require("dotenv").config({ path: "../../../.env.test" })
 const User = require("./index")
 const database = require("../../../database")
 const mongoose = require("mongoose")
@@ -10,7 +8,6 @@ beforeAll(async function() {
 	await database.init()
 })
 afterAll(async function() {
-	await User.deleteMany({})
 	await mongoose.disconnect()
 })
 
