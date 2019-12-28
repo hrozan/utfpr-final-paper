@@ -91,6 +91,31 @@ describe("User Resource", () => {
 		})
 	})
 
+	describe("GET /user:id", () => {
+		it("should return user data", async () => {
+			const payload = {
+				username: faker.internet.userName(),
+				email: faker.internet.email(),
+				password: faker.internet.password()
+			}
+
+			const { body } = await request(app)
+				.post("/user")
+				.send(payload)
+				.expect(201)
+
+			const response = await request(app)
+				.get(`/user/${body.id}`)
+				.expect(200)
+
+			const {user}  = response.body
+
+			expect(user.username).toBe(payload.username)
+			expect(user.email).toBe(payload.email)
+			expect(user.password).toBeUndefined()
+		})
+	})
+
 	describe("DELETE /user/:id", () => {
 		it("should delete a user", async () => {
 			const payload = {
@@ -110,12 +135,13 @@ describe("User Resource", () => {
 
 			expect(response.body).toHaveProperty("message")
 		})
-	})
-	it("should not delete a user with invalid id", async () => {
-		const response = await request(app)
-			.delete(`/user/dfasdfasdfasd`)
-			.expect(400)
 
-		expect(response.body).toHaveProperty("errorMessage")
+		it("should not delete a user with invalid id", async () => {
+			const response = await request(app)
+				.delete(`/user/dfasdfasdfasd`)
+				.expect(400)
+
+			expect(response.body).toHaveProperty("errorMessage")
+		})
 	})
 })
