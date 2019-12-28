@@ -9,7 +9,8 @@
 		"db:start": "docker-compose up -d",
 		"db:shutdown": "docker-compose stop && docker-compose rm -f",
 		"seed": "node ./database/seed/user.js",
-		"test": "jest"
+		"test": "jest",
+		"test:dev": "jest --silent=false --verbose=true --watch"
 	},
 	"dependencies": {
 		"bcrypt": "^3.0.6",
@@ -32,6 +33,7 @@
 		"faker": "^4.1.0",
 		"jest": "^24.9.0",
 		"nodemon": "^1.19.4",
-		"prettier": "^1.18.2"
+		"prettier": "^1.18.2",
+		"supertest": "^4.0.2"
 	}
 }

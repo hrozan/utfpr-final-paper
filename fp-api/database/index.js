@@ -15,3 +15,7 @@ exports.init = async function() {
 		console.error.bind(console, "connection error:")
 	}
 }
+
+exports.close = function() {
+	return mongoose.disconnect()
+}
