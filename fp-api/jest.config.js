@@ -2,7 +2,7 @@
 // https://jestjs.io/docs/en/configuration.html
 
 module.exports = {
-	verbose: true,
+	silent: true,
 	clearMocks: true,
 	coverageDirectory: "coverage",
 	moduleFileExtensions: ["js", "json", "jsx", "ts", "tsx", "node"],

@@ -8,7 +8,7 @@ beforeAll(async function() {
 	await database.init()
 })
 afterAll(async function() {
-	await mongoose.disconnect()
+	await database.close()
 })
 
 describe("UserModel", () => {
@@ -25,6 +25,18 @@ describe("UserModel", () => {
 			expect(user).toHaveProperty("_id")
 		})
 
+		it("should create user with hashed password", async () => {
+			const userMock = {
+				username: faker.internet.userName(),
+				email: faker.internet.email(),
+				password: faker.internet.password()
+			}
+
+			const user = await User.create(userMock)
+
+			expect(user.password).not.toBe(userMock.password)
+		})
+
 		it("should not create a duplicate user ", async () => {
 			const userMock = {
 				username: faker.internet.userName(),
@@ -33,11 +45,12 @@ describe("UserModel", () => {
 			}
 
 			await User.create(userMock)
-			expect(User.create.bind(userMock)).toThrow()
+
+			await expect(User.create(userMock)).rejects.toThrow(/duplicate key/)
 		})
 
 		it("should not create with empty object ", async () => {
-			expect(User.create.bind({})).toThrow()
+			await expect(User.create({})).rejects.toThrow()
 		})
 
 		it("should create ignoring extra property", async () => {
@@ -58,7 +71,7 @@ describe("UserModel", () => {
 				username: faker.internet.userName(),
 				password: faker.internet.password()
 			}
-			expect(User.create.bind(userMock)).toThrow()
+			await expect(User.create(userMock)).rejects.toThrow()
 		})
 
 		it("should not create with missing password", async () => {
@@ -66,7 +79,7 @@ describe("UserModel", () => {
 				username: faker.internet.userName(),
 				email: faker.internet.email()
 			}
-			expect(User.create.bind(userMock)).toThrow()
+			await expect(User.create(userMock)).rejects.toThrow()
 		})
 
 		it("should not create with missing password ", async () => {
@@ -75,7 +88,30 @@ describe("UserModel", () => {
 				password: faker.internet.password()
 			}
 
-			expect(User.create.bind(userMock)).toThrow()
+			await expect(User.create(userMock)).rejects.toThrow()
+		})
+	})
+
+	describe("list", () => {
+		it("should list all user", async () => {})
+	})
+
+	describe("delete", () => {
+		it("should delete a user", async () => {
+			const userMock = {
+				username: faker.internet.userName(),
+				email: faker.internet.email(),
+				password: faker.internet.password()
+			}
+			const { _id } = await User.create(userMock)
+			const result = await User.deleteOne({ _id })
+
+			expect(result.n).toBe(1)
+		})
+
+		it("should not delete a user with invalid id", async () => {
+			const result = await User.deleteOne({ _id: mongoose.Types.ObjectId() })
+			expect(result.n).toBe(0)
 		})
 	})
 })

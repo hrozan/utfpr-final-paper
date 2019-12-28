@@ -7,8 +7,12 @@ const routes = require("./routes")
 
 const app = express()
 
+
+if (process.env.NODE_ENV !== "test") {
+	app.use(logger("dev"))
+}
+
 app.use(cors())
-app.use(logger("dev"))
 app.use(express.json())
 app.use(routes)
 
