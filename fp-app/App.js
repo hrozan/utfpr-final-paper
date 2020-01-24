@@ -7,16 +7,23 @@
  */
 
 import React from 'react';
-import {View, Text, Button} from 'react-native';
+import {Container, Text, Header, Footer, Body, Button, FooterTab} from 'native-base';
 
 const App: () => React$Node = () => {
   return (
-    <View>
-      <Text>Higor Rozan</Text>
-      <View>
-        <Button title={"Click Me"}/>
-      </View>
-    </View>
+    <Container>
+      <Header />
+      <Body>
+        <Text>Higor Augusto Rozan</Text>
+      </Body>
+      <Footer>
+        <FooterTab>
+          <Button >
+            <Text>Connect</Text>
+          </Button>
+        </FooterTab>
+      </Footer>
+    </Container>
   );
 };
 
