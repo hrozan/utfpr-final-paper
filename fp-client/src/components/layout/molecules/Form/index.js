@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from "react"
 import * as PropTypes from "prop-types"
 import styles from "./styles.module.scss"
