@@ -14,9 +14,11 @@ export function loadRoutes(app: Application) {
   app.use(authRoutes)
   app.use(userRoutes)
   app.use(smartObjectRoutes)
+
+  loadRoutesErrorHandlers(app)
 }
 
-export function loadRoutesErrorHandlers(app: Application) {
+function loadRoutesErrorHandlers(app: Application) {
   // catch 404 and forward to error handler
   app.use(function(req: Request, res: Response, next: NextFunction) {
     next(createError(404))

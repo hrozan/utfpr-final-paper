@@ -1,5 +1,4 @@
-
-import express, { Request, Response, NextFunction, ErrorRequestHandler } from "express"
+import express from "express"
 import logger from "morgan"
 import cors from "cors"
 import { loadRoutes } from "./infra/routes"
@@ -14,6 +13,5 @@ app.use(cors())
 app.use(express.json())
 
 loadRoutes(app)
-
 
 export default app
