@@ -38,6 +38,7 @@
 		"@types/faker": "^4.1.10",
 		"@types/http-errors": "^1.6.3",
 		"@types/jest": "^25.1.4",
+		"@types/jsonwebtoken": "^8.3.8",
 		"@types/mongoose": "^5.7.3",
 		"@types/morgan": "^1.9.0",
 		"@types/node": "^13.9.0",
