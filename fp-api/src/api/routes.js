@@ -11,15 +11,15 @@ api.route("/mqtt/credentials").get(authentication.middleware, smartObject.getCre
 
 // User
 api
-	.route("/user")
-	.all(authentication.middleware)
-	.get(userController.list)
-	.post(userController.create)
+  .route("/user")
+  .all(authentication.middleware)
+  .get(userController.list)
+  .post(userController.create)
 
 api
-	.route("/user/:id")
-	.all(authentication.middleware)
-	.get(userController.read)
-	.delete(userController.delete)
+  .route("/user/:id")
+  .all(authentication.middleware)
+  .get(userController.read)
+  .delete(userController.delete)
 
 module.exports = api
