@@ -1,4 +1,4 @@
-import authentication from "./index"
+import authentication from "../authentication"
 import jwt from "jsonwebtoken"
 
 jest.mock("jsonwebtoken")

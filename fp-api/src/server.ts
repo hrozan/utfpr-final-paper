@@ -1,10 +1,8 @@
 import http from "http"
 import { AddressInfo } from "net"
-import dotenv from "dotenv"
-import app from "./api/app"
-import database from "./database"
+import app from "./app"
+import * as database from "./infra/database"
 
-dotenv.config()
 const port = normalizePort(process.env.PORT || "3000")
 app.set("port", port)
 
@@ -13,7 +11,7 @@ server.listen(port)
 server.on("error", onError)
 server.on("listening", onListening)
 
-database.init().then()
+database.connect().then()
 
 function normalizePort(val: string) {
   const port = parseInt(val, 10)

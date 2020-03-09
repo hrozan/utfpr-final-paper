@@ -1,8 +1,8 @@
-const User = require("../../models/User")
+import { Request, Response } from "express"
+import User from "./model"
+import { isEmpty } from "../../utils"
 
-const { isEmpty } = require("../../../utils")
-
-exports.create = async (request, response) => {
+export async function create(request: Request, response: Response) {
   const { body } = request
 
   if (isEmpty(body)) {
@@ -18,10 +18,11 @@ exports.create = async (request, response) => {
   }
 }
 
-exports.read = async (request, response) => {
+export async function read(request: Request, response: Response) {
   const { params } = request
   try {
     const user = await User.findById(params.id)
+    // @ts-ignore
     const returnUser = user.toObject()
     delete returnUser.password
     return response.json({ user: returnUser })
@@ -31,9 +32,10 @@ exports.read = async (request, response) => {
   }
 }
 
-exports.list = async (request, response) => {
+export async function list(request: Request, response: Response) {
   try {
     const users = await User.find({})
+    // @ts-ignore
     const payload = users.map(({ _id, username, email }) => ({ id: _id, username, email }))
     return response.json(payload)
   } catch (e) {
@@ -42,16 +44,17 @@ exports.list = async (request, response) => {
   }
 }
 
-exports.delete = async (request, response) => {
+export async function remove(request: Request, response: Response) {
   const { params } = request
 
   try {
     const user = await User.findByIdAndRemove(params.id)
+    // @ts-ignore
     if (user.n <= 0) {
-      return response.json({ message: "User Not Found" })
+      return response.json({ message: "Model Not Found" })
     }
 
-    return response.json({ message: "User Deleted" })
+    return response.json({ message: "Model Deleted" })
   } catch (e) {
     console.error(`Error deleting user: ${e.message}`)
     return response.status(400).json({ errorMessage: "invalid parameter" })

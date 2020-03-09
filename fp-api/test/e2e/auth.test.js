@@ -1,9 +1,9 @@
 require("dotenv").config({ path: ".env.test" })
-const database = require("../../src/database")
+const database = require("../../src/infra/database")
 const faker = require("faker")
 const request = require("supertest")
-const app = require("../../src/api/app")
-const User = require("../../src/api/models/User")
+const app = require("../../src/app")
+const User = require("../../src/domain/user/model")
 
 const userMock = {
   username: faker.internet.userName(),
