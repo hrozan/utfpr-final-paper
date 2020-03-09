@@ -1,9 +1,10 @@
-require("dotenv").config({ path: "../../../.env.test" })
-const User = require("./index")
-const database = require("../../../database")
-const mongoose = require("mongoose")
-const faker = require("faker")
+import dotenv from "dotenv"
+import User from "../../src/api/models/User"
+import database from "../../src/database"
+import mongoose from "mongoose"
+import faker from "faker"
 
+dotenv.config({ path: "../../../.env.test" })
 beforeAll(async function() {
   await database.init()
 })
@@ -34,6 +35,7 @@ describe("UserModel", () => {
 
       const user = await User.create(userMock)
 
+      // @ts-ignore
       expect(user.password).not.toBe(userMock.password)
     })
 

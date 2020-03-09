@@ -1,9 +1,10 @@
-require("dotenv").config()
-const app = require("./api/app")
-const debug = require("debug")("api:server")
-const http = require("http")
-const database = require("./database")
+import http from "http"
+import { AddressInfo } from "net"
+import dotenv from "dotenv"
+import app from "./api/app"
+import database from "./database"
 
+dotenv.config()
 const port = normalizePort(process.env.PORT || "3000")
 app.set("port", port)
 
@@ -14,7 +15,7 @@ server.on("listening", onListening)
 
 database.init().then()
 
-function normalizePort(val) {
+function normalizePort(val: string) {
   const port = parseInt(val, 10)
 
   if (isNaN(port)) {
@@ -30,7 +31,7 @@ function normalizePort(val) {
   return false
 }
 
-function onError(error) {
+function onError(error: any) {
   if (error.syscall !== "listen") {
     throw error
   }
@@ -53,7 +54,6 @@ function onError(error) {
 }
 
 function onListening() {
-  const addr = server.address()
-  const bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port
-  debug("Listening on " + bind)
+  const addr = <AddressInfo>server.address()
+  console.info(`Listening on: http://localhost:${addr.port}`)
 }
