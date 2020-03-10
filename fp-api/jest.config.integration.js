@@ -4,9 +4,10 @@ module.exports = {
   roots: ["<rootDir>/test/"],
   coverageDirectory: "coverage",
   moduleFileExtensions: ["js", "json", "jsx", "ts", "tsx", "node"],
-  preset: "./test/presets",
+  preset: "./test/presets.ts",
   testMatch: ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[tj]s?(x)"],
   testEnvironment: "node",
   watchman: false,
-  setupFilesAfterEnv: ["<rootDir>/test/setup.js"]
+  globalSetup: "<rootDir>/test/setup.ts",
+  globalTeardown: "<rootDir>/test/teardown.ts"
 }
