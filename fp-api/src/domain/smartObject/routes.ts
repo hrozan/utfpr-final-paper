@@ -3,6 +3,6 @@ import * as controller from "./controller"
 import authentication from "../../infra/middleware/authentication"
 
 const router = express.Router()
-router.route("/mqtt/credentials").get(authentication.middleware, controller.getCredentials)
+router.route("/credentials").get(authentication.middleware, controller.getCredentials)
 
 export default router

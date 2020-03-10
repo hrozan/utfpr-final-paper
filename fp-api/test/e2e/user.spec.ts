@@ -1,20 +1,20 @@
-require("dotenv").config({ path: ".env.test" })
-const database = require("../../src/infra/database")
-const faker = require("faker")
-const request = require("supertest")
-const app = require("../../src/app")
-const User = require("../../src/domain/user/model")
+import * as database from "../../src/infra/database"
+import faker from "faker"
+import request from "supertest"
+import app from "../../src/app"
+import User from "../../src/domain/user/model"
+import { IUser } from "./user"
 
-const adminUser = {
+const adminUser: IUser = {
   username: faker.internet.userName(),
   email: faker.internet.email(),
   password: faker.internet.password()
 }
 
-let token
+let token: string
 
 beforeAll(async function() {
-  await database.init()
+  await database.connect()
   // create test user
   await User.create(adminUser)
 
@@ -84,7 +84,7 @@ describe("Model Resource", () => {
 
   describe("GET /user", () => {
     it("should list 3 user", async () => {
-      const payload = []
+      const payload: Array<IUser> = []
       const payloadLength = 3
 
       for (let i = 0; i < payloadLength; i++) {
@@ -109,7 +109,7 @@ describe("Model Resource", () => {
 
       let found = 0
       const users = response.body
-      users.forEach(createdUsers => {
+      users.forEach((createdUsers: IUser) => {
         payload.forEach(expectedUser => {
           if (createdUsers.username === expectedUser.username) {
             found++

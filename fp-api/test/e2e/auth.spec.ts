@@ -1,18 +1,18 @@
-require("dotenv").config({ path: ".env.test" })
-const database = require("../../src/infra/database")
-const faker = require("faker")
-const request = require("supertest")
-const app = require("../../src/app")
-const User = require("../../src/domain/user/model")
+import * as database from "../../src/infra/database"
+import faker from "faker"
+import request from "supertest"
+import app from "../../src/app"
+import User from "../../src/domain/user/model"
+import { IUser } from "./user"
 
-const userMock = {
+const userMock: IUser = {
   username: faker.internet.userName(),
   email: faker.internet.email(),
   password: faker.internet.password()
 }
 
 beforeAll(async function() {
-  await database.init()
+  await database.connect()
   // create test user
   await User.create(userMock)
 })

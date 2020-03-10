@@ -1,10 +1,8 @@
-import dotenv from "dotenv"
 import User from "../../src/domain/user/model"
 import mongoose from "mongoose"
 import * as database from "../../src/infra/database"
 import faker from "faker"
 
-dotenv.config({ path: "../../../.env.test" })
 beforeAll(async function() {
   await database.connect()
 })

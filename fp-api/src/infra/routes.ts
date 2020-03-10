@@ -2,7 +2,7 @@ import { Application, Request, Response, NextFunction } from "express"
 import createError from "http-errors"
 import authRoutes from "../domain/auth/routes"
 import userRoutes from "../domain/user/routes"
-import smartObjectRoutes from "../domain/user/routes"
+import smartObjectRoutes from "../domain/smartObject/routes"
 
 function healthCheckHandler(request: Request, response: Response) {
   return response.json({ status: "ok" })
@@ -12,8 +12,8 @@ export function loadRoutes(app: Application) {
   // health check
   app.get("/", healthCheckHandler)
   app.use(authRoutes)
-  app.use(userRoutes)
-  app.use(smartObjectRoutes)
+  app.use("/user", userRoutes)
+  app.use("/mqtt", smartObjectRoutes)
 
   loadRoutesErrorHandlers(app)
 }

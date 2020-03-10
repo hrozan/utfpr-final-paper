@@ -5,7 +5,7 @@ jest.mock("jsonwebtoken")
 
 describe("Authentication Middleware", () => {
   it("should authenticate user with success", async () => {
-    const reqMock : object = {
+    const reqMock: object = {
       headers: {
         authorization: "12341234123412341"
       }
