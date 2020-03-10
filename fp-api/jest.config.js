@@ -9,6 +9,7 @@ module.exports = {
   testEnvironment: "node",
   watchman: true,
   globalSetup: "<rootDir>/test/setup.ts",
-  globalTeardown: "<rootDir>/test/teardown.ts",
-  testTimeout: 10000
+  globalTeardown: "<rootDir>/test/teardown.ts"
 }
+
+jest.setTimeout(30000)
