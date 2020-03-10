@@ -5,13 +5,13 @@
   "main": "dist/server.js",
   "scripts": {
     "start": "node dist/server.js",
-    "dev": "concurrently -k -p \"[{name}]\" -n \"Build,App\" -c \"yellow.bold,cyan.bold\" \"npm run build:watch\" \"npm run server\"",
-    "server": "nodemon -r dotenv/config dist/server.js",
+    "dev": "concurrently -k -p \"[{name}]\" -n \"Build,App\" -c \"green.bold,cyan.bold\" \"npm run build:watch\" \"npm run server:watch\"",
+    "server": "node -r dotenv/config dist/server.js",
+    "server:watch": "nodemon -r dotenv/config dist/server.js",
     "build": "tsc",
     "build:watch": "tsc --watch",
     "db:start": "docker-compose up -d",
     "db:shutdown": "docker-compose stop && docker-compose rm -f",
-    "seed": "node src/infra/database/seed/user.js",
     "test": "jest",
     "test:integration": "jest -c jest.config.integration.js",
     "test:integration:watch": "jest -c jest.config.integration.js --watch --silent=false",
@@ -71,6 +71,6 @@
     "ignore": [
       "*.(test|spec).(js|ts)"
     ],
-    "delay": 2000
+    "delay": 3000
   }
 }

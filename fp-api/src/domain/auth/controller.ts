@@ -12,7 +12,7 @@ export async function login(request: Request, response: Response) {
   try {
     const user = await User.findOne({ username })
     if (!user) {
-      console.log("Model not Found")
+      console.log("Model not Found", user)
       return response.status(400).json(LOGIN_ERROR_RESPONSE)
     }
 

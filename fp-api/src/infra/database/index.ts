@@ -1,6 +1,8 @@
 import mongoose from "mongoose"
 const MONGO_URL = <string>process.env.MONGO_URL
 
+console.log(MONGO_URL)
+
 mongoose.set("useNewUrlParser", true)
 mongoose.set("useFindAndModify", false)
 mongoose.set("useUnifiedTopology", true)

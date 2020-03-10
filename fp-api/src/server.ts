@@ -55,3 +55,8 @@ function onListening() {
   const addr = <AddressInfo>server.address()
   console.info(`Listening on: http://localhost:${addr.port}`)
 }
+
+process.on("exit", () => {
+  console.log("exit")
+  process.exit(0)
+})

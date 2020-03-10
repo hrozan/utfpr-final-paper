@@ -11,7 +11,7 @@ function healthCheckHandler(request: Request, response: Response) {
 export function loadRoutes(app: Application) {
   // health check
   app.get("/", healthCheckHandler)
-  app.use(authRoutes)
+  app.use("/auth", authRoutes)
   app.use("/user", userRoutes)
   app.use("/mqtt", smartObjectRoutes)
 

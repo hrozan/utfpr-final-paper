@@ -7,6 +7,8 @@ import { login as actionLogin, logout as actionLogout } from "../components/auth
 const authService = {
   async login(payload) {
     const url = urlJoin(API_URL, "auth", "login")
+    const result3 = await http.get("/")
+    console.log(result3)
     const result = await http.post(url, payload)
     const user = result.data
 
