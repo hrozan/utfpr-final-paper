@@ -9,5 +9,6 @@ module.exports = {
   testEnvironment: "node",
   watchman: true,
   globalSetup: "<rootDir>/test/setup.ts",
-  globalTeardown: "<rootDir>/test/teardown.ts"
+  globalTeardown: "<rootDir>/test/teardown.ts",
+  testTimeout: 10000
 }
