@@ -24,7 +24,7 @@ beforeAll(async function() {
   }
 
   const response = await request(app)
-    .post("/login")
+    .post("/auth/login")
     .send(payload)
 
   token = response.body.token

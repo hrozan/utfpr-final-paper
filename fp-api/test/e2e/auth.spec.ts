@@ -29,7 +29,7 @@ describe("Auth Resource", () => {
       }
 
       const response = await request(app)
-        .post("/login")
+        .post("/auth/login")
         .send(payload)
         .expect(200)
 
@@ -45,7 +45,7 @@ describe("Auth Resource", () => {
       }
 
       const response = await request(app)
-        .post("/login")
+        .post("/auth/login")
         .send(payload)
         .expect(400)
 
