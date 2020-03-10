@@ -1,12 +1,12 @@
-module.exports = {
-  roots: ["<rootDir>/src/"],
+const merge = require("merge")
+const baseConfig = require("./jest.config.base")
+
+const config = {
   preset: "ts-jest",
-  silent: true,
-  clearMocks: true,
-  coverageDirectory: "coverage",
-  moduleFileExtensions: ["js", "json", "jsx", "ts", "tsx", "node"],
-  testMatch: ["**/*.spec.ts"],
-  testEnvironment: "node",
   watchman: true,
-  verbose: true
+  roots: ["<rootDir>/src/"],
+  globalSetup: undefined,
+  globalTeardown: undefined
 }
+
+module.exports = merge.recursive(baseConfig, config)

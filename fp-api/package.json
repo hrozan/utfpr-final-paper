@@ -12,7 +12,7 @@
     "build:watch": "tsc --watch",
     "db:start": "docker-compose up -d",
     "db:shutdown": "docker-compose stop && docker-compose rm -f",
-    "test": "jest",
+    "test": "jest -c jest.config.base.js",
     "test:integration": "jest -c jest.config.integration.js",
     "test:integration:watch": "jest -c jest.config.integration.js --watch --silent=false",
     "test:unit": "jest -c jest.config.unit.js",

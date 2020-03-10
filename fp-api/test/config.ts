@@ -9,8 +9,8 @@ declare var global: GlobalMongoDb
 import * as database from "../src/infra/database"
 
 export async function connectDatabase() {
+  console.log("")
   await database.connect()
-  console.log("Connect Database")
   global["__MONGO_DB__"] = database.close
 }
 
