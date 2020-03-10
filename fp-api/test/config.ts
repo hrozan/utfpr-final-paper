@@ -1,4 +1,3 @@
-import mongoose from "mongoose"
 import Global = NodeJS.Global
 
 interface GlobalMongoDb extends Global {
