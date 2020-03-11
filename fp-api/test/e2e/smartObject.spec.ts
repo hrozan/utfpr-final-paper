@@ -14,7 +14,6 @@ const adminUser: IUser = {
 let token: string
 
 beforeAll(async function() {
-  await database.connect()
   // create test user
   await User.create(adminUser)
 
@@ -28,9 +27,6 @@ beforeAll(async function() {
     .send(payload)
 
   token = response.body.token
-})
-afterAll(async function() {
-  await database.close()
 })
 
 describe("Smart Resource", () => {

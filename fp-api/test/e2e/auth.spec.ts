@@ -12,13 +12,10 @@ const userMock: IUser = {
 }
 
 beforeAll(async function() {
-  await database.connect()
   // create test user
   await User.create(userMock)
 })
-afterAll(async function() {
-  await database.close()
-})
+
 
 describe("Auth Resource", () => {
   describe("POST /login", () => {

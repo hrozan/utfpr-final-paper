@@ -5,18 +5,19 @@
   "main": "dist/server.js",
   "scripts": {
     "start": "node dist/server.js",
-    "dev": "concurrently -k -p \"[{name}]\" -n \"Build,App\" -c \"green.bold,cyan.bold\" \"npm run build:watch\" \"npm run server:watch\"",
+    "dev": "nodemon -r dotenv/config src/server.ts",
     "server": "node -r dotenv/config dist/server.js",
     "server:watch": "nodemon -r dotenv/config dist/server.js",
     "build": "tsc",
     "build:watch": "tsc --watch",
     "db:start": "docker-compose up -d",
     "db:shutdown": "docker-compose stop && docker-compose rm -f",
+    "seed": "ts-node -r dotenv/config scripts/seed.ts",
     "test": "jest -c jest.config.base.js",
     "test:integration": "jest -c jest.config.integration.js",
     "test:integration:watch": "jest -c jest.config.integration.js --watch --silent=false",
     "test:unit": "jest -c jest.config.unit.js",
-    "test:unit:watch": "jest -c jest.config.unit.js --watch --silent=false",
+    "test:unit:watch": "jest -c jest.config.unit.js --watch",
     "prettier": "npx prettier --write \"src/**/*\" \"test/**/*\""
   },
   "dependencies": {
@@ -43,7 +44,6 @@
     "@types/morgan": "^1.9.0",
     "@types/node": "^13.9.0",
     "@types/supertest": "^2.0.8",
-    "concurrently": "^5.1.0",
     "dotenv": "^8.2.0",
     "eslint": "^6.6.0",
     "eslint-plugin-jest": "^23.1.1",
@@ -57,6 +57,7 @@
     "prettier": "^1.18.2",
     "supertest": "^4.0.2",
     "ts-jest": "^25.2.1",
+    "ts-node": "^8.6.2",
     "typescript": "^3.8.3"
   },
   "husky": {

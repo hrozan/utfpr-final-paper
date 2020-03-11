@@ -1,14 +1,6 @@
-import User from "../../src/domain/user/model"
+import User from "../../../src/domain/user/model"
 import mongoose from "mongoose"
-import * as database from "../../src/infra/database"
 import faker from "faker"
-
-beforeAll(async function() {
-  await database.connect()
-})
-afterAll(async function() {
-  await database.close()
-})
 
 describe("UserModel", () => {
   describe("create", () => {
@@ -20,7 +12,6 @@ describe("UserModel", () => {
       }
 
       const user = await User.create(userMock)
-
       expect(user).toHaveProperty("_id")
     })
 

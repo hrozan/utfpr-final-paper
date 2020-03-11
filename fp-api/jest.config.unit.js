@@ -5,8 +5,9 @@ const config = {
   preset: "ts-jest",
   watchman: true,
   roots: ["<rootDir>/src/"],
-  globalSetup: undefined,
-  globalTeardown: undefined
+  verbose: true,
+  silent: false,
+  setupFilesAfterEnv: undefined
 }
 
 module.exports = merge.recursive(baseConfig, config)

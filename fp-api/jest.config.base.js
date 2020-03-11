@@ -8,7 +8,5 @@ module.exports = {
   testMatch: ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[tj]s?(x)"],
   testEnvironment: "node",
   watchman: true,
-  globalSetup: "<rootDir>/test/setup.ts",
-  globalTeardown: "<rootDir>/test/teardown.ts",
   setupFilesAfterEnv: ["<rootDir>/test/setupAfterEnv.ts"]
 }

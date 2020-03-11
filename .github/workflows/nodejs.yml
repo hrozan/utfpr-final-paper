@@ -14,7 +14,7 @@ jobs:
       run: |
         cd fp-api/
         npm i
-        npm run test:unit
+        npm run test
       env:
         CI: true
     

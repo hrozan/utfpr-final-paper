@@ -1,19 +1,19 @@
 // TODO: refact this modulo to user a useri interface
-// see: https://stackoverflow.com/questions/34482136/mongoose-the-typescript-way
+// see:"://stackoverflow.com/questions/34482136/mongoose-the-typescript-way
 import mongoose, { HookNextFunction } from "mongoose"
 import bcrypt from "bcrypt"
 
 const saltRounds = 10
 
-const MODEL_NAME = "Model"
+const MODEL_NAME = "Users"
 
-const Model = {
+const User = {
   username: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true }
 }
 
-const userSchema = new mongoose.Schema(Model)
+const userSchema = new mongoose.Schema(User)
 
 userSchema.pre("save", async function save(next: HookNextFunction) {
   if (!this.isModified("password")) return next()
