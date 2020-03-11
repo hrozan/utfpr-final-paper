@@ -1,35 +1,9 @@
-import * as database from "../../src/infra/database"
 import faker from "faker"
 import request from "supertest"
-import app from "../../src/app"
-import User from "../../src/domain/user/model"
-import { IUser } from "./user"
+import app from "../../../src/app"
+import { auth, IUser } from "../auth"
 
-const adminUser: IUser = {
-  username: faker.internet.userName(),
-  email: faker.internet.email(),
-  password: faker.internet.password()
-}
-
-let token: string
-
-beforeAll(async function() {
-  // create test user
-  await User.create(adminUser)
-
-  const payload = {
-    username: adminUser.username,
-    password: adminUser.password
-  }
-
-  const response = await request(app)
-    .post("/auth/login")
-    .send(payload)
-
-  token = response.body.token
-})
-
-describe("Model Resource", () => {
+describe("User Routes", () => {
   describe("POST /user", () => {
     it("should create a user", async () => {
       const payload = {
@@ -40,7 +14,7 @@ describe("Model Resource", () => {
 
       const response = await request(app)
         .post("/user")
-        .set({ Authorization: token })
+        .use(auth)
         .send(payload)
         .expect(201)
 
@@ -50,7 +24,7 @@ describe("Model Resource", () => {
     it("should not create user with empty payload", async () => {
       const response = await request(app)
         .post("/user")
-        .set({ Authorization: token })
+        .use(auth)
         .send({})
         .expect(400)
 
@@ -66,13 +40,13 @@ describe("Model Resource", () => {
 
       await request(app)
         .post("/user")
-        .set({ Authorization: token })
+        .use(auth)
         .send(payload)
         .expect(201)
 
       await request(app)
         .post("/user")
-        .set({ Authorization: token })
+        .use(auth)
         .send(payload)
         .expect(400)
     })
@@ -94,14 +68,14 @@ describe("Model Resource", () => {
       for (let i = 0; i < payloadLength; i++) {
         await request(app)
           .post("/user")
-          .set({ Authorization: token })
+          .use(auth)
           .send(payload[i])
           .expect(201)
       }
 
       const response = await request(app)
         .get("/user")
-        .set({ Authorization: token })
+        .use(auth)
 
       let found = 0
       const users = response.body
@@ -126,13 +100,13 @@ describe("Model Resource", () => {
 
       const { body } = await request(app)
         .post("/user")
-        .set({ Authorization: token })
+        .use(auth)
         .send(payload)
         .expect(201)
 
       const response = await request(app)
         .get(`/user/${body.id}`)
-        .set({ Authorization: token })
+        .use(auth)
         .expect(200)
 
       const { user } = response.body
@@ -153,13 +127,13 @@ describe("Model Resource", () => {
 
       const { body } = await request(app)
         .post("/user")
-        .set({ Authorization: token })
+        .use(auth)
         .send(payload)
         .expect(201)
 
       const response = await request(app)
         .delete(`/user/${body.id}`)
-        .set({ Authorization: token })
+        .use(auth)
         .expect(200)
 
       expect(response.body).toHaveProperty("message")
@@ -168,7 +142,7 @@ describe("Model Resource", () => {
     it("should not delete a user with invalid id", async () => {
       const response = await request(app)
         .delete(`/user/dfasdfasdfasd`)
-        .set({ Authorization: token })
+        .use(auth)
         .expect(400)
 
       expect(response.body).toHaveProperty("errorMessage")

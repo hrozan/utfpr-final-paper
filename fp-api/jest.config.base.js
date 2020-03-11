@@ -2,6 +2,7 @@ module.exports = {
   roots: ["<rootDir>/src/", "<rootDir>/test/"],
   preset: "./test/presets.ts",
   silent: true,
+  verbose: false,
   clearMocks: true,
   coverageDirectory: "coverage",
   moduleFileExtensions: ["js", "json", "jsx", "ts", "tsx", "node"],

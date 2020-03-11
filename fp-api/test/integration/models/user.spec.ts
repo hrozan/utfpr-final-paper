@@ -2,7 +2,7 @@ import User from "../../../src/domain/user/model"
 import mongoose from "mongoose"
 import faker from "faker"
 
-describe("UserModel", () => {
+describe("User Model", () => {
   describe("create", () => {
     it("should create successfully", async () => {
       const userMock = {

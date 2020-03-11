@@ -1,6 +1,7 @@
+import { connect, disconect } from "../src/infra/database"
 import User from "../src/domain/user/model"
 
-const user = {
+const newUser = {
   email: "admin@email.com.br",
   username: "admin",
   password: "password"
@@ -9,11 +10,14 @@ const user = {
 async function run() {
   console.info("Start Seed")
   try {
-    const result = await User.create(user)
+    await connect()
+    const user = await User.create(newUser)
     console.log("User Created")
-    console.log(result)
+    console.log(user)
   } catch (e) {
     console.error(e.message)
+  } finally {
+    await disconect()
   }
 }
 
