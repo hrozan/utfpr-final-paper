@@ -24,7 +24,6 @@ describe("User Model", () => {
 
       const user = await User.create(userMock)
 
-      // @ts-ignore
       expect(user.password).not.toBe(userMock.password)
     })
 

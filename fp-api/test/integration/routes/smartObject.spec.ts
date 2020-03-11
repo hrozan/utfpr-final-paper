@@ -1,6 +1,6 @@
 import request from "supertest"
 import app from "../../../src/app"
-import { auth } from "../auth"
+import auth from "../auth"
 
 describe("Smart Resource", () => {
   describe("GET /mqtt/credentials", () => {

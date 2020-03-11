@@ -4,13 +4,7 @@ import app from "../../src/app"
 import faker from "faker"
 import User from "../../src/domain/user/model"
 
-export type IUser = {
-  username: string
-  email: string
-  password: string
-}
-
-export const adminUser: IUser = {
+export const adminUser = {
   username: faker.internet.userName(),
   email: faker.internet.email(),
   password: faker.internet.password()
@@ -25,7 +19,7 @@ export async function createAdmin(): Promise<void> {
   token = response.body.token
 }
 
-export function auth(request: SuperAgentRequest): SuperAgentRequest {
+export default function auth(request: SuperAgentRequest): SuperAgentRequest {
   request.set({ Authorization: token })
   return request
 }

@@ -1,7 +1,13 @@
 import faker from "faker"
 import request from "supertest"
 import app from "../../../src/app"
-import { auth, IUser } from "../auth"
+import auth from "../auth"
+
+type MockUser = {
+  username: string
+  email: string
+  password: string
+}
 
 describe("User Routes", () => {
   describe("POST /user", () => {
@@ -54,7 +60,8 @@ describe("User Routes", () => {
 
   describe("GET /user", () => {
     it("should list 3 user", async () => {
-      const payload: Array<IUser> = []
+      const payload: Array<MockUser> = []
+
       const payloadLength = 3
 
       for (let i = 0; i < payloadLength; i++) {
@@ -79,7 +86,7 @@ describe("User Routes", () => {
 
       let found = 0
       const users = response.body
-      users.forEach((createdUsers: IUser) => {
+      users.forEach((createdUsers: MockUser) => {
         payload.forEach(expectedUser => {
           if (createdUsers.username === expectedUser.username) {
             found++
