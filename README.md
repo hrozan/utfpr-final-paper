@@ -6,8 +6,6 @@ This is repo contains all source code from my implementation
 
 ### :rocket: Getting Started
 
-### Client and Server 
-
 Install dependencies
 
 ```bash
@@ -21,6 +19,7 @@ cp fp-server/.env.example fp-api/.env
 ```
 
 Run project 
+
 ```bash
 npm run dev:client   
 npm run dev:server 
@@ -30,5 +29,3 @@ npm run dev:server
 
 This project is licensed under the terms of the [MIT license](/LICENSE)
 
----
-  __Author__: :busts_in_silhouette: [Higor Augusto Bassi Rozan](https://github.com/hrozan)
