@@ -1,5 +1,5 @@
 {
-  "name": "fp-api",
+  "name": "fp-server",
   "version": "0.0.0",
   "private": true,
   "main": "dist/server.js",
@@ -10,8 +10,6 @@
     "server:watch": "nodemon -r dotenv/config dist/server.js",
     "build": "tsc",
     "build:watch": "tsc --watch",
-    "db:start": "docker-compose up -d",
-    "db:shutdown": "docker-compose stop && docker-compose rm -f",
     "seed": "ts-node -r dotenv/config scripts/seed.ts",
     "test": "jest -c jest.config.base.js",
     "test:integration": "jest -c jest.config.integration.js",

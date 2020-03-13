@@ -4,7 +4,12 @@ import { API_URL } from "../config"
 import { store } from "../store"
 import { login as actionLogin, logout as actionLogout } from "../components/auth/authActions"
 
-export async function login(payload: object) {
+export type LoginPayload = {
+  username: string
+  password: string
+}
+
+export async function login(payload: LoginPayload) {
   const url = urlJoin(API_URL, "auth", "login")
   const result = await http.post(url, payload)
   const user = result.data

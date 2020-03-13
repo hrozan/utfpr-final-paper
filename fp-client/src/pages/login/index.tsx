@@ -4,7 +4,7 @@ import Button from "components/layout/atoms/Button"
 import Card from "components/layout/atoms/Card"
 import TextInput from "components/layout/molecules/TextInput"
 import Form from "components/layout/molecules/Form"
-import { login } from "services/authService"
+import { login, LoginPayload } from "services/authService"
 import alert from "components/layout/organism/Alert"
 import LoginPage from "components/layout/template/LoginPage"
 
@@ -17,7 +17,7 @@ type Props = {
 const Login = (props: Props) => {
   const [loading, setLoading] = useState(false)
 
-  const submitHandler = async (data: object) => {
+  const submitHandler = async (data: LoginPayload) => {
     try {
       setLoading(true)
       await login(data)
