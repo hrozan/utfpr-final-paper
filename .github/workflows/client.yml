@@ -3,7 +3,7 @@ name: Client CI
 on: [push]
 
 jobs:
-  api-test:
+  test:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
