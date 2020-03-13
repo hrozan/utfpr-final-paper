@@ -2,7 +2,7 @@ import MQTT from "paho-mqtt/paho-mqtt"
 import urlJoin from "url-join"
 import { store } from "../../store"
 import { BROKER_URL, BROKER_PORT, API_URL } from "../../config"
-import http from "../http"
+import * as http from "../http"
 import { onConnected, onMessage } from "./mqttActions"
 
 const MQTTProvider = {

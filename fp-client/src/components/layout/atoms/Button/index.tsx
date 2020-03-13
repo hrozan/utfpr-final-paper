@@ -1,9 +1,14 @@
 import React from "react"
-import * as PropTypes from "prop-types"
 import classNames from "classnames"
 import styles from "./styles.module.scss"
 
-const Button = props => {
+interface Props {
+  children: React.ReactNode
+  variant?: string
+  loading?: boolean
+}
+
+const Button = (props: Props) => {
   const { variant, children, loading, ...rest } = props
   const classes = classNames(styles.button, {
     [styles.primary]: variant === "primary",
@@ -15,12 +20,6 @@ const Button = props => {
       {loading ? <div className={styles.loading} /> : children}
     </button>
   )
-}
-
-Button.propTypes = {
-  children: PropTypes.node,
-  variant: PropTypes.oneOf(["primary", "secondary"]),
-  loading: PropTypes.bool
 }
 
 Button.defaultProps = {

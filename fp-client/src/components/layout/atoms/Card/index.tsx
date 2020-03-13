@@ -1,20 +1,19 @@
 import React from "react"
-import * as PropTypes from "prop-types"
 import styles from "./styles.module.scss"
 
-const Card = props => {
+interface Props {
+  children: React.ReactNode
+  title?: string
+}
+
+const Card = (props: Props) => {
   const { children, title, ...rest } = props
   return (
     <div {...rest} className={styles.card}>
-      <div className={styles.title}>{title}</div>
+      <p className={styles.title}>{title}</p>
       <div className={styles.body}>{children}</div>
     </div>
   )
-}
-
-Card.propTypes = {
-  children: PropTypes.node,
-  title: PropTypes.string
 }
 
 export default Card

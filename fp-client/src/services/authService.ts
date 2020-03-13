@@ -1,4 +1,4 @@
-import http from "../providers/http"
+import * as http from "../providers/http"
 import urlJoin from "url-join"
 import { API_URL } from "../config"
 import { store } from "../store"

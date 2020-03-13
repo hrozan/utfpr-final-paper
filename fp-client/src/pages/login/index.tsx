@@ -1,14 +1,15 @@
 import React, { useState } from "react"
 import { withRouter } from "react-router-dom"
+import { login, LoginPayload } from "services/authService"
+
 import Button from "components/layout/atoms/Button"
 import Card from "components/layout/atoms/Card"
 import TextInput from "components/layout/molecules/TextInput"
 import Form from "components/layout/molecules/Form"
-import { login, LoginPayload } from "services/authService"
 import alert from "components/layout/organism/Alert"
 import LoginPage from "components/layout/template/LoginPage"
 
-type Props = {
+interface Props {
   history: {
     push: (path: string) => void
   }

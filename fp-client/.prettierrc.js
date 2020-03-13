@@ -1,5 +1,6 @@
 module.exports = {
 	semi: false,
 	printWidth: 120,
-	singleQuote: false
+	singleQuote: false,
+  arrowParens: "always"
 }
