@@ -2,7 +2,10 @@ import * as http from "../providers/http"
 import urlJoin from "url-join"
 import { API_URL } from "../config"
 import { store } from "../store"
-import { login as actionLogin, logout as actionLogout } from "../components/auth/authActions"
+import {
+  login as actionLogin,
+  logout as actionLogout,
+} from "../components/auth/ducks"
 
 export type LoginPayload = {
   username: string

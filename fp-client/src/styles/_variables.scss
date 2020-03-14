@@ -5,7 +5,11 @@ $color-secondary: #ff9702;
 $color-danger: #ff1e45;
 $color-light: #ffffff;
 $color-dark: #000000;
-$color-primary-gradient: linear-gradient(120deg, $color-primary, $color-primary-darker);
+$color-primary-gradient: linear-gradient(
+  120deg,
+  $color-primary,
+  $color-primary-darker
+);
 
 // Breaking Points
 $break-point-desktop: 1200px;

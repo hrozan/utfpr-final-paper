@@ -16,7 +16,6 @@ export async function login(request: Request, response: Response) {
       return response.status(400).json(LOGIN_ERROR_RESPONSE)
     }
 
-    // @ts-ignore
     const match = await user.checkPassword(password)
     if (!match) {
       console.log("Wrong Password")
@@ -25,7 +24,6 @@ export async function login(request: Request, response: Response) {
 
     const payload = {
       id: user._id,
-      // @ts-ignore
       username: user.username
     }
     const token = jwt.sign(payload, JWT_KEY)

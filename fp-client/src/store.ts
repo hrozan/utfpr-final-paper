@@ -2,9 +2,9 @@ import { createStore, combineReducers } from "redux"
 import { persistStore, persistReducer } from "redux-persist"
 import storage from "redux-persist/lib/storage/session" // defaults to localStorage for web
 
-import authReducer from "./components/auth/authReducer"
-import alertReducer from "./components/layout/organism/Alert/alertReducer"
-import mqttReducer from "./providers/mqtt/mqttReducer"
+import authReducer from "./components/auth/ducks"
+import alertReducer from "./components/layout/organism/Alert/ducks"
+import mqttReducer from "./providers/mqtt/ducks"
 
 const rootReducer = combineReducers({ auth: authReducer, alert: alertReducer, mqtt: mqttReducer })
 

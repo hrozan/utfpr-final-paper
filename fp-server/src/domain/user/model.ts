@@ -5,7 +5,7 @@ export interface IUser extends mongoose.Document {
   username: string
   email: string
   password: string
-  checkPassword: () => boolean
+  checkPassword(data: string): boolean
 }
 
 export interface UserQuery extends mongoose.DocumentQuery<IUser, IUser> {

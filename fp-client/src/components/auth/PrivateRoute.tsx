@@ -1,6 +1,7 @@
 import React from "react"
 import { Redirect, Route } from "react-router-dom"
-import { useSelector, DefaultRootState } from "react-redux"
+import { useSelector } from "react-redux"
+import { AuthState } from "./ducks"
 
 interface Props {
   children: React.ReactNode
@@ -8,10 +9,8 @@ interface Props {
   path: string
 }
 
-interface State extends DefaultRootState {
-  auth: {
-    isAuthenticated: boolean
-  }
+interface State {
+  auth: AuthState
 }
 
 const PrivateRoute = (props: Props) => {

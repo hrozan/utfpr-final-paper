@@ -1,7 +1,11 @@
 @import "variables";
 body {
   font-family: Ubuntu, serif;
-  background-image: linear-gradient(120deg, $color-primary, $color-primary-darker);
+  background-image: linear-gradient(
+    120deg,
+    $color-primary,
+    $color-primary-darker
+  );
   background-repeat: space;
   min-height: 100vh;
 }

@@ -1,5 +1,5 @@
 import { store } from "../../../../store"
-import { show, hide } from "./alertActions"
+import { show, hide } from "./ducks"
 
 const HIDE_TIME = 3000
 
