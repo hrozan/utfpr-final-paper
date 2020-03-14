@@ -14,7 +14,7 @@ export function onDisconnected() {
   }
 }
 
-export function onMessage(payload) {
+export function onMessage(payload: object) {
   return {
     type: ON_MESSAGE,
     payload
