@@ -3,7 +3,9 @@ import styles from "./styles.module.scss"
 import { Link as RouterLink } from "react-router-dom"
 
 interface Props {
+  children: React.ReactNode
   to: string
+  onClick?: () => void
 }
 
 const Link = (props: Props) => {

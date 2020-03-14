@@ -1,12 +1,23 @@
 import React from "react"
-import * as PropTypes from "prop-types"
 import { Redirect, Route } from "react-router-dom"
-import { useSelector } from "react-redux"
+import { useSelector, DefaultRootState } from "react-redux"
 
-const PrivateRoute = props => {
+interface Props {
+  children: React.ReactNode
+  exact: boolean
+  path: string
+}
+
+interface State extends DefaultRootState {
+  auth: {
+    isAuthenticated: boolean
+  }
+}
+
+const PrivateRoute = (props: Props) => {
   const { children, ...rest } = props
 
-  const auth = useSelector(state => state.auth)
+  const auth = useSelector((state: State) => state.auth)
   const { isAuthenticated } = auth
 
   return (
@@ -26,10 +37,6 @@ const PrivateRoute = props => {
       }
     />
   )
-}
-
-PrivateRoute.propTypes = {
-  children: PropTypes.node
 }
 
 export default PrivateRoute

@@ -1,11 +1,13 @@
 import { LOGOUT, LOGIN } from "./authActions"
 
+
 const INITIAL_STATE = {
   user: {},
   isAuthenticated: false
 }
 
-export default function authReducer(state = INITIAL_STATE, action) {
+// todo: read this e refactor https://redux.js.org/recipes/usage-with-typescript/
+export default function authReducer(state = INITIAL_STATE, action: any) {
   switch (action.type) {
     case LOGIN:
       return {

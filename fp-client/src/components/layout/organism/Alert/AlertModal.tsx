@@ -4,7 +4,8 @@ import { useSelector } from "react-redux"
 import Card from "../../atoms/Card"
 
 const AlertModal = () => {
-  const alert = useSelector(state => state.alert)
+  // @ts-ignore
+  const alert = useSelector((state) => state.alert)
   const { message } = alert
 
   if (!message) {
@@ -21,7 +22,5 @@ const AlertModal = () => {
     </div>
   )
 }
-
-AlertModal.propTypes = {}
 
 export default AlertModal

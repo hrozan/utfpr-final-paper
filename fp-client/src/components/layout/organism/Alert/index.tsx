@@ -4,7 +4,7 @@ import { show, hide } from "./alertActions"
 const HIDE_TIME = 3000
 
 const alert = {
-  show(message) {
+  show(message: string) {
     store.dispatch(show(message))
     setTimeout(() => {
       store.dispatch(hide())

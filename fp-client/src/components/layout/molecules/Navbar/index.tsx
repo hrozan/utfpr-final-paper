@@ -1,14 +1,19 @@
 import React, { useState } from "react"
-import * as PropTypes from "prop-types"
 import styles from "./styles.module.scss"
 import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome"
 import { faBars, faLaughWink, faSadTear } from "@fortawesome/free-solid-svg-icons"
 import { useSelector } from "react-redux"
 
-const Navbar = props => {
+interface Props {
+  children: React.ReactNode
+  show: boolean
+}
+
+const Navbar = (props: Props) => {
   const { children, show } = props
   const [isOpen, setIsOpen] = useState(false)
-  const mqtt = useSelector(state => state.mqtt)
+  // @ts-ignore
+  const mqtt = useSelector((state) => state.mqtt)
 
   const onClickHandler = () => {
     setIsOpen(!isOpen)
@@ -29,11 +34,6 @@ const Navbar = props => {
       {isOpen && <div className={styles.content}>{children}</div>}
     </nav>
   )
-}
-
-Navbar.propTypes = {
-  children: PropTypes.node,
-  show: PropTypes.bool
 }
 
 Navbar.defaultProps = {

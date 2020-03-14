@@ -1,7 +1,7 @@
 export const SHOW = "SHOW"
 export const HIDE = "HIDE"
 
-export function show(message) {
+export function show(message: string) {
   return {
     type: SHOW,
     payload: message

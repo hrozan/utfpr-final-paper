@@ -7,7 +7,8 @@ import { useSelector } from "react-redux"
 import { logout } from "../services/authService"
 
 const Menu = () => {
-  const auth = useSelector(state => state.auth)
+  // @ts-ignore
+  const auth = useSelector((state) => state.auth)
   const { isAuthenticated } = auth
 
   return (

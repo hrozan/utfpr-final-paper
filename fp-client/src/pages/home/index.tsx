@@ -1,9 +1,9 @@
 import React, { useEffect } from "react"
-import { useSelector, DefaultRootState } from "react-redux"
+import { DefaultRootState, useSelector } from "react-redux"
 import Card from "components/layout/atoms/Card"
 import DashboardPage from "components/layout/template/CardDisplay"
 import Page from "components/layout/template/Page"
-import MQTTProvider from "providers/mqtt"
+import * as mqtt from "providers/mqtt"
 
 interface State extends DefaultRootState {
   mqtt: {
@@ -19,9 +19,10 @@ const Home = () => {
   const { data } = useSelector((state: State) => state.mqtt)
 
   const onConnect = () => {
-    MQTTProvider.connect()
+    mqtt
+      .connect()
       .then(() => console.info("mqtt connected"))
-      .catch(e => console.log(e))
+      .catch((e) => console.log(e))
   }
 
   useEffect(() => onConnect(), [])

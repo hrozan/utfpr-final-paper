@@ -1,13 +1,15 @@
-/* eslint-disable react/prop-types */
 import React from "react"
-import * as PropTypes from "prop-types"
 import classNames from "classnames"
 import styles from "./styles.module.scss"
 import { Field } from "react-final-form"
 
-const TextInput = props => {
+interface Props {
+  name: string
+}
+
+const TextInput = (props: Props) => {
   const { name } = props
-  const required = value => (value ? undefined : "Required")
+  const required = (value: any) => (value ? undefined : "Required")
 
   return (
     <Field name={name} validate={required}>
@@ -23,12 +25,6 @@ const TextInput = props => {
       }}
     </Field>
   )
-}
-
-TextInput.propTypes = {
-  children: PropTypes.node,
-  name: PropTypes.string.isRequired,
-  required: PropTypes.string
 }
 
 TextInput.defaultProps = {
