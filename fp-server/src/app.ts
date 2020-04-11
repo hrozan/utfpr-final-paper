@@ -1,16 +1,30 @@
 import express from "express"
-import logger from "morgan"
-import cors from "cors"
-import { loadRoutes } from "./infra/routes"
+import routes from "./infra/routes"
+import middleware from "./infra/middleware"
+import * as database from "./infra/database"
+import { App } from "./infra/types"
 
-const app = express()
-
-if (process.env.NODE_ENV !== "test") {
-  app.use(logger("dev"))
+export const startServer = (port: number) => {
+  const app = express()
+  middleware(app)
+  routes(app)
+  return app.listen(port)
 }
-app.use(cors())
-app.use(express.json())
 
-loadRoutes(app)
+export const startDatabase = () => {
+  return database.connect()
+}
 
-export default app
+export const run = async (port: number): Promise<App> => {
+  const server = startServer(port)
+  const database = await startDatabase()
+  return {
+    server,
+    database
+  }
+}
+
+export const shutDown = (app: App) => async () => {
+  await app.database.close()
+  await app.server.close()
+}
