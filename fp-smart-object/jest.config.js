@@ -1,6 +1,6 @@
 module.exports = {
   roots: ["<rootDir>/src/", "<rootDir>/test/"],
-  preset: "./test/presets.ts",
+  preset: "ts-jest",
   silent: true,
   verbose: false,
   clearMocks: true,

@@ -30,8 +30,3 @@ describe("getCollection", () => {
   })
 })
 
-describe("close", () => {
-  it("should close database successfully", async () => {
-    await expect(close).resolves
-  })
-})

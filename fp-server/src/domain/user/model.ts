@@ -1,10 +1,30 @@
-import { IUser } from "./types"
-import { getCollection } from "../../infra/database"
+import validate from "validate.js"
 
-const COLLECTION_NAME = "Users"
-
-export const create = async (user: IUser): Promise<IUser> => {
-  const collection = await getCollection(COLLECTION_NAME)
-  const result = await collection.insertOne(user)
-  return result.ops[0] as IUser
+export interface User {
+  _id?: string
+  userName: string
+  email: string
+  password: string
 }
+
+const baseConstraints = {
+  type: "string",
+  presence: {
+    allowEmpty: false
+  }
+}
+
+const constraints = {
+  userName: {
+    ...baseConstraints
+  },
+  email: {
+    ...baseConstraints,
+    email: true
+  },
+  password: {
+    ...baseConstraints
+  }
+}
+
+export const validateUser = (user: User) => validate(user, constraints)

@@ -1,13 +1,9 @@
-import { Db, MongoClient } from "mongodb"
+import { Collection, Db, MongoClient } from "mongodb"
 import { DATABASE_URI, DATABASE_NAME } from "./config"
 
 let client: MongoClient
 
 export const connect = async (): Promise<MongoClient> => {
-  if (client) {
-    return client
-  }
-
   const config = { useUnifiedTopology: true }
   client = new MongoClient(DATABASE_URI, config)
   return client.connect()
@@ -20,7 +16,7 @@ export const getDb = async (): Promise<Db> => {
   return client.db(DATABASE_NAME)
 }
 
-export const getCollection = async (collectionName: string) => {
+export const getCollection = async (collectionName: string) : Promise<Collection> => {
   const db = await getDb()
   return db.collection(collectionName)
 }
