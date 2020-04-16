@@ -4,7 +4,6 @@ afterEach(async () => {
   await close()
 })
 
-// TODO: create instances tests
 
 describe("connect", () => {
   it("should connect to database successfully", async () => {
