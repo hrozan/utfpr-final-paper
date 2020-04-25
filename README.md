@@ -1,7 +1,6 @@
 # :computer: Computer Engineer Final Paper
 
-![Server CI](https://github.com/hrozan/utfpr-final-paper/workflows/Server%20CI/badge.svg) ![Server CI](https://github.com/hrozan/utfpr-final-paper/workflows/Server%20CI/badge.svg)
-
+![Server CI](https://github.com/hrozan/utfpr-final-paper/workflows/Server%20CI/badge.svg) 
 ## :mortar_board: UTFPR - Universidade Tecnológica Federal do Paraná
 
 This is repo contains all source code from my implementation
@@ -11,7 +10,7 @@ This is repo contains all source code from my implementation
 Install dependencies
 
 ```bash
-npm i && cd fp-client && npm i && cd ../fp-server && npm i
+npm i && cd ../server && npm i
 ```
 
 Set Up **.env**
@@ -23,7 +22,6 @@ cp fp-server/.env.example fp-api/.env
 Run project
 
 ```bash
-npm run dev:client
 npm run dev:server
 ```
 
