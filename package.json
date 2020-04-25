@@ -4,12 +4,8 @@
   "description": "UTFPR - Universidade Tecnológica Federal do Paraná",
   "main": "index.js",
   "scripts": {
-    "dev:server": "cd fp-server && npm run dev",
-    "dev:client": "cd fp-client && npm start",
-    "dev:smart": "cd fp-smart-object && npm run dev",
-    "env:start": "docker-compose up -d",
-    "poc:dev": "cd fp-server && npx nodemon src/index.ts",
-    "env:shutdown": "docker-compose stop && docker-compose rm -f"
+    "dev:server": "cd server && npm run dev",
+    "prettier": "npx prettier --write \"server/**/*.ts\""
   },
   "repository": {
     "type": "git",
@@ -23,6 +19,20 @@
   "homepage": "https://github.com/hrozan/utfpr-final-paper#readme",
   "dependencies": {},
   "devDependencies": {
-    "dotenv": "^8.2.0"
+    "husky": "^4.2.3",
+    "lint-staged": "^10.0.8",
+    "prettier": "^1.18.2",
+    "eslint": "^6.6.0",
+    "eslint-plugin-jest": "^23.1.1",
+    "eslint-plugin-prettier": "^3.1.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-rebase": "npm test"
+    }
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache --fix"
   }
 }

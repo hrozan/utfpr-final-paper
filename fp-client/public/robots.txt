@@ -1,2 +1,0 @@
-# https://server.js.robotstxt.org/robotstxt.html
-User-agent: *
