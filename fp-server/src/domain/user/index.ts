@@ -3,10 +3,6 @@ import * as controller from "./controller"
 
 const router = express.Router()
 
-router.post("/user", async (req, res) => {
-  const data = req.body
-  const id = await controller.createUser(data)
-  return res.status(201).json({ id })
-})
+router.post("/user", async (req, res) => controller.createUser({ req, res }))
 
 export default router

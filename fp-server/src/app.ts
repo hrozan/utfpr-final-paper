@@ -11,16 +11,12 @@ export const startServer = (port: number) => {
   return app.listen(port)
 }
 
-export const startDatabase = () => {
-  return database.connect()
-}
-
 export const run = async (port: number): Promise<App> => {
   const server = startServer(port)
-  const database = await startDatabase()
+  const db = await database.connect()
   return {
     server,
-    database
+    database: db
   }
 }
 

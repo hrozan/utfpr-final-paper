@@ -1,20 +1,29 @@
-import { IUser } from "../types"
-import * as user from "../model"
-import { close } from "../../../infra/database"
+import { validateUser, User } from "../model"
 
-afterEach(async () => {
-  await close()
-})
+describe("validate", () => {
+  it("should return undefined for a valid user", async () => {
+    const user: User = { email: "test@email.com", password: "fasdfa", userName: "asdfasdf" }
 
-describe("create", () => {
-  it("should create a user", async () => {
-    const newUser: IUser = { email: "teste@email.com", password: "pass123", userName: "Teste" }
+    const result = validateUser(user)
 
-    const result = await user.create(newUser)
+    expect(result).toBeUndefined()
+  })
 
-    expect(result._id).toBeDefined()
-    expect(result.email).toBe(newUser.email)
-    expect(result.password).toBe(newUser.password)
-    expect(result.userName).toBe(newUser.userName)
+  it("should return false for black values", async () => {
+    const user: User = { email: "", password: "", userName: "" }
+
+    const result = validateUser(user)
+
+    expect(result.userName).toBeDefined()
+    expect(result.password).toBeDefined()
+    expect(result.email).toBeDefined()
+  })
+
+  it("should return true for a empty object", async () => {
+    const user = {}
+
+    const result = validateUser(user as User)
+
+    expect(result).toBeDefined()
   })
 })

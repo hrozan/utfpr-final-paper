@@ -4,7 +4,6 @@ afterEach(async () => {
   await close()
 })
 
-// TODO: create instances tests
 
 describe("connect", () => {
   it("should connect to database successfully", async () => {
@@ -30,8 +29,3 @@ describe("getCollection", () => {
   })
 })
 
-describe("close", () => {
-  it("should close database successfully", async () => {
-    await expect(close).resolves
-  })
-})

@@ -1,12 +1,14 @@
 {
   "name": "utfpr-final-paper",
   "version": "1.0.0",
-  "description": "## UTFPR - Universidade Tecnológica Federal do Paraná",
+  "description": "UTFPR - Universidade Tecnológica Federal do Paraná",
   "main": "index.js",
   "scripts": {
     "dev:server": "cd fp-server && npm run dev",
     "dev:client": "cd fp-client && npm start",
+    "dev:smart": "cd fp-smart-object && npm run dev",
     "env:start": "docker-compose up -d",
+    "poc:dev": "cd fp-server && npx nodemon src/index.ts",
     "env:shutdown": "docker-compose stop && docker-compose rm -f"
   },
   "repository": {
@@ -19,5 +21,8 @@
     "url": "https://github.com/hrozan/utfpr-final-paper/issues"
   },
   "homepage": "https://github.com/hrozan/utfpr-final-paper#readme",
-  "dependencies": {}
+  "dependencies": {},
+  "devDependencies": {
+    "dotenv": "^8.2.0"
+  }
 }

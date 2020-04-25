@@ -27,7 +27,8 @@
     "passport": "^0.4.1",
     "passport-google-oauth": "^2.0.0",
     "ramda": "^0.27.0",
-    "url-join": "latest"
+    "url-join": "latest",
+    "validate.js": "^0.13.1"
   },
   "devDependencies": {
     "@shelf/jest-mongodb": "^1.1.3",
