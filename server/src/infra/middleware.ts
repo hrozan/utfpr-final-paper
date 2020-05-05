@@ -1,9 +1,8 @@
-import express, { Application } from "express"
-import cors from "cors"
-import morgan from "morgan"
+import Koa from "koa"
+import morgan from "koa-morgan"
+import bodyParser from "koa-bodyparser"
 
-export default (app: Application) => {
-  app.use(cors())
-  app.use(express.json())
+export default (app: Koa) => {
   app.use(morgan("combined"))
+  app.use(bodyParser())
 }

@@ -1,8 +1,11 @@
-import { Application, Response } from "express"
-import userRoutes from "../domain/user"
-import { API_BASE_PATH } from "./config"
+import Koa, { Context } from "koa"
+import Router from "koa-router"
+import user from "../domain/user"
 
-export default (app: Application) => {
-  app.get("/", (_, res: Response) => res.json({ status: "ok" }))
-  app.use(API_BASE_PATH, userRoutes)
+const base = new Router()
+base.get("/", (ctx: Context) => (ctx.body = { status: "ok", database: ctx.database.isConnected() }))
+
+export default (app: Koa) => {
+  app.use(base.routes()).use(base.allowedMethods())
+  app.use(user.routes()).use(user.allowedMethods())
 }

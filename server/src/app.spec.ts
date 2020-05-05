@@ -1,18 +1,13 @@
-import { run, shutDown } from "./app"
-import { App } from "./infra/types"
+import { run } from "./app"
 
 describe("run", () => {
-  let app: App
+  it("should run and shutdown app successfully", async () => {
+    await expect(async () => {
+      const port: number = 3001
 
-  afterEach(async () => {
-    if (!app) return
-    await shutDown(app)()
-  })
+      const app = await run(port)
 
-  it("should run app successfully", async () => {
-    app = await run(3001)
-
-    expect(app.server).toBeDefined()
-    expect(app.database).toBeDefined()
+      await app.shutdown()
+    }).not.toThrowError()
   })
 })

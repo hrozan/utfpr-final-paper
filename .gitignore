@@ -181,8 +181,6 @@ typings/
 .yarn-integrity
 
 
-# parcel-bundler cache (https://parceljs.org/)
-.cache
 
 # next.js build output
 .next
@@ -208,7 +206,6 @@ typings/
 
 # Xcode
 #
-build/
 *.pbxuser
 !default.pbxuser
 *.mode1v3
@@ -228,7 +225,6 @@ project.xcworkspace
 
 # Android/IntelliJ
 #
-build/
 .idea
 .gradle
 local.properties
@@ -239,8 +235,7 @@ local.properties
 .vscode/
 
 # node.js
-#
-node_modules/
+
 npm-debug.log
 yarn-error.log
 

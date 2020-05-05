@@ -1,31 +1,40 @@
-import { Collection, Db, MongoClient } from "mongodb"
-import { DATABASE_URI, DATABASE_NAME } from "./config"
+import { Db, MongoClient } from "mongodb"
+import { DATABASE_NAME, DATABASE_URI } from "./config"
 
-let database: Db
-let client: MongoClient
+export default class Database {
+  static instance: Database
+  client: MongoClient
+  db: Db
 
-export const connect = async (): Promise<MongoClient> => {
-  const config = { useUnifiedTopology: true }
-  client = await MongoClient.connect(DATABASE_URI, config)
-  database = client.db(DATABASE_NAME)
-  return client
-}
-
-export const getDb = async (): Promise<Db> => {
-  if (!database) {
-    await connect()
+  constructor(client: MongoClient) {
+    this.client = client
+    this.db = this.client.db(DATABASE_NAME)
   }
-  return database
-}
 
-export const getCollection = async (collectionName: string): Promise<Collection> => {
-  const db = await getDb()
-  return db.collection(collectionName)
-}
-
-export const close = () => {
-  if (!client) {
-    return
+  static async connect(): Promise<Database> {
+    if (!this.instance) {
+      const config = { useUnifiedTopology: true }
+      const client = await MongoClient.connect(DATABASE_URI, config)
+      this.instance = new Database(client)
+    }
+    return this.instance
   }
-  return client.close()
+
+  isConnected = () => this.client.isConnected()
+
+  close = (): Promise<void> => {
+    return this.client.close()
+  }
+
+  insert = (collectionName: string) => async <T>(data: T) => {
+    const collection = await this.db.collection(collectionName)
+    const result = await collection.insertOne(data)
+    const [newDocument] = result.ops
+    return newDocument as T
+  }
+
+  find = async <T>(collectionName: string): Promise<T[]> => {
+    const collection = await this.db.collection(collectionName)
+    return collection.find<T>({}).toArray()
+  }
 }

@@ -1,26 +1,31 @@
-import express from "express"
+import Koa from "koa"
 import routes from "./infra/routes"
 import middleware from "./infra/middleware"
-import * as database from "./infra/database"
-import { App } from "./infra/types"
+import Database from "./infra/database"
+import { App } from "./types"
 
-export const startServer = (port: number) => {
-  const app = express()
-  middleware(app)
-  routes(app)
-  return app.listen(port)
+declare interface ExtendableContext {
+  database: Database
 }
 
 export const run = async (port: number): Promise<App> => {
-  const server = startServer(port)
-  const db = await database.connect()
+  const app = new Koa()
+  middleware(app)
+  routes(app)
+
+  // Inject database reference in express application
+  const database = await Database.connect()
+  app.context.database = database
+
+  const server = app.listen(port)
+
+  const shutdown = async () => {
+    await database.close()
+    server.close()
+  }
+
   return {
     server,
-    database: db
+    shutdown
   }
-}
-
-export const shutDown = (app: App) => async () => {
-  await app.database.close()
-  await app.server.close()
 }

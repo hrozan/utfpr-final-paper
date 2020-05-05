@@ -1,18 +1,12 @@
-import { run, shutDown } from "./app"
+import { run } from "./app"
 import { PORT } from "./infra/config"
 
 run(PORT)
   .then((app) => {
-    console.log(`Server running on: http://localhost:${PORT}`)
-
-    if (app.database.isConnected()) {
-      console.log(`Database Connected Successfully`)
-    } else {
-      console.error("Database Not Connected")
-    }
-
+    console.log(`Application running on: http://localhost:${PORT}`)
     // Graceful Shutdown
-    process.on("SIGTERM", shutDown(app))
-    process.on("SIGINT", shutDown(app))
+    const shutdown = async () => app.shutdown()
+    process.on("SIGTERM", shutdown)
+    process.on("SIGINT", shutdown)
   })
   .catch((err) => console.error(err.message))
