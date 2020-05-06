@@ -9,13 +9,12 @@ export interface User {
   password: string
 }
 
-export class UserModel {
-  user: User
-  db: Database
-  constructor(db: Database, data?: any) {
-    this.user = <User>data
-    this.db = db
-  }
-  save = async () => this.db.insert(collectionName)<User>(this.user)
-  findAll = async () => this.db.find<User>(collectionName)
+export const findAllUser = async (): Promise<User[]> => {
+  const db = await Database.connect()
+  return db.findAll<User>(collectionName)
+}
+
+export const saveUser = async (user: User): Promise<User> => {
+  const db = await Database.connect()
+  return db.insert(collectionName)<User>(user)
 }

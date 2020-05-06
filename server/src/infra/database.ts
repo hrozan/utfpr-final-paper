@@ -20,8 +20,6 @@ export default class Database {
     return this.instance
   }
 
-  isConnected = () => this.client.isConnected()
-
   close = (): Promise<void> => {
     return this.client.close()
   }
@@ -33,7 +31,7 @@ export default class Database {
     return newDocument as T
   }
 
-  find = async <T>(collectionName: string): Promise<T[]> => {
+  findAll = async <T>(collectionName: string): Promise<T[]> => {
     const collection = await this.db.collection(collectionName)
     return collection.find<T>({}).toArray()
   }

@@ -5,7 +5,7 @@ run(PORT)
   .then((app) => {
     console.log(`Application running on: http://localhost:${PORT}`)
     // Graceful Shutdown
-    const shutdown = async () => app.shutdown()
+    const shutdown = async () => await app.shutdown()
     process.on("SIGTERM", shutdown)
     process.on("SIGINT", shutdown)
   })
