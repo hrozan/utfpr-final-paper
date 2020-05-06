@@ -14,8 +14,13 @@ export default class Database {
   static async connect(): Promise<Database> {
     if (!this.instance) {
       const config = { useUnifiedTopology: true }
-      const client = await MongoClient.connect(DATABASE_URI, config)
-      this.instance = new Database(client)
+      try {
+        const client = await MongoClient.connect(DATABASE_URI, config)
+        this.instance = new Database(client)
+      } catch (e) {
+        console.error("Error in Database Connection")
+        return {} as Database
+      }
     }
     return this.instance
   }
