@@ -1,20 +1,37 @@
+import { IsString, IsEmail, validateOrReject } from "class-validator"
 import Database from "../../infra/database"
 
 const collectionName = "Users"
 
-export interface User {
-  _id?: string
-  userName: string
+export class User {
+  _id: string
+
+  @IsEmail()
   email: string
+
+  @IsString()
   password: string
+
+  @IsString()
+  userName: string
+
+  constructor({ _id, email, password, userName }: any) {
+    this._id = _id
+    this.email = email
+    this.password = password // todo hash password
+    this.userName = userName
+  }
 }
 
-export const findAllUser = async (): Promise<User[]> => {
-  const db = await Database.connect()
-  return db.findAll<User>(collectionName)
-}
+export class UserModel {
+  static findAll = async (): Promise<User[]> => {
+    const db = await Database.connect()
+    return db.findAll<User>(collectionName)
+  }
 
-export const saveUser = async (user: User): Promise<User> => {
-  const db = await Database.connect()
-  return db.insert(collectionName)<User>(user)
+  static save = async (user: User): Promise<User> => {
+    const db = await Database.connect()
+    await validateOrReject(user)
+    return db.insert(collectionName)<User>(user)
+  }
 }

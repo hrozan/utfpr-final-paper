@@ -12,6 +12,7 @@
       "*": ["node_modules/*", "src/types/*"]
     },
     "esModuleInterop": true,
+    "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true
   },
   "include": ["src/**/*"],
