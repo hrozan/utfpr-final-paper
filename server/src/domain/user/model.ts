@@ -1,37 +1,39 @@
-import { IsString, IsEmail, validateOrReject } from "class-validator"
-import Database from "../../infra/database"
+import mongoose, { Document, Schema } from "mongoose"
 
-const collectionName = "Users"
-
-export class User {
-  _id: string
-
-  @IsEmail()
-  email: string
-
-  @IsString()
-  password: string
-
-  @IsString()
+// region Mongoose Model
+export interface User {
+  _id?: any
   userName: string
+  email: string
+  password: string
+}
 
-  constructor({ _id, email, password, userName }: any) {
-    this._id = _id
-    this.email = email
-    this.password = password // todo hash password
-    this.userName = userName
+type UserModel = User & Document
+
+const schema = {
+  userName: {
+    required: true,
+    type: String
+  },
+  email: {
+    required: true,
+    type: String
+  },
+  password: {
+    required: true,
+    type: String
   }
 }
 
-export class UserModel {
-  static findAll = async (): Promise<User[]> => {
-    const db = await Database.connect()
-    return db.findAll<User>(collectionName)
-  }
+const UserSchema: Schema = new Schema(schema)
+const UserModel = mongoose.model<UserModel>("Users", UserSchema)
 
-  static save = async (user: User): Promise<User> => {
-    const db = await Database.connect()
-    await validateOrReject(user)
-    return db.insert(collectionName)<User>(user)
-  }
+// endregion
+
+export const createUser = async (user: User): Promise<User> => {
+  return await UserModel.create(user)
+}
+
+export const readAllUser = async (): Promise<User[]> => {
+  return UserModel.find({})
 }
