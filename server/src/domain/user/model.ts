@@ -1,4 +1,7 @@
 import mongoose, { Document, Schema } from "mongoose"
+import bcrypt from "bcrypt"
+
+const SALT_ROUNDS = 10
 
 // region Mongoose Model
 export interface User {
@@ -26,14 +29,27 @@ const schema = {
 }
 
 const UserSchema: Schema = new Schema(schema)
-const UserModel = mongoose.model<UserModel>("Users", UserSchema)
+export const UserModel = mongoose.model<UserModel>("Users", UserSchema)
 
 // endregion
 
 export const createUser = async (user: User): Promise<User> => {
-  return await UserModel.create(user)
+  const passwordHash = await bcrypt.hash(user.password, SALT_ROUNDS)
+  return await UserModel.create({ ...user, password: passwordHash })
 }
 
 export const readAllUser = async (): Promise<User[]> => {
   return UserModel.find({})
+}
+
+export const findUserByEmail = async (email: string): Promise<User | null> => {
+  return UserModel.findOne({ email })
+}
+
+export const checkUserForLogin = async (email: string, password: string): Promise<boolean> => {
+  const user = await findUserByEmail(email)
+  if (!user) {
+    return false
+  }
+  return bcrypt.compare(password, user.password)
 }

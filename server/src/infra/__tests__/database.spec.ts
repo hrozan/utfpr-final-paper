@@ -4,8 +4,10 @@ afterEach(async () => {
   await database.disconnect()
 })
 
-it("should connect successfully from database", async () => {
-  await database.connect()
+describe("Database", () => {
+  it("should connect successfully from database", async () => {
+    await database.connect()
 
-  expect(database.isConnected()).toBeTruthy()
+    expect(database.isConnected()).toBeTruthy()
+  })
 })
