@@ -1,7 +1,7 @@
 import * as model from "../model"
-import { User } from "../model"
+import * as util from "./utils"
+import { User } from "../types"
 import database from "../../../infra/database"
-import * as faker from "faker"
 
 beforeAll(async () => {
   await database.connect()
@@ -15,26 +15,16 @@ afterEach(async () => {
   await model.UserModel.deleteMany({})
 })
 
-const createFakeUser = (): User => {
-  const userName = faker.internet.userName()
-  return { email: faker.internet.email(userName), password: faker.internet.password(), userName: userName }
-}
-
-const createFakeUserAndSave = async (): Promise<User> => {
-  const newUser = createFakeUser()
-  return model.createUser(newUser)
-}
-
-describe("User", () => {
+describe("User.Model", () => {
   it("should create a User", async () => {
-    const newUser = createFakeUser()
+    const newUser = util.createFakeUser()
     const user = await model.createUser(newUser)
 
     expect(user._id).toBeDefined()
   })
 
   it("should create a User and hash password", async () => {
-    const newUser = createFakeUser()
+    const newUser = util.createFakeUser()
     const user = await model.createUser(newUser)
 
     expect(user.password).not.toBe(newUser.password)
@@ -42,7 +32,7 @@ describe("User", () => {
 
   it("should read all Users", async () => {
     const count = 3
-    const newUsers = [...new Array(count)].map<Promise<User>>(() => createFakeUserAndSave())
+    const newUsers = [...new Array(count)].map<Promise<User>>(() => util.createFakeUserAndSave())
     await Promise.all(newUsers)
 
     const users = await model.readAllUser()
@@ -52,19 +42,19 @@ describe("User", () => {
   })
 
   it("should fetch User by email", async () => {
-    const { email } = await createFakeUserAndSave()
+    const { email } = await util.createFakeUserAndSave()
 
     const user = await model.findUserByEmail(email)
 
     expect(user?.email).toBe(email)
   })
 
-  it("should check a user for login", async () => {
-    const newUser = createFakeUser()
-    await model.createUser(newUser)
+  it("should check a user for password", async () => {
+    const newUser = util.createFakeUser()
+    const user = await model.createUser(newUser)
 
-    const result = await model.checkUserForLogin(newUser.email, newUser.password)
+    const match = await model.checkUserPassword(newUser.password, user.password)
 
-    expect(result).toBeTruthy()
+    expect(match).toBeTruthy()
   })
 })
