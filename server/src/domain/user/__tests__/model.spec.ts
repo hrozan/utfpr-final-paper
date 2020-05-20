@@ -1,5 +1,5 @@
 import * as model from "../model"
-import * as util from "./utils"
+import * as fake from "./fake"
 import { User } from "../types"
 import database from "../../../infra/database"
 
@@ -17,14 +17,14 @@ afterEach(async () => {
 
 describe("User.Model", () => {
   it("should create a User", async () => {
-    const newUser = util.createFakeUser()
+    const newUser = fake.createFakeUser()
     const user = await model.createUser(newUser)
 
     expect(user._id).toBeDefined()
   })
 
   it("should create a User and hash password", async () => {
-    const newUser = util.createFakeUser()
+    const newUser = fake.createFakeUser()
     const user = await model.createUser(newUser)
 
     expect(user.password).not.toBe(newUser.password)
@@ -32,7 +32,7 @@ describe("User.Model", () => {
 
   it("should read all Users", async () => {
     const count = 3
-    const newUsers = [...new Array(count)].map<Promise<User>>(() => util.createFakeUserAndSave())
+    const newUsers = [...new Array(count)].map<Promise<User>>(() => fake.createFakeUserAndSave())
     await Promise.all(newUsers)
 
     const users = await model.readAllUser()
@@ -42,7 +42,7 @@ describe("User.Model", () => {
   })
 
   it("should fetch User by email", async () => {
-    const { email } = await util.createFakeUserAndSave()
+    const { email } = await fake.createFakeUserAndSave()
 
     const user = await model.findUserByEmail(email)
 
@@ -50,7 +50,7 @@ describe("User.Model", () => {
   })
 
   it("should check a user for password", async () => {
-    const newUser = util.createFakeUser()
+    const newUser = fake.createFakeUser()
     const user = await model.createUser(newUser)
 
     const match = await model.checkUserPassword(newUser.password, user.password)

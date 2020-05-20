@@ -3,6 +3,9 @@ import { PORT } from "./infra/config"
 
 run(PORT)
   .then((app) => {
+    if (app.dbIsConnected) {
+      console.log("Database is Connected")
+    }
     console.log(`Application running on: http://localhost:${PORT}`)
     // Graceful Shutdown
     const shutdown = async () => await app.shutdown()

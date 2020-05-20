@@ -1,5 +1,5 @@
 import * as service from "../service"
-import * as util from "./utils"
+import * as fake from "./fake"
 import * as model from "../model"
 import { AuthCredential } from "../types"
 import database from "../../../infra/database"
@@ -18,7 +18,7 @@ afterEach(async () => {
 
 describe("User.Service", () => {
   it("should login user and return a token", async () => {
-    const newUser = await util.createFakeUser()
+    const newUser = await fake.createFakeUser()
     await model.createUser(newUser)
     const credential: AuthCredential = {
       password: newUser.password,
