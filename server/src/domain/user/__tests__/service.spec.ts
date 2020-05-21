@@ -4,19 +4,19 @@ import * as model from "../model"
 import { AuthCredential } from "../types"
 import database from "../../../infra/database"
 
-beforeAll(async () => {
-  await database.connect()
-})
-
-afterAll(async () => {
-  await database.disconnect()
-})
-
-afterEach(async () => {
-  await model.UserModel.deleteMany({})
-})
-
 describe("User.Service", () => {
+  beforeAll(async () => {
+    await database.connect()
+  })
+
+  afterAll(async () => {
+    await database.disconnect()
+  })
+
+  beforeEach(async () => {
+    await model.UserModel.deleteMany({})
+  })
+
   it("should login user and return a token", async () => {
     const newUser = await fake.createFakeUser()
     await model.createUser(newUser)

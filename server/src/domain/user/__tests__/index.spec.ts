@@ -18,7 +18,11 @@ describe("User.Routes", () => {
     await shutdown()
   })
 
-  afterEach(async () => {
+  beforeEach(async () => {
+    await model.UserModel.deleteMany({})
+  })
+
+  beforeAll(async () => {
     await model.UserModel.deleteMany({})
   })
 
@@ -30,7 +34,7 @@ describe("User.Routes", () => {
     const response = await request(server).get("/users")
 
     expect(response.status).toBe(200)
-    expect(response.body.length).toBe(count)
+    expect(response.body.length).toBeGreaterThanOrEqual(count)
   })
 
   it("POST /users", async () => {

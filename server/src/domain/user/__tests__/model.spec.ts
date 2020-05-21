@@ -3,19 +3,19 @@ import * as fake from "./fake"
 import { User } from "../types"
 import database from "../../../infra/database"
 
-beforeAll(async () => {
-  await database.connect()
-})
-
-afterAll(async () => {
-  await database.disconnect()
-})
-
-afterEach(async () => {
-  await model.UserModel.deleteMany({})
-})
-
 describe("User.Model", () => {
+  beforeAll(async () => {
+    await database.connect()
+  })
+
+  afterAll(async () => {
+    await database.disconnect()
+  })
+
+  beforeAll(async () => {
+    await model.UserModel.deleteMany({})
+  })
+
   it("should create a User", async () => {
     const newUser = fake.createFakeUser()
     const user = await model.createUser(newUser)
@@ -37,7 +37,7 @@ describe("User.Model", () => {
 
     const users = await model.readAllUser()
 
-    expect(users.length).toBe(count)
+    expect(users.length).toBeGreaterThanOrEqual(count)
     users.map((user) => expect(user._id).toBeDefined())
   })
 
