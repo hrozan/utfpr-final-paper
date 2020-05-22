@@ -58,4 +58,13 @@ describe("User.Routes", () => {
     expect(response.status).toBe(200)
     expect(response.body).toHaveProperty("token")
   })
+
+  it("DELETE /users/:id", async () => {
+    const newUser = await fake.createFakeUserAndSave()
+
+    const response = await request(server).del(`/users/${newUser._id}`)
+
+    expect(response.status).toBe(200)
+    expect(response.body).toHaveProperty("id")
+  })
 })
