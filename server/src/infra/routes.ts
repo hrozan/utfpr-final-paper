@@ -1,13 +1,12 @@
 import Koa, { Context } from "koa"
 import Router from "koa-router"
 import user from "../domain/user"
-import Database from "./database"
+import database from "./database"
 
 const base = new Router()
 
 base.get("/", async (ctx: Context) => {
-  const db = await Database.connect()
-  ctx.body = { status: "ok", database: db.client.isConnected() }
+  ctx.body = { status: "ok", database: database.isConnected() }
 })
 
 export default (app: Koa) => {

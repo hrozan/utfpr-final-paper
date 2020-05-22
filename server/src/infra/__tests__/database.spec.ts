@@ -1,35 +1,13 @@
-import Database from "../database"
+import database from "../database"
 
-const testCollection = "TestCollection"
-interface TestDocument {
-  _id?: string
-  content: string
-}
-
-describe("connect", () => {
-  let database: Database
-
-  beforeAll(async () => {
-    database = await Database.connect()
+describe("Database", () => {
+  afterEach(async () => {
+    await database.disconnect()
   })
 
-  afterAll(async () => {
-    if (database) {
-      await database.close()
-    }
-  })
+  it("should connect successfully from database", async () => {
+    await database.connect()
 
-  it("should connect to database successfully", async () => {
-    expect(database.client.isConnected()).toBeTruthy()
-  })
-
-  it("should insert to database", async () => {
-    const newTestDocument: TestDocument = {
-      content: "Lorem ipsum dolor"
-    }
-
-    const testDocument = await database.insert(testCollection)<TestDocument>(newTestDocument)
-
-    expect(testDocument._id).toBeDefined()
+    expect(database.isConnected()).toBeTruthy()
   })
 })

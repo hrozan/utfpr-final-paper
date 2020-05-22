@@ -1,20 +1,48 @@
-import Database from "../../infra/database"
+import mongoose, { Document, Schema } from "mongoose"
+import bcrypt from "bcrypt"
+import { User } from "./types"
 
-const collectionName = "Users"
+const SALT_ROUNDS = 10
 
-export interface User {
-  _id?: string
-  userName: string
-  email: string
-  password: string
+// region Mongoose Model
+
+const schema = {
+  userName: {
+    required: true,
+    type: String
+  },
+  email: {
+    required: true,
+    type: String
+  },
+  password: {
+    required: true,
+    type: String
+  }
 }
 
-export const findAllUser = async (): Promise<User[]> => {
-  const db = await Database.connect()
-  return db.findAll<User>(collectionName)
+const UserSchema: Schema = new Schema(schema)
+export type UserModel = User & Document
+export const UserModel = mongoose.model<UserModel>("Users", UserSchema)
+
+// endregion
+
+export const createUser = async (user: User): Promise<User> => {
+  const passwordHash = await bcrypt.hash(user.password, SALT_ROUNDS)
+  return await UserModel.create({ ...user, password: passwordHash })
 }
 
-export const saveUser = async (user: User): Promise<User> => {
-  const db = await Database.connect()
-  return db.insert(collectionName)<User>(user)
+export const readAllUser = async (): Promise<User[]> => {
+  return UserModel.find({})
 }
+
+export const findUserByEmail = async (email: string): Promise<User | null> => {
+  return UserModel.findOne({ email })
+}
+
+export const deleteUser = async (id: string): Promise<User | null> => {
+  return UserModel.findByIdAndDelete(id)
+}
+
+export const checkUserPassword = async (password: string, hash: string): Promise<boolean> =>
+  bcrypt.compare(password, hash)

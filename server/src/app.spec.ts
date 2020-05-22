@@ -1,6 +1,6 @@
 import { run } from "./app"
 
-describe("run", () => {
+describe("App", () => {
   it("should run and shutdown app successfully", async () => {
     await expect(async () => {
       const port: number = 3001

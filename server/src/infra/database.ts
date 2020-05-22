@@ -1,43 +1,19 @@
-import { Db, MongoClient } from "mongodb"
-import { DATABASE_NAME, DATABASE_URI } from "./config"
+import mongoose, { Mongoose } from "mongoose"
+import { DATABASE_URI } from "./config"
 
-export default class Database {
-  static instance: Database
-  client: MongoClient
-  db: Db
+const connectedState = 1
+export default {
+  async connect(): Promise<Mongoose> {
+    const config = { useNewUrlParser: true, useUnifiedTopology: true }
 
-  constructor(client: MongoClient) {
-    this.client = client
-    this.db = this.client.db(DATABASE_NAME)
-  }
-
-  static async connect(): Promise<Database> {
-    if (!this.instance) {
-      const config = { useUnifiedTopology: true }
-      try {
-        const client = await MongoClient.connect(DATABASE_URI, config)
-        this.instance = new Database(client)
-      } catch (e) {
-        console.error("Error in Database Connection")
-        return {} as Database
-      }
-    }
-    return this.instance
-  }
-
-  close = (): Promise<void> => {
-    return this.client.close()
-  }
-
-  insert = (collectionName: string) => async <T>(data: T) => {
-    const collection = await this.db.collection(collectionName)
-    const result = await collection.insertOne(data)
-    const [newDocument] = result.ops
-    return newDocument as T
-  }
-
-  findAll = async <T>(collectionName: string): Promise<T[]> => {
-    const collection = await this.db.collection(collectionName)
-    return collection.find<T>({}).toArray()
+    const database = await mongoose.connect(DATABASE_URI, config)
+    database.connection.on("open", () => console.info("Database Connected Successfully"))
+    return database
+  },
+  async disconnect(): Promise<void> {
+    return mongoose.connection.close()
+  },
+  isConnected() {
+    return mongoose.connection.readyState === connectedState
   }
 }

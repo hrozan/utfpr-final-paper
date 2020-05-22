@@ -17,7 +17,9 @@
     "url": "https://github.com/hrozan/utfpr-final-paper/issues"
   },
   "homepage": "https://github.com/hrozan/utfpr-final-paper#readme",
-  "dependencies": {},
+  "dependencies": {
+    "class-validator": "^0.12.2"
+  },
   "devDependencies": {
     "@typescript-eslint/experimental-utils": "^2.30.0",
     "eslint": "^6.6.0",
