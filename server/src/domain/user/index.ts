@@ -29,4 +29,19 @@ router.post("/login", async (ctx: Context) => {
 
   ctx.body = { token }
 })
+
+router.del("/:id", async (ctx: Context) => {
+  const userId = ctx.params.id
+
+  const deletedUser = await model.deleteUser(userId)
+
+  if (!deletedUser) {
+    ctx.status = 404
+    ctx.body = {}
+    return
+  }
+
+  ctx.body = { id: deletedUser._id }
+})
+
 export default router

@@ -57,4 +57,12 @@ describe("User.Model", () => {
 
     expect(match).toBeTruthy()
   })
+
+  it("should delete a user", async () => {
+    const newUser = await fake.createFakeUserAndSave()
+
+    const user = await model.deleteUser(newUser._id)
+
+    expect(user?._id).toEqual(newUser._id)
+  })
 })

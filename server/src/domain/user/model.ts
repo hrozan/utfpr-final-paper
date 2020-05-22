@@ -1,6 +1,6 @@
 import mongoose, { Document, Schema } from "mongoose"
 import bcrypt from "bcrypt"
-import { User, AuthCredential } from "./types"
+import { User } from "./types"
 
 const SALT_ROUNDS = 10
 
@@ -38,6 +38,10 @@ export const readAllUser = async (): Promise<User[]> => {
 
 export const findUserByEmail = async (email: string): Promise<User | null> => {
   return UserModel.findOne({ email })
+}
+
+export const deleteUser = async (id: string): Promise<User | null> => {
+  return UserModel.findByIdAndDelete(id)
 }
 
 export const checkUserPassword = async (password: string, hash: string): Promise<boolean> =>
