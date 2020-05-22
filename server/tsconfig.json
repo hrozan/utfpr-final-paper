@@ -9,7 +9,7 @@
     "types": ["node", "jest"],
     "baseUrl": ".",
     "paths": {
-      "*": ["node_modules/*", "src/types/*"]
+      "*": ["node_modules/*"]
     },
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true
