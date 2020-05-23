@@ -1,21 +1,25 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/react-native-community/react-native-template-typescript
- *
- * @format
- */
-
 import React from "react"
-import { Text, View } from "react-native"
+import { Button, Container, Content, Footer, FooterTab, Header, Text } from "native-base"
 
 const App: React.FC = () => {
+  const sayHello = () => {
+    console.log("Hello")
+  }
+
   return (
-    <View>
-      <Text>Hello</Text>
-    </View>
+    <Container>
+      <Header />
+      <Content>
+        <Text>Higor Rozan</Text>
+      </Content>
+      <Footer>
+        <FooterTab>
+          <Button onPress={sayHello}>
+            <Text>Click Me!</Text>
+          </Button>
+        </FooterTab>
+      </Footer>
+    </Container>
   )
 }
 
