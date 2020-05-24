@@ -6,6 +6,7 @@
     "android": "react-native run-android",
     "start": "react-native start",
     "test": "jest",
+    "test:dev": "jest --watch --silent=false --verbose",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
