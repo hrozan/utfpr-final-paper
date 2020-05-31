@@ -7,11 +7,13 @@ interface Props {
   value: string
   onChangeText: (text: string) => void
   password?: boolean
+  testID?: string
 }
 
 const TextField: React.FC<Props> = (props) => (
   <Item style={styles.item}>
     <Input
+      testID={props.testID}
       placeholder={props.label}
       value={props.value}
       onChangeText={props.onChangeText}
