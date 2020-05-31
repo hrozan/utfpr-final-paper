@@ -20,6 +20,6 @@ export const run = async (port: number): Promise<App> => {
   return {
     server,
     dbIsConnected: database.isConnected(),
-    shutdown
+    shutdown,
   }
 }

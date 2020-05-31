@@ -3,23 +3,23 @@ module.exports = {
     commonjs: true,
     es6: true,
     node: true,
-    jest:true
-
+    jest: true,
   },
-  extends: ["eslint:recommended", "plugin:jest/recommended"],
+  extends: ["eslint:recommended", "plugin:jest/recommended", "@react-native-community"],
   globals: {
     Atomics: "readonly",
-    SharedArrayBuffer: "readonly"
+    SharedArrayBuffer: "readonly",
   },
+  parser: "@typescript-eslint/parser",
   parserOptions: {
-    ecmaVersion: 2018
+    ecmaVersion: 2018,
   },
   rules: {
-    indent: ["error", 2, { SwitchCase: 1 }],
+    indent: ["error", 2, {SwitchCase: 1}],
     "linebreak-style": ["error", "unix"],
     quotes: ["error", "double"],
     semi: ["error", "never"],
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
   },
-  plugins: ["prettier", "jest"]
+  plugins: ["prettier", "jest", "@typescript-eslint"],
 }

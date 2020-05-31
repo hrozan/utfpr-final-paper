@@ -1,7 +1,7 @@
 module.exports = {
   displayName: {
     name: "API",
-    color: "blue"
+    color: "blue",
   },
   preset: "./test/presets.ts",
   roots: ["<rootDir>/src/"],
@@ -11,5 +11,5 @@ module.exports = {
   testMatch: ["**/__tests__/**/?(*.)+(spec|test).[jt]s?(x)", "**/?(*.)+(spec|test).[tj]s?(x)"],
   notify: false,
   silent: true,
-  verbose: false
+  verbose: false,
 }
