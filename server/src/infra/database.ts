@@ -1,5 +1,5 @@
 import mongoose, { Mongoose } from "mongoose"
-import { DATABASE_URI } from "./config"
+import { DATABASE_URI } from "../config"
 
 const connectedState = 1
 export default {

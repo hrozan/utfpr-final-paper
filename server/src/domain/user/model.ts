@@ -1,6 +1,12 @@
 import mongoose, { Document, Schema } from "mongoose"
 import bcrypt from "bcrypt"
-import { User } from "./types"
+
+export interface User {
+  _id?: any
+  userName: string
+  email: string
+  password: string
+}
 
 const SALT_ROUNDS = 10
 
@@ -9,16 +15,16 @@ const SALT_ROUNDS = 10
 const schema = {
   userName: {
     required: true,
-    type: String
+    type: String,
   },
   email: {
     required: true,
-    type: String
+    type: String,
   },
   password: {
     required: true,
-    type: String
-  }
+    type: String,
+  },
 }
 
 const UserSchema: Schema = new Schema(schema)

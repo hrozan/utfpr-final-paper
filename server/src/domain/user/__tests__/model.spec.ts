@@ -1,6 +1,6 @@
+import { User } from "../model"
 import * as model from "../model"
 import * as fake from "./fake"
-import { User } from "../types"
 import database from "../../../infra/database"
 
 describe("User.Model", () => {

@@ -3,7 +3,7 @@ import * as fake from "./fake"
 import * as model from "../model"
 import { run } from "../../../app"
 import { Server } from "http"
-import { User } from "../types"
+import { User } from "../model"
 
 describe("User.Routes", () => {
   let server: Server
@@ -19,10 +19,6 @@ describe("User.Routes", () => {
   })
 
   beforeEach(async () => {
-    await model.UserModel.deleteMany({})
-  })
-
-  beforeAll(async () => {
     await model.UserModel.deleteMany({})
   })
 
@@ -45,18 +41,6 @@ describe("User.Routes", () => {
       .send(payload)
 
     expect(response.status).toBe(201)
-  })
-
-  it("POST /users/login", async () => {
-    const newUser = fake.createFakeUser()
-    await model.createUser(newUser)
-
-    const response = await request(server)
-      .post("/users/login")
-      .send({ email: newUser.email, password: newUser.password })
-
-    expect(response.status).toBe(200)
-    expect(response.body).toHaveProperty("token")
   })
 
   it("DELETE /users/:id", async () => {

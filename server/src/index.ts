@@ -1,5 +1,5 @@
 import { run } from "./app"
-import { PORT } from "./infra/config"
+import { PORT } from "./config"
 
 run(PORT)
   .then((app) => {
