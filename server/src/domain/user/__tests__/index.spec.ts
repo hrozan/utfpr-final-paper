@@ -5,6 +5,15 @@ import { run } from "../../../app"
 import { Server } from "http"
 import { User } from "../model"
 
+const login = async (server: Server): Promise<string> => {
+  const user = fake.createFakeUser()
+  await model.createUser(user)
+  const response = await request(server)
+    .post("/auth/login")
+    .send({ email: user.email, password: user.password })
+  return response.body.token
+}
+
 describe("User.Routes", () => {
   let server: Server
   let shutdown: Function
@@ -27,7 +36,11 @@ describe("User.Routes", () => {
     const newUsers = [...new Array(count)].map<Promise<User>>(() => fake.createFakeUserAndSave())
     await Promise.all(newUsers)
 
-    const response = await request(server).get("/users")
+    const token = await login(server)
+
+    const response = await request(server)
+      .get("/users")
+      .set({ token })
 
     expect(response.status).toBe(200)
     expect(response.body.length).toBeGreaterThanOrEqual(count)
@@ -36,8 +49,11 @@ describe("User.Routes", () => {
   it("POST /users", async () => {
     const payload = fake.createFakeUser()
 
+    const token = await login(server)
+
     const response = await request(server)
       .post("/users")
+      .set({ token })
       .send(payload)
 
     expect(response.status).toBe(201)
@@ -46,7 +62,10 @@ describe("User.Routes", () => {
   it("DELETE /users/:id", async () => {
     const newUser = await fake.createFakeUserAndSave()
 
+    const token = await login(server)
+
     const response = await request(server).del(`/users/${newUser._id}`)
+      .set({ token })
 
     expect(response.status).toBe(200)
     expect(response.body).toHaveProperty("id")

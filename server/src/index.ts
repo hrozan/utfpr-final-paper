@@ -3,7 +3,7 @@ import { PORT } from "./config"
 
 run(PORT)
   .then((app) => {
-    console.log(`🚀 Application running on: http://localhost:${PORT}`)
+    console.log(`🚀 Application Running On: http://localhost:${PORT}`)
     // Graceful Shutdown
     const shutdown = async () => {
       console.log("Shutdown")

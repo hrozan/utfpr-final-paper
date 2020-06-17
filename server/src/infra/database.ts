@@ -7,11 +7,11 @@ export default {
     const config = { useNewUrlParser: true, useUnifiedTopology: true }
 
     const database = await mongoose.connect(DATABASE_URI, config)
-    console.log("💿 Database Connected Successfully")
+    console.log("✅ Database Connected Successfully")
     return database
   },
   async disconnect(): Promise<void> {
-    return mongoose.connection.close()
+    console.log(" Database Close Successfully")
   },
   isConnected() {
     return mongoose.connection.readyState === connectedState
