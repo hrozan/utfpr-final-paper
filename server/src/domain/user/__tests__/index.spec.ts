@@ -37,7 +37,6 @@ describe("User.Routes", () => {
     await Promise.all(newUsers)
 
     const token = await login(server)
-
     const response = await request(server)
       .get("/users")
       .set({ token })
@@ -50,7 +49,6 @@ describe("User.Routes", () => {
     const payload = fake.createFakeUser()
 
     const token = await login(server)
-
     const response = await request(server)
       .post("/users")
       .set({ token })
@@ -63,7 +61,6 @@ describe("User.Routes", () => {
     const newUser = await fake.createFakeUserAndSave()
 
     const token = await login(server)
-
     const response = await request(server).del(`/users/${newUser._id}`)
       .set({ token })
 

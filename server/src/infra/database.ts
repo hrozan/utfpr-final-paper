@@ -12,6 +12,7 @@ export default {
   },
   async disconnect(): Promise<void> {
     console.log(" Database Close Successfully")
+    return mongoose.connection.close()
   },
   isConnected() {
     return mongoose.connection.readyState === connectedState
