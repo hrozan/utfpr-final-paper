@@ -7,6 +7,7 @@ import bodyParser from "koa-bodyparser"
 import authMiddleware from "./domain/auth/middleware"
 import user from "./domain/user"
 import auth from "./domain/auth"
+import broker from "./domain/broker"
 
 export interface App {
   server: Server
@@ -28,6 +29,7 @@ export const run = async (port: number): Promise<App> => {
   // Private Routes
   app.use(authMiddleware)
   app.use(user.routes()).use(user.allowedMethods())
+  app.use(broker.routes()).use(broker.allowedMethods())
 
   // Error Handling
   app.silent = ENV !== "development"
