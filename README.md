@@ -1,29 +1,16 @@
 # :computer: Computer Engineer Final Paper
 
 ![Server CI](https://github.com/hrozan/utfpr-final-paper/workflows/Server%20CI/badge.svg) 
+
 ## :mortar_board: UTFPR - Universidade Tecnológica Federal do Paraná
 
 This is repo contains all source code from my implementation
 
 ### :rocket: Getting Started
 
-Install dependencies
+- [Server](./server/README.md)
 
-```bash
-npm i && cd ../server && npm i
-```
-
-Set Up **.env**
-
-```bash
-cp fp-server/.env.example fp-api/.env
-```
-
-Run project
-
-```bash
-npm run dev:server
-```
+- [Mobile](./mobile/README.md)
 
 ### :page_facing_up: License
 
