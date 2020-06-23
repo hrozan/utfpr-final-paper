@@ -17,15 +17,15 @@ const router = new Router({ prefix: "/auth" })
 
 router.post("/login", async (ctx: Context) => {
   const credential: AuthCredential = ctx.request.body
+  
   const user = await model.findUserByEmail(credential.email)
-
   if (!user) {
-    return (ctx.status = 404)
+    return (ctx.status = 401)
   }
 
   const match = await model.checkUserPassword(credential.password, user.password)
   if (!match) {
-    return (ctx.status = 500)
+    return (ctx.status = 401)
   }
 
   const payload: TokenPayload = { _id: user._id }
