@@ -2,12 +2,11 @@ import { run } from "./app"
 
 describe("App", () => {
   it("should run and shutdown app successfully", async () => {
-    await expect(async () => {
-      const port: number = 3001
+    const port: number = 3001
 
-      const app = await run(port)
+    const app = await run(port)
+    await app.shutdown()
 
-      await app.shutdown()
-    }).not.toThrowError()
+    expect(app).toBeDefined()
   })
 })

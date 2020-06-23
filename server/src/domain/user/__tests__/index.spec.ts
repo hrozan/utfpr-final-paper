@@ -27,7 +27,10 @@ describe("User.Routes", () => {
     const newUsers = [...new Array(count)].map<Promise<User>>(() => fake.createFakeUserAndSave())
     await Promise.all(newUsers)
 
-    const response = await request(server).get("/users")
+    const token = await fake.login(server)
+    const response = await request(server)
+      .get("/users")
+      .set({ token })
 
     expect(response.status).toBe(200)
     expect(response.body.length).toBeGreaterThanOrEqual(count)
@@ -36,8 +39,10 @@ describe("User.Routes", () => {
   it("POST /users", async () => {
     const payload = fake.createFakeUser()
 
+    const token = await fake.login(server)
     const response = await request(server)
       .post("/users")
+      .set({ token })
       .send(payload)
 
     expect(response.status).toBe(201)
@@ -46,7 +51,10 @@ describe("User.Routes", () => {
   it("DELETE /users/:id", async () => {
     const newUser = await fake.createFakeUserAndSave()
 
-    const response = await request(server).del(`/users/${newUser._id}`)
+    const token = await fake.login(server)
+    const response = await request(server)
+      .del(`/users/${newUser._id}`)
+      .set({ token })
 
     expect(response.status).toBe(200)
     expect(response.body).toHaveProperty("id")

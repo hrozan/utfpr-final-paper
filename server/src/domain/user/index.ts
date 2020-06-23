@@ -5,7 +5,8 @@ import * as model from "./model"
 const router = new Router({ prefix: "/users" })
 
 router.get("/", async (ctx: Context) => {
-  ctx.body = await model.readAllUser()
+  const users = await model.readAllUser()
+  ctx.body = users.map((user) => ({ id: user._id, userName: user.userName, email: user.email }))
 })
 
 router.post("/", async (ctx: Context) => {

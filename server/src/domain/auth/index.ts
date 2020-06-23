@@ -33,4 +33,6 @@ router.post("/login", async (ctx: Context) => {
   return (ctx.body = { token })
 })
 
+router.get("/", (ctx) => (ctx.body = { api: 1 }))
+
 export default router
