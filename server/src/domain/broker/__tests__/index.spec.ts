@@ -1,13 +1,13 @@
 import request = require("supertest")
 import { login } from "../../user/__tests__/fake"
 import { Server } from "http"
-import { run } from "../../../app"
+import { start } from "../../../app"
 
 describe("Broker.Routes", () => {
   let server: Server
   let shutdown: Function
   beforeAll(async () => {
-    const app = await run(3013)
+    const app = await start(3013)
     server = app.server
     shutdown = app.shutdown
   })

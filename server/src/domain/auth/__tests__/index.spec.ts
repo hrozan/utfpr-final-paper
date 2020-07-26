@@ -1,14 +1,14 @@
 import request = require("supertest")
 import * as fake from "../../user/__tests__/fake"
 import * as model from "../../user/model"
-import { run } from "../../../app"
+import { start } from "../../../app"
 import { Server } from "http"
 
 describe("Auth.Routes", () => {
   let server: Server
   let shutdown: Function
   beforeAll(async () => {
-    const app = await run(3011)
+    const app = await start(3011)
     server = app.server
     shutdown = app.shutdown
   })

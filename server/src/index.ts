@@ -1,7 +1,7 @@
-import { run } from "./app"
+import { start } from "./app"
 import { PORT } from "./config"
 
-run(PORT)
+start(PORT)
   .then((app) => {
     console.log(`🚀 Application Running On: http://localhost:${PORT}`)
     // Graceful Shutdown

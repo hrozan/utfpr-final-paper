@@ -1,7 +1,7 @@
 import request = require("supertest")
 import * as fake from "./fake"
 import * as model from "../model"
-import { run } from "../../../app"
+import { start } from "../../../app"
 import { Server } from "http"
 import { User } from "../model"
 
@@ -9,7 +9,7 @@ describe("User.Routes", () => {
   let server: Server
   let shutdown: Function
   beforeAll(async () => {
-    const app = await run(3010)
+    const app = await start(3010)
     server = app.server
     shutdown = app.shutdown
   })

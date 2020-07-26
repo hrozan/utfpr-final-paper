@@ -14,7 +14,7 @@ export interface App {
   shutdown: () => Promise<void>
 }
 
-export const run = async (port: number): Promise<App> => {
+export const start = async (port: number): Promise<App> => {
   const app = new Koa()
 
   // Middleware

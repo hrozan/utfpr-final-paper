@@ -1,10 +1,10 @@
-import { run } from "./app"
+import { start } from "./app"
 
 describe("App", () => {
   it("should run and shutdown app successfully", async () => {
     const port: number = 3001
 
-    const app = await run(port)
+    const app = await start(port)
     await app.shutdown()
 
     expect(app).toBeDefined()
