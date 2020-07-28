@@ -5,6 +5,7 @@ import requests
 
 class AuthConfig:
     def __init__(self, base_url: str, email: str, password: str):
+        # todo: add validation
         self.base_url = base_url
         self.email = email
         self.password = password
