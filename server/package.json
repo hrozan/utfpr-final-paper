@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node dist/index.js",
     "dev": "nodemon -r dotenv/config src/index.ts",
-    "server": "node -r dotenv/config dist/server.js",
+    "server": "npm run build && node -r dotenv/config dist/index.js",
     "build": "tsc",
     "build:watch": "tsc --watch",
     "test": "jest",
