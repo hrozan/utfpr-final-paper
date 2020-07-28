@@ -1,8 +1,7 @@
 import logging
-import time
 
 import paho.mqtt.client as mqtt
-import psutil
+
 from services.auth import AuthConfig, AuthService
 
 if __name__ == '__main__':
@@ -21,9 +20,16 @@ if __name__ == '__main__':
 
     def on_connect(client, userdata, flags, rc):
         logging.info("Connected with result code %s", rc)
+        client.subscribe("stats/cpu")
+        client.subscribe("stats/memory")
+
+
+    def on_message(client, userdata, msg):
+        logging.info("On %s : %s", msg.topic, str(msg.payload))
 
 
     client.on_connect = on_connect
+    client.on_message = on_message
     client.tls_set()
 
     client.username_pw_set(username, password)
@@ -33,17 +39,7 @@ if __name__ == '__main__':
     # endregion
 
     try:
-        while True:
-            system_cpu_percent = psutil.cpu_percent()
-            system_memory_percent = psutil.virtual_memory().percent
-
-            client.publish("stats/cpu", system_cpu_percent)
-            logging.info("published in stats/cpi (%s)", system_cpu_percent)
-
-            client.publish("stats/memory", system_memory_percent)
-            logging.info("published in stats/memory (%s)", system_memory_percent)
-
-            time.sleep(2)
+        client.loop_forever()
     except KeyboardInterrupt:
-        logging.info("exit")
+        logging.info("Exited")
         exit(0)
