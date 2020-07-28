@@ -1,5 +1,6 @@
 import logging
 import time
+import os
 
 import paho.mqtt.client as mqtt
 import psutil
@@ -10,8 +11,11 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
     logging.info("Start")
 
-    # todo: put this in .env
-    auth_config = AuthConfig("http://localhost:3000", "higor@email.com", "pass123")
+    auth_api_url = os.environ['AUTH_API_URL']
+    auth_api_email = os.environ['AUTH_API_EMAIL']
+    auth_api_password = os.environ['AUTH_API_PASSWORD']
+
+    auth_config = AuthConfig(auth_api_url, auth_api_email, auth_api_password)
     auth_service = AuthService(auth_config)
     username, password = auth_service.get_broker_credentials()
 
