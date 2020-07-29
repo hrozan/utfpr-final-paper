@@ -1,23 +1,19 @@
 import logging
 import time
-import os
 
 import paho.mqtt.client as mqtt
 import psutil
-from services.auth import AuthConfig, AuthService
+
+from config import Config
+from services import ApiService
 
 if __name__ == '__main__':
-    # todo: use .env to configure logs level
-    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
-    logging.info("Start")
+    config = Config()
 
-    auth_api_url = os.environ['AUTH_API_URL']
-    auth_api_email = os.environ['AUTH_API_EMAIL']
-    auth_api_password = os.environ['AUTH_API_PASSWORD']
+    logging.info("🚀 Start")
 
-    auth_config = AuthConfig(auth_api_url, auth_api_email, auth_api_password)
-    auth_service = AuthService(auth_config)
-    username, password = auth_service.get_broker_credentials()
+    api_service = ApiService(config.api)
+    username, password = api_service.get_broker_credentials()
 
     # region Connect to broker
     client = mqtt.Client()
@@ -42,12 +38,12 @@ if __name__ == '__main__':
             system_memory_percent = psutil.virtual_memory().percent
 
             client.publish("stats/cpu", system_cpu_percent)
-            logging.info("published in stats/cpi (%s)", system_cpu_percent)
+            logging.info("Published in stats/cpi (%s)", system_cpu_percent)
 
             client.publish("stats/memory", system_memory_percent)
-            logging.info("published in stats/memory (%s)", system_memory_percent)
+            logging.info("Published in stats/memory (%s)", system_memory_percent)
 
             time.sleep(2)
     except KeyboardInterrupt:
-        logging.info("exit")
+        logging.info("Exit Gracefully")
         exit(0)
