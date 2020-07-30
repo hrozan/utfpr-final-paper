@@ -2,14 +2,13 @@ import logging
 
 import paho.mqtt.client as mqtt
 
-from services.api import ApiConfig, ApiService
+from services import ApiConfig, ApiService
 
 if __name__ == '__main__':
     # todo: use .env to configure logs level
     logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
     logging.info("Start")
 
-    # todo: put this in .env
     auth_config = ApiConfig("http://localhost:3000", "higor@email.com", "pass123")
     auth_service = ApiService(auth_config)
     username, password = auth_service.get_broker_credentials()

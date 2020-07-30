@@ -11,17 +11,35 @@ class ApiConfig:
         self.password = password
 
 
+class MessengerConfig:
+    def __init__(self, broker_uri: str, port: int):
+        self.port = port
+        self.broker_uri = broker_uri
+
+
 class Config:
-    def __init__(self):
+    def __init__(self, api: ApiConfig, messenger: MessengerConfig):
+        self.messenger = messenger
+        self.api = api
+
+    @staticmethod
+    def get():
         try:
             if os.environ["ENV"] == DEVELOPMENT:
                 logging.basicConfig(level=logging.DEBUG)
 
-            self.api: ApiConfig = ApiConfig(
+            api = ApiConfig(
                 os.environ['API_URL'],
                 os.environ['API_EMAIL'],
                 os.environ['API_PASSWORD']
             )
+
+            messenger = MessengerConfig(
+                os.environ["BROKER_URI"],
+                int(os.environ["BROKER_PORT"])
+            )
+
+            return Config(api, messenger)
 
         except KeyError as error:
             logging.error("Fail to load configurations: %s", error)

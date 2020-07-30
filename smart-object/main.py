@@ -1,49 +1,37 @@
 import logging
 import time
 
-import paho.mqtt.client as mqtt
 import psutil
 
-from config import Config
-from services import ApiService
+from app.messenger import create_messenger_client
+from app.webapi import create_api_service
+from app.config import Config
 
-if __name__ == '__main__':
-    config = Config()
 
+def run():
+    config = Config.get()
     logging.info("🚀 Start")
 
-    api_service = ApiService(config.api)
-    username, password = api_service.get_broker_credentials()
+    api_service = create_api_service(config.api)
+    credentials = api_service.get_broker_credentials()
+    messenger_client = create_messenger_client(config.messenger, credentials)
 
-    # region Connect to broker
-    client = mqtt.Client()
+    while True:
+        system_cpu_percent = psutil.cpu_percent()
+        system_memory_percent = psutil.virtual_memory().percent
+
+        messenger_client.publish("stats/cpu", system_cpu_percent)
+        logging.info("Published in stats/cpi (%s)", system_cpu_percent)
+
+        messenger_client.publish("stats/memory", system_memory_percent)
+        logging.info("Published in stats/memory (%s)", system_memory_percent)
+
+        time.sleep(2)
 
 
-    def on_connect(client, userdata, flags, rc):
-        logging.info("Connected with result code %s", rc)
-
-
-    client.on_connect = on_connect
-    client.tls_set()
-
-    client.username_pw_set(username, password)
-    broker_url = "hrozan.xyz"
-    client.connect(broker_url, 8883, 60)
-
-    # endregion
-
+if __name__ == '__main__':
     try:
-        while True:
-            system_cpu_percent = psutil.cpu_percent()
-            system_memory_percent = psutil.virtual_memory().percent
-
-            client.publish("stats/cpu", system_cpu_percent)
-            logging.info("Published in stats/cpi (%s)", system_cpu_percent)
-
-            client.publish("stats/memory", system_memory_percent)
-            logging.info("Published in stats/memory (%s)", system_memory_percent)
-
-            time.sleep(2)
+        run()
     except KeyboardInterrupt:
         logging.info("Exit Gracefully")
         exit(0)
