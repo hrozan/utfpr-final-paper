@@ -11,7 +11,7 @@ export default {
     return database
   },
   async disconnect(): Promise<void> {
-    console.log(" Database Close Successfully")
+    console.log("✅ Database Close Successfully")
     return mongoose.connection.close()
   },
   isConnected() {

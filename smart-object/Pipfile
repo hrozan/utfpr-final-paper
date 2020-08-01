@@ -3,11 +3,18 @@ name = "pypi"
 url = "https://pypi.org/simple"
 verify_ssl = true
 
+[scripts]
+main = "python main.py"
+test = "pytest"
+
 [dev-packages]
+pytest = "*"
 
 [packages]
 requests = "*"
 paho-mqtt = "*"
+psutil = "*"
+pytest-mock = "*"
 
 [requires]
 python_version = "3.8"
