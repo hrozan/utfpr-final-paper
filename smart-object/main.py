@@ -17,6 +17,7 @@ def run():
 
     while True:
         payload = get_system_data_json()
+
         messenger_client.publish("system/data", payload)
         logging.info("Published in system/data: %s", payload)
 
