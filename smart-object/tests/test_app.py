@@ -1,8 +1,10 @@
+import json
 from unittest.mock import Mock
 
 from app.config import ApiConfig
 from app.messenger import create_messenger_client, MessengerConfig, BrokerCredentials
 from app.webapi import create_api_service
+from app.system import get_system_data_json
 
 
 def test_create_api_service_successfully(mocker):
@@ -33,3 +35,17 @@ def test_create_messenger_client(mocker):
     assert client.username_pw_set.called
     assert client.connect.called
 
+
+def test_get_system_data_json(mocker):
+    cpu_percent = 23
+    virtual_memory = Mock()
+    virtual_memory.percent = 12
+
+    cpu_percent_mock = mocker.patch("psutil.cpu_percent", return_value=cpu_percent)
+    virtual_memory_mock = mocker.patch("psutil.virtual_memory", return_value=virtual_memory)
+
+    payload = get_system_data_json()
+
+    assert payload == json.dumps({'cpu': cpu_percent, 'memory': virtual_memory.percent})
+    assert cpu_percent_mock.called
+    assert virtual_memory_mock.called

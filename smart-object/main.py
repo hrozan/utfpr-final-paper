@@ -1,11 +1,10 @@
 import logging
 import time
 
-import psutil
-
-from app.messenger import create_messenger_client
-from app.webapi import create_api_service
 from app.config import Config
+from app.messenger import create_messenger_client
+from app.system import get_system_data_json
+from app.webapi import create_api_service
 
 
 def run():
@@ -17,14 +16,10 @@ def run():
     messenger_client = create_messenger_client(config.messenger, credentials)
 
     while True:
-        system_cpu_percent = psutil.cpu_percent()
-        system_memory_percent = psutil.virtual_memory().percent
+        payload = get_system_data_json()
 
-        messenger_client.publish("stats/cpu", system_cpu_percent)
-        logging.info("Published in stats/cpi (%s)", system_cpu_percent)
-
-        messenger_client.publish("stats/memory", system_memory_percent)
-        logging.info("Published in stats/memory (%s)", system_memory_percent)
+        messenger_client.publish("system/data", payload)
+        logging.info("Published in system/data: %s", payload)
 
         time.sleep(2)
 
