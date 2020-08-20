@@ -1,8 +1,7 @@
-import React, { useEffect } from "react"
-import Login from "./app/domain/login/Login"
+import React from "react"
+import Login from "./app/component/Login"
 
 const App: React.FC = () => {
-  useEffect(() => {}, [])
   return <Login />
 }
 

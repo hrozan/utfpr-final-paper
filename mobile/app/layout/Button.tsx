@@ -1,5 +1,5 @@
 import React from "react"
-import { Button as RNButton } from "react-native"
+import { Button as NBButton, Text } from "native-base"
 
 interface Props {
   title: string
@@ -8,6 +8,8 @@ interface Props {
 }
 
 const Button: React.FC<Props> = (props) => (
-  <RNButton testID={props.testID} title={props.title} onPress={props.onPress} />
+  <NBButton testID={props.testID} onPress={props.onPress} full>
+    <Text>{props.title}</Text>
+  </NBButton>
 )
 export default Button

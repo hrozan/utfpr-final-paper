@@ -1,11 +1,10 @@
 import nock from "nock"
-import service, { loginUrl } from "../service"
-import { Credentials } from "../types"
-import { API_URL } from "../../../infra/config"
+import service, {loginUrl, Credentials} from "../service"
+import {API_URL} from "../../../infra/config"
 
 describe("Login.Service", () => {
-  it("should login a user", async () => {
-    const responseMock = { token: "test-token" }
+  it("should Login a user", async () => {
+    const responseMock = {token: "test-token"}
     nock(API_URL)
       .post(loginUrl)
       .reply(200, responseMock)

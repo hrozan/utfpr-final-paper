@@ -1,7 +1,3 @@
 import AsyncStorage from "@react-native-community/async-storage"
 
-export default {
-  async setItem(key: string, value: string) {
-    return AsyncStorage.setItem(key, value)
-  },
-}
+export const saveItemOnStorage = (key: string, value: string) => AsyncStorage.setItem(key, value)
