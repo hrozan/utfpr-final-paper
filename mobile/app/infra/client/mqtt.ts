@@ -7,7 +7,7 @@ client.onMessageArrived = (message) => {
   console.log(message.payloadString)
 }
 
-export const connect = () => {
+export const mqttConnect = () => {
   const onSuccess = () => {
     console.log("Connected")
     client.subscribe("system/data")
@@ -20,4 +20,8 @@ export const connect = () => {
     password: "t1i2i5",
   }
   client.connect(config)
+}
+
+export const mqttDisconnect = () => {
+  client.disconnect()
 }

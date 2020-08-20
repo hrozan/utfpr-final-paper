@@ -6,6 +6,6 @@ const request = async (config: AxiosRequestConfig): Promise<AxiosResponse> => {
   return axios(config)
 }
 
-export const post = async (url: string, payload: any): Promise<AxiosResponse> => {
+export const httpPost = async (url: string, payload: any): Promise<AxiosResponse> => {
   return request({ method: "POST", url, data: payload })
 }
