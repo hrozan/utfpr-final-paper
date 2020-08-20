@@ -3,11 +3,9 @@ import { ToastAndroid } from "react-native"
 import Button from "../../layout/Button"
 import Card from "../../layout/Card"
 import TextField from "../../layout/TextField"
-import BaseWrapper from "../../layout/BaseWrapper"
-import Centered from "../../layout/Centered"
 import { login } from "./service"
-import { connect } from "../../infra/client/mqtt"
 import { saveItemOnStorage } from "../../infra/storage"
+import { Content } from "native-base"
 
 export const TOKEN_KEY = "token"
 const Login: React.FC = () => {
@@ -21,7 +19,7 @@ const Login: React.FC = () => {
         ToastAndroid.show("Error On Login", ToastAndroid.SHORT)
       }
 
-      connect()
+      // connect()
       await saveItemOnStorage(TOKEN_KEY, token)
     } catch (e) {
       ToastAndroid.show("Error On Login", ToastAndroid.SHORT)
@@ -29,26 +27,24 @@ const Login: React.FC = () => {
   }
 
   return (
-    <BaseWrapper>
-      <Centered>
-        <Card>
-          <TextField
-            testID="email-input"
-            label={"Email"}
-            value={email}
-            onChangeText={(value) => onChangeEmail(value)}
-          />
-          <TextField
-            testID="password-input"
-            label={"Password"}
-            password
-            value={password}
-            onChangeText={(value) => onChangePassword(value)}
-          />
-          <Button testID="login-button" title={"Log In"} onPress={onSubmit} />
-        </Card>
-      </Centered>
-    </BaseWrapper>
+    <Content>
+      <Card>
+        <TextField
+          testID="email-input"
+          label={"Email"}
+          value={email}
+          onChangeText={(value) => onChangeEmail(value)}
+        />
+        <TextField
+          testID="password-input"
+          label={"Password"}
+          password
+          value={password}
+          onChangeText={(value) => onChangePassword(value)}
+        />
+        <Button testID="login-button" title={"Log In"} onPress={onSubmit} />
+      </Card>
+    </Content>
   )
 }
 
