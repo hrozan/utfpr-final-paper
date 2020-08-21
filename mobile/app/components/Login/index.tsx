@@ -1,5 +1,5 @@
-import React, { useState, useContext } from "react"
-import { useHistory, Redirect } from "react-router-native"
+import React, { useState, useContext, useEffect } from "react"
+import { useHistory } from "react-router-native"
 import { ToastAndroid } from "react-native"
 import Button from "../../layout/Button"
 import Card from "../../layout/Card"

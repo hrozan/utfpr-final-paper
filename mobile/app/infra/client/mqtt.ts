@@ -1,27 +1,40 @@
-import mqtt, { ConnectionOptions } from "paho-mqtt"
+import mqtt, { ConnectionOptions, Client } from "paho-mqtt"
+
+export interface MqttConfig {
+  userName: string
+  password: string
+  onUpdate: (payload: string) => void
+}
 
 const BROKER_URI = "hrozan.xyz"
 const client = new mqtt.Client(BROKER_URI, 8083, "clientId")
 
-client.onMessageArrived = (message) => {
-  console.log(message.payloadString)
-}
+export const mqttConnect = (config: MqttConfig) => {
 
-export const mqttConnect = () => {
+  client.onMessageArrived = (message) => {
+    config.onUpdate(message.payloadString)
+  }
+
   const onSuccess = () => {
-    console.log("Connected")
+    console.log("Mqtt client connected successfully")
     client.subscribe("system/data")
   }
 
-  const config: ConnectionOptions = {
+  const connectionOptions: ConnectionOptions = {
     onSuccess,
     useSSL: true,
-    userName: "hrozan",
-    password: "t1i2i5",
+    userName: config.userName,
+    password: config.password,
   }
-  client.connect(config)
+
+  try {
+    client.connect(connectionOptions)
+  } catch (e) {
+    console.log("Mqtt Already Connected");
+  }
 }
 
 export const mqttDisconnect = () => {
   client.disconnect()
+  console.log("Mqtt client disconnected successfully");
 }
