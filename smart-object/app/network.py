@@ -1,71 +1,52 @@
 import logging
 import requests
 from paho.mqtt.client import Client
-from config import config, BROKER_URI, BROKER_PORT, API_URL, API_EMAIL, API_PASSWORD
 
 
-class BrokerCredentials:
-    def __init__(self, user, password):
+class BrokerConfig:
+    def __init__(self, uri: str, port: int, user: str, password: str):
+        self.uri = uri
+        self.port = port
         self.password = password
         self.user = user
+        self.keep_alive = 60
 
 
-def create_mqtt_client(credentials: BrokerCredentials) -> Client:
-    broker_uri = config[BROKER_URI]
-    broker_port = config[BROKER_PORT]
-
+def mqtt_client_factory(config: BrokerConfig) -> Client:
     client = Client()
 
-    def on_connect(client, userdata, flags, rc):
-        logging.info("Connected with result code %s", rc)
+    def on_connect():
+        logging.info("Connected with result code ")
 
     client.on_connect = on_connect
-
     client.tls_set()
+    client.username_pw_set(config.user, config.password)
 
-    client.username_pw_set(credentials.user, credentials.password)
-    client.connect(broker_uri, broker_port, 60)
+    client.connect(config.uri, config.port, config.keep_alive)
     return client
 
 
-def get_broker_credentials() -> BrokerCredentials:
-    token = login_to_webapi()
+def fetch_broker_config(config) -> BrokerConfig:
+    base_url = config.api_url
 
-    base_url = config[API_URL]
-    url = base_url + "/broker"
-    response = requests.get(url, headers={'token': token})
-    if response.status_code != 200:
-        logging.error("Fail to get broker credentials, status code %s", response.status_code)
-        raise Exception
-
-    body = response.json()
-
-    username: str = body.get('user')
-    password: str = body.get('password')
-    return BrokerCredentials(username, password)
-
-
-def login_to_webapi() -> str:
-    """
-    Login to the api and return a authentication token
-    :return: Authentication token
-    """
-
-    base_url = config[API_URL]
-    email = config[API_EMAIL]
-    password = config[API_PASSWORD]
-
-    url = base_url + "/auth/login"
+    login_url = base_url + "/auth/login"
     payload = {
-        'email': email,
-        'password': password
+        'email': config.api_email,
+        'password': config.api_password
     }
+    response = requests.post(login_url, payload)
+    token = response.json().get('token')
 
-    response = requests.post(url, payload)
-    if response.status_code != 200:
-        logging.error("Fail to login, status code %s", response.status_code)
-        raise Exception
+    broker_url = base_url + "/broker"
+    response = requests.get(broker_url, headers={'token': token})
 
-    logging.debug("Logged to api successfully")
-    body = response.json()
-    return body.get('token')
+    broker_user: str = response.json().get('user')
+    broker_password: str = response.json().get('password')
+
+    broker_config = BrokerConfig(
+        uri=config.broker_uri,
+        port=config.broker_port,
+        user=broker_user,
+        password=broker_password
+    )
+    return broker_config

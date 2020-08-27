@@ -1,24 +1,47 @@
-import logging
 import os
 
-DEVELOPMENT = "development"
-API_URL = "API_URL"
-API_EMAIL = "API_EMAIL"
-API_PASSWORD = "API_PASSWORD"
-BROKER_URI = "BROKER_URI"
-BROKER_PORT = "BROKER_PORT"
-
-config = dict()
+DEVELOPMENT = "DEV"
+PRODUCTION = "PROD"
 
 
-def load_config():
-    if os.environ["ENV"] == DEVELOPMENT:
-        logging.basicConfig(level=logging.DEBUG)
+class Config:
+    def __init__(self, env: str, api_url: str, api_email: str, api_password: str, broker_uri: str, broker_port: int):
+        self.env = env
+        self.broker_port = broker_port
+        self.broker_uri = broker_uri
+        self.api_url = api_url
+        self.api_email = api_email
+        self.api_password = api_password
 
-    config[API_URL] = os.environ[API_URL]
-    config[API_EMAIL] = os.environ[API_EMAIL]
-    config[API_PASSWORD] = os.environ[API_PASSWORD]
-    config[BROKER_URI] = os.environ[BROKER_URI]
-    config[BROKER_PORT] = int(os.environ[BROKER_PORT])
-    logging.info("🔧 Configuration loaded successfully")
-    return config
+
+class DevelopmentConfig(Config):
+    def __init__(self):
+        super().__init__(
+            env=DEVELOPMENT,
+            api_url='http://localhost:3000',
+            api_email='higor@email.com',
+            api_password='pass123',
+            broker_uri='hrozan.xyz',
+            broker_port=8883
+        )
+
+
+class ProductionConfig(Config):
+    def __init__(self):
+        super().__init__(
+            env=PRODUCTION,
+            api_url=os.environ.get('API_URL'),
+            api_email=os.environ.get('API_EMAIL'),
+            api_password=os.environ.get('API_PASSWORD'),
+            broker_uri=os.environ.get('BROKER_URI'),
+            broker_port=int(os.environ.get('BROKER_PORT'))
+        )
+
+
+def get_config() -> Config:
+    env = os.environ.get("ENV")
+
+    if env != PRODUCTION:
+        return DevelopmentConfig()
+
+    return ProductionConfig()

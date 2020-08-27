@@ -1,8 +1,7 @@
 import psutil
-import json
 
 
-def get_system_data_json():
+def get_system_information():
     cpu_percent = psutil.cpu_percent()
     memory_percent = psutil.virtual_memory().percent
-    return json.dumps({'cpu': cpu_percent, 'memory': memory_percent})
+    return {'cpu': cpu_percent, 'memory': memory_percent}

@@ -1,21 +1,27 @@
 import logging
+import json
 import time
 
-from config import load_config
-from network import create_mqtt_client, get_broker_credentials
-from system import get_system_data_json
+from config import get_config, DEVELOPMENT
+from network import mqtt_client_factory, fetch_broker_config
+from system import get_system_information
 
 
 def main():
-    logging.info("🚀 Starting Application")
+    app_config = get_config()
+    print("🚀 Starting Application")
 
-    credentials = get_broker_credentials()
-    messenger_client = create_mqtt_client(credentials)
+    if app_config.env == DEVELOPMENT:
+        print("👷 Running in Development")
+        logging.basicConfig(level=logging.DEBUG)
+
+    broker_config = fetch_broker_config(app_config)
+    client = mqtt_client_factory(broker_config)
 
     while True:
-        payload = get_system_data_json()
+        payload = get_system_information()
 
-        messenger_client.publish("system/data", payload)
+        client.publish("system/data", json.dumps(payload))
         logging.info("Published in system/data: %s", payload)
 
         time.sleep(2)
@@ -23,11 +29,7 @@ def main():
 
 if __name__ == '__main__':
     try:
-        load_config()
         main()
     except KeyboardInterrupt:
         logging.info("Exit Gracefully")
         exit(0)
-    except KeyError as error:
-        logging.error("Fail to load configurations: %s ", error)
-        exit(1)
