@@ -4,7 +4,7 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [scripts]
-main = "python main.py"
+app = "python app/main.py"
 test = "pytest"
 
 [dev-packages]
