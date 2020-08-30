@@ -4,17 +4,18 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [scripts]
-app = "python app/main.py"
+main = "python main.py"
+client = "python client.py"
 test = "pytest"
 
 [dev-packages]
 pytest = "*"
+pytest-mock = "*"
 
 [packages]
 requests = "*"
 paho-mqtt = "*"
 psutil = "*"
-pytest-mock = "*"
 
 [requires]
 python_version = "3.8"

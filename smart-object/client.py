@@ -1,15 +1,14 @@
 import logging
-import json
-import time
 
-from config import get_config, DEVELOPMENT
-from network import mqtt_client_factory, fetch_broker_config
-from system import get_system_information
+from paho.mqtt.client import MQTTMessage
+
+from app.config import get_config, DEVELOPMENT
+from app.network import mqtt_client_factory, fetch_broker_config
 
 
 def main():
     app_config = get_config()
-    print("🚀 Starting Application")
+    print("🚀 Client Application")
 
     if app_config.env == DEVELOPMENT:
         print("👷 Running in Development")
@@ -18,13 +17,13 @@ def main():
     broker_config = fetch_broker_config(app_config)
     client = mqtt_client_factory(broker_config)
 
-    while True:
-        payload = get_system_information()
+    def on_message(_, __, message: MQTTMessage):
+        print(message.payload.decode('utf8'))
 
-        client.publish("system/data", json.dumps(payload))
-        logging.info("Published in system/data: %s", payload)
+    client.on_message = on_message
 
-        time.sleep(2)
+    client.subscribe("system/data")
+    client.loop_forever()
 
 
 if __name__ == '__main__':
