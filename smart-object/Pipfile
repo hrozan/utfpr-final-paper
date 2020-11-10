@@ -11,6 +11,7 @@ test = "pytest"
 [dev-packages]
 pytest = "*"
 pytest-mock = "*"
+pylint = "*"
 
 [packages]
 requests = "*"
