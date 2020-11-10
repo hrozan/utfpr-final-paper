@@ -1,4 +1,4 @@
-name: Server CI
+name: Smart Object CI
 
 on: [ push ]
 
@@ -12,7 +12,10 @@ jobs:
           python-version: '3.x'
           architecture: 'x64'
       - name: Install pipenv
-        run: sudo apt install -y pipenv
+        run: |
+          sudo apt update
+          sudo apt install -y pip
+          pip intall --user pipenv
       - name: Install and Test
         run: |
           cd smart-object/
