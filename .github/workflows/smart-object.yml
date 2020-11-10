@@ -17,6 +17,8 @@ jobs:
           sudo apt install -y python3-pip
           pip install --user pipenv
       - name: Install and Test
+        env:
+          PATH: "$PATH:$HOME/.local/bin"
         run: |
           cd smart-object/
           pipenv install
