@@ -10,14 +10,13 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: '3.x'
-      - name: Install pipenv
+      - name: Install pipenv and Test
         run: |
           sudo apt update
           sudo apt install -y python3-pip
           pip install --user pipenv
-      - name: Install and Test
-        run: |
           export PATH=$PATH:$HOME/.local/bin
           cd smart-object/
           pipenv install
           pipenv run test
+
