@@ -1,6 +1,6 @@
 import { Context, Next } from "koa"
 import * as jwt from "jsonwebtoken"
-import { JWT_KEY } from "../../config"
+import { config } from "../../config"
 import { TokenPayload } from "./index"
 
 export default async (ctx: Context, next: Next) => {
@@ -10,7 +10,7 @@ export default async (ctx: Context, next: Next) => {
   }
 
   try {
-    const payload = jwt.verify(token, JWT_KEY) as TokenPayload
+    const payload = jwt.verify(token, config.jwtKey) as TokenPayload
     ctx.userId = payload._id
   } catch (e) {
     console.error("Token Verification Error")

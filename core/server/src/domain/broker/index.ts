@@ -1,8 +1,8 @@
 import { Context } from "koa"
 import Router from "koa-router"
-import { BROKER_CREDENTIAL } from "../../config"
+import { config } from "../../config"
 
-const [user, password] = BROKER_CREDENTIAL.split(".")
+const [user, password] = config.brokerCredential.split(".")
 
 const router = new Router({ prefix: "/broker" })
 

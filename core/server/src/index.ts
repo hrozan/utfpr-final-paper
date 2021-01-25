@@ -1,12 +1,15 @@
+import Debug from "debug"
 import { start } from "./app"
-import { PORT } from "./config"
+import { config } from "./config"
 
-start(PORT)
+const debug = Debug("app")
+
+start(config.port)
   .then((app) => {
-    console.log(`🚀 Application Running On: http://localhost:${PORT}`)
+    debug(`running on: http://localhost:${config.port}`)
     // Graceful Shutdown
     const shutdown = async () => {
-      console.log("Shutdown")
+      debug("shutdown")
       await app.shutdown()
     }
     process.on("SIGTERM", shutdown)

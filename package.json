@@ -6,7 +6,7 @@
   "scripts": {
     "dev:server": "cd server && npm run dev",
     "prettier": "npx prettier --write \"server/**/*.ts\"",
-    "deploy:server" : "sh ./deploy/server.sh"
+    "deploy:server": "sh ./deploy/server.sh"
   },
   "repository": {
     "type": "git",
