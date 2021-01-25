@@ -11,10 +11,10 @@ DATA_TOPIC = 'system/data'
 
 def main():
     app_config = get_config()
-    print("🚀 Starting Application")
+    print("Starting application")
 
     if app_config.env == DEVELOPMENT:
-        print("👷 Running in Development")
+        print("Running in development")
         logging.basicConfig(level=logging.DEBUG)
 
     broker_config = fetch_broker_config(app_config)

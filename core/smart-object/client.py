@@ -8,10 +8,8 @@ from app.network import mqtt_client_factory, fetch_broker_config
 
 def main():
     app_config = get_config()
-    print("🚀 Client Application")
 
     if app_config.env == DEVELOPMENT:
-        print("👷 Running in Development")
         logging.basicConfig(level=logging.DEBUG)
 
     broker_config = fetch_broker_config(app_config)

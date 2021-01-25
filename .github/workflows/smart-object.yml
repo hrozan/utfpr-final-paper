@@ -9,14 +9,14 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
-          python-version: '3.x'
+          python-version: '3.9'
       - name: Install pipenv and Test
         run: |
           sudo apt update
           sudo apt install -y python3-pip
           pip install --user pipenv
           export PATH=$PATH:$HOME/.local/bin
-          cd packages/smart-object/
-          pipenv install
+          cd core/smart-object/
+          pipenv install --dev
           pipenv run test
 
