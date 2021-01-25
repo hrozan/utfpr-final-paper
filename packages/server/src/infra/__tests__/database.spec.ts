@@ -1,13 +1,12 @@
-import database from "../database"
+import {disconnectDb, connectDb} from "../database"
 
 describe("Database", () => {
-  afterEach(async () => {
-    await database.disconnect()
-  })
 
   it("should connect successfully from database", async () => {
-    await database.connect()
+    const db = await connectDb()
 
-    expect(database.isConnected()).toBeTruthy()
+    expect(db.isConnected).toBeTruthy()
+
+    await disconnectDb(db)
   })
 })

@@ -1,15 +1,18 @@
-import { User } from "../model"
+import {User} from "../model"
 import * as model from "../model"
 import * as fake from "./fake"
-import database from "../../../infra/database"
+import {connectDb, disconnectDb, Db} from "../../../infra/database"
 
 describe("User.Model", () => {
+  let db: Db | null = null;
+
   beforeAll(async () => {
-    await database.connect()
+    db = await connectDb()
   })
 
   afterAll(async () => {
-    await database.disconnect()
+    if (db)
+      await disconnectDb(db)
   })
 
   beforeAll(async () => {
@@ -42,7 +45,7 @@ describe("User.Model", () => {
   })
 
   it("should fetch User by email", async () => {
-    const { email } = await fake.createFakeUserAndSave()
+    const {email} = await fake.createFakeUserAndSave()
 
     const user = await model.findUserByEmail(email)
 

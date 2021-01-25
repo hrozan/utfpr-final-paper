@@ -1,7 +1,7 @@
 import Koa from "koa"
-import { Server } from "http"
-import database from "./infra/database"
-import { ENV } from "./config"
+import {Server} from "http"
+import {connectDb, disconnectDb} from "./infra/database"
+import {ENV} from "./config"
 import morgan from "koa-morgan"
 import bodyParser from "koa-bodyparser"
 import authMiddleware from "./domain/auth/middleware"
@@ -9,7 +9,7 @@ import user from "./domain/user"
 import auth from "./domain/auth"
 import broker from "./domain/broker"
 
-export interface App {
+export type App = {
   server: Server
   shutdown: () => Promise<void>
 }
@@ -25,7 +25,6 @@ export const start = async (port: number): Promise<App> => {
 
   // Public Routes
   app.use(auth.routes()).use(auth.allowedMethods())
-
   // Private Routes
   app.use(authMiddleware)
   app.use(user.routes()).use(user.allowedMethods())
@@ -34,11 +33,11 @@ export const start = async (port: number): Promise<App> => {
   // Error Handling
   app.silent = ENV !== "development"
 
-  await database.connect()
+  const db = await connectDb()
   const server = app.listen(port)
 
   const shutdown = async () => {
-    await database.disconnect()
+    await disconnectDb(db)
     await server.close()
   }
 
