@@ -1,7 +1,7 @@
 import Koa from "koa"
-import { Server } from "http"
-import { connectDb, disconnectDb } from "./infra/database"
-import { config } from "./config"
+import {Server} from "http"
+import {connectDb, disconnectDb} from "./infra/database"
+import {config, Env} from "./config"
 import morgan from "koa-morgan"
 import bodyParser from "koa-bodyparser"
 import authMiddleware from "./domain/auth/middleware"
@@ -18,7 +18,7 @@ export const start = async (port: number): Promise<App> => {
   const app = new Koa()
 
   // Middleware
-  if (config.env !== "test") app.use(morgan("combined"))
+  if (config.env !== Env.test) app.use(morgan("combined"))
 
   app.use(bodyParser())
 
@@ -29,7 +29,7 @@ export const start = async (port: number): Promise<App> => {
   app.use(broker.routes()).use(broker.allowedMethods())
 
   // Error Handling
-  app.silent = config.env !== "development"
+  app.silent = config.env !== Env.dev
 
   const db = await connectDb()
   const server = app.listen(port)
