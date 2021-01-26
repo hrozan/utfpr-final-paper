@@ -24,4 +24,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Server Files
-          path: core/server/dist/**/*
+          path: |
+            core/server/dist/**/*
+            core/server/package.json
+            core/server/package-lock.json
