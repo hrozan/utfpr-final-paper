@@ -10,8 +10,6 @@ export interface User {
 
 const SALT_ROUNDS = 10
 
-// region Mongoose Model
-
 const schema = {
   userName: {
     required: true,
@@ -30,8 +28,6 @@ const schema = {
 const UserSchema: Schema = new Schema(schema)
 export type UserModel = User & Document
 export const UserModel = mongoose.model<UserModel>("Users", UserSchema)
-
-// endregion
 
 export const createUser = async (user: User): Promise<User> => {
   const passwordHash = await bcrypt.hash(user.password, SALT_ROUNDS)
