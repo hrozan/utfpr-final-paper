@@ -1,9 +1,9 @@
 name: Server Deploy
 
 on:
-  push:
+  pull_request:
     branches:
-      - main
+      - main 
 
 jobs:
   build:
