@@ -1,5 +1,5 @@
 import request = require("supertest")
-import { login } from "../../user/__tests__/fake"
+import { login } from "../../user/__tests__/user.mock"
 import { Server } from "http"
 import { start } from "../../../app"
 

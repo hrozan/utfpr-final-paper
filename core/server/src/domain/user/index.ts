@@ -1,6 +1,6 @@
 import { Context } from "koa"
 import Router from "koa-router"
-import * as model from "./model"
+import * as model from "./repository"
 
 const router = new Router({ prefix: "/users" })
 

@@ -1,9 +1,9 @@
 import request = require("supertest")
-import * as fake from "./fake"
-import * as model from "../model"
+import * as fake from "./user.mock"
+import * as model from "../repository"
 import { start } from "../../../app"
 import { Server } from "http"
-import { User } from "../model"
+import { User } from "../repository"
 
 describe("User.Routes", () => {
   let server: Server
@@ -24,7 +24,7 @@ describe("User.Routes", () => {
 
   it("GET  /users", async () => {
     const count = 3
-    const newUsers = [...new Array(count)].map<Promise<User>>(() => fake.createFakeUserAndSave())
+    const newUsers = [...new Array(count)].map<Promise<User>>(() => fake.createUserMockAndSave())
     await Promise.all(newUsers)
 
     const token = await fake.login(server)
@@ -37,7 +37,7 @@ describe("User.Routes", () => {
   })
 
   it("POST /users", async () => {
-    const payload = fake.createFakeUser()
+    const payload = fake.createUserMock()
 
     const token = await fake.login(server)
     const response = await request(server)
@@ -49,7 +49,7 @@ describe("User.Routes", () => {
   })
 
   it("DELETE /users/:id", async () => {
-    const newUser = await fake.createFakeUserAndSave()
+    const newUser = await fake.createUserMockAndSave()
 
     const token = await fake.login(server)
     const response = await request(server)

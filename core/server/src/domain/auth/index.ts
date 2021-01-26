@@ -1,8 +1,8 @@
-import { Context } from "koa"
+import {Context} from "koa"
 import Router from "koa-router"
-import * as model from "../user/model"
+import {checkUserPassword, findUserByEmail} from "../user/repository"
 import * as jwt from "jsonwebtoken"
-import { config } from "../../config"
+import {config} from "../../config"
 
 export interface AuthCredential {
   email: string
@@ -18,12 +18,12 @@ const router = new Router({ prefix: "/auth" })
 router.post("/login", async (ctx: Context) => {
   const credential: AuthCredential = ctx.request.body
 
-  const user = await model.findUserByEmail(credential.email)
+  const user = await findUserByEmail(credential.email)
   if (!user) {
     return (ctx.status = 401)
   }
 
-  const match = await model.checkUserPassword(credential.password, user.password)
+  const match = await checkUserPassword(credential.password, user.password)
   if (!match) {
     return (ctx.status = 401)
   }
@@ -32,7 +32,5 @@ router.post("/login", async (ctx: Context) => {
   const token = jwt.sign(payload, config.jwtKey)
   return (ctx.body = { token })
 })
-
-router.get("/", (ctx) => (ctx.body = { api: 1 }))
 
 export default router

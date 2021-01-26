@@ -5,8 +5,8 @@ describe("App", () => {
     const port: number = 3001
 
     const app = await start(port)
-    await app.shutdown()
 
     expect(app).toBeDefined()
+    await app.shutdown()
   })
 })

@@ -1,6 +1,6 @@
 import request = require("supertest")
-import * as fake from "../../user/__tests__/fake"
-import * as model from "../../user/model"
+import * as fake from "../../user/__tests__/user.mock"
+import * as model from "../../user/repository"
 import { start } from "../../../app"
 import { Server } from "http"
 
@@ -22,7 +22,7 @@ describe("Auth.Routes", () => {
   })
 
   it("POST /auth/login", async () => {
-    const newUser = fake.createFakeUser()
+    const newUser = fake.createUserMock()
     await model.createUser(newUser)
 
     const response = await request(server)

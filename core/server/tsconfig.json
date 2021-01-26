@@ -15,5 +15,5 @@
     "forceConsistentCasingInFileNames": true
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "**/*.spec.ts", "**/*.test.js", "**/fake.ts"]
+  "exclude": ["node_modules", "**/*.spec.ts", "**/*.test.js", "**/*.mock.ts"]
 }

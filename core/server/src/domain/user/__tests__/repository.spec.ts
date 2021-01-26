@@ -1,6 +1,6 @@
-import {User} from "../model"
-import * as model from "../model"
-import * as fake from "./fake"
+import {User} from "../repository"
+import * as model from "../repository"
+import * as fake from "./user.mock"
 import {connectDb, disconnectDb, Db} from "../../../infra/database"
 
 describe("User.Model", () => {
@@ -20,14 +20,14 @@ describe("User.Model", () => {
   })
 
   it("should create a User", async () => {
-    const newUser = fake.createFakeUser()
+    const newUser = fake.createUserMock()
     const user = await model.createUser(newUser)
 
     expect(user._id).toBeDefined()
   })
 
   it("should create a User and hash password", async () => {
-    const newUser = fake.createFakeUser()
+    const newUser = fake.createUserMock()
     const user = await model.createUser(newUser)
 
     expect(user.password).not.toBe(newUser.password)
@@ -35,7 +35,7 @@ describe("User.Model", () => {
 
   it("should read all Users", async () => {
     const count = 3
-    const newUsers = [...new Array(count)].map<Promise<User>>(() => fake.createFakeUserAndSave())
+    const newUsers = [...new Array(count)].map<Promise<User>>(() => fake.createUserMockAndSave())
     await Promise.all(newUsers)
 
     const users = await model.readAllUser()
@@ -45,7 +45,7 @@ describe("User.Model", () => {
   })
 
   it("should fetch User by email", async () => {
-    const {email} = await fake.createFakeUserAndSave()
+    const {email} = await fake.createUserMockAndSave()
 
     const user = await model.findUserByEmail(email)
 
@@ -53,7 +53,7 @@ describe("User.Model", () => {
   })
 
   it("should check a user for password", async () => {
-    const newUser = fake.createFakeUser()
+    const newUser = fake.createUserMock()
     const user = await model.createUser(newUser)
 
     const match = await model.checkUserPassword(newUser.password, user.password)
@@ -62,7 +62,7 @@ describe("User.Model", () => {
   })
 
   it("should delete a user", async () => {
-    const newUser = await fake.createFakeUserAndSave()
+    const newUser = await fake.createUserMockAndSave()
 
     const user = await model.deleteUser(newUser._id)
 

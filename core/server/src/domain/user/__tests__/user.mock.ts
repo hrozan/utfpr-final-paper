@@ -1,10 +1,9 @@
 import * as faker from "faker"
-import * as model from "../model"
-import { User } from "../model"
+import { createUser, User } from "../repository"
 import { Server } from "http"
 import request = require("supertest")
 
-export const createFakeUser = (): User => {
+export const createUserMock = (): User => {
   const userName = faker.internet.userName()
   return {
     email: faker.internet.email(userName),
@@ -13,14 +12,14 @@ export const createFakeUser = (): User => {
   }
 }
 
-export const createFakeUserAndSave = async (): Promise<User> => {
-  const newUser = createFakeUser()
-  return model.createUser(newUser)
+export const createUserMockAndSave = async (): Promise<User> => {
+  const newUser = createUserMock()
+  return createUser(newUser)
 }
 
 export const login = async (server: Server): Promise<string> => {
-  const user = createFakeUser()
-  await model.createUser(user)
+  const user = createUserMock()
+  await createUser(user)
   const response = await request(server)
     .post("/auth/login")
     .send({ email: user.email, password: user.password })
