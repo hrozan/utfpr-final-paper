@@ -1,0 +1,27 @@
+name: Server Deploy
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "14.15"
+      - name: Install and Build
+        run: |
+          cd core/server/
+          npm ci
+          npm run build
+        env:
+          CI: true
+      - name: Save Build Files
+        uses: actions/upload-artifact@v2
+        with:
+          name: Server Files
+          path: core/server/dist/**/*

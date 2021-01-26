@@ -1,6 +1,11 @@
-name: Smart Object CI
+name: Smart Object Integration
 
-on: [ push ]
+on:
+  push:
+    branches:
+      - main
+      - "feat/**"
+      - "fix/**"
 
 jobs:
   test:
