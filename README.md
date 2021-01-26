@@ -1,6 +1,6 @@
 # :computer: Computer Engineer Final Paper
 
-![server](https://github.com/hrozan/utfpr-final-paper/workflows/Server/badge.svg) 
+d
 
 ## :mortar_board: UTFPR - Universidade Tecnológica Federal do Paraná
 
