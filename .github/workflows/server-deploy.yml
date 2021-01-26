@@ -1,7 +1,7 @@
 name: Server Deploy
 
 on:
-  pull_request:
+  push:
     branches:
       - main 
 
