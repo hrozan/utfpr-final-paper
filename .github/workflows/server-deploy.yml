@@ -3,7 +3,7 @@ name: Server Deploy
 on:
   pull_request:
     branches:
-      - main
+      - main 
 
 jobs:
   build:
@@ -13,14 +13,14 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: "14.15"
-      - name: Install and Build
+      - name:  Build
         run: |
           cd core/server/
           npm ci
           npm run build
         env:
           CI: true
-      - name: Save Build Files
+      - name: Save Files
         uses: actions/upload-artifact@v2
         with:
           name: Server Files

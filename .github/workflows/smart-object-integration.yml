@@ -3,7 +3,6 @@ name: Smart Object Integration
 on:
   push:
     branches:
-      - main
       - "feat/**"
       - "fix/**"
 
