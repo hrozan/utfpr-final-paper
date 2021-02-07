@@ -15,7 +15,7 @@ jobs:
           node-version: "14.15"
       - name:  Build
         run: |
-          cd core/server/
+          cd packages/server/
           npm ci
           npm run build
         env:

@@ -1,13 +1,13 @@
 import Koa from "koa"
 import { Server } from "http"
-import { connectDb, disconnectDb } from "./infra/database"
 import { config, Env } from "./config"
 import morgan from "koa-morgan"
 import bodyParser from "koa-bodyparser"
-import authMiddleware from "./domain/auth/middleware"
-import user from "./domain/user"
-import auth from "./domain/auth"
-import broker from "./domain/broker"
+import authMiddleware from "./core/auth/middleware"
+import user from "./core/user"
+import auth from "./core/auth"
+import broker from "./core/broker"
+import * as database from "./database"
 import Router from "koa-router"
 
 export type App = {
@@ -41,11 +41,11 @@ export const start = async (port: number): Promise<App> => {
   // Error Handling
   app.silent = config.env !== Env.dev
 
-  const db = await connectDb()
+  const db = await database.connect()
   const server = app.listen(port)
 
   const shutdown = async () => {
-    await disconnectDb(db)
+    await database.disconnect(db)
     server.close()
   }
 

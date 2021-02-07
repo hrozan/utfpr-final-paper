@@ -1,12 +1,11 @@
-import {disconnectDb, connectDb} from "../database"
+import { disconnect, connect } from "../index"
 
 describe("Database", () => {
-
   it("should connect successfully from database", async () => {
-    const db = await connectDb()
+    const db = await connect()
 
     expect(db.isConnected).toBeTruthy()
 
-    await disconnectDb(db)
+    await disconnect(db)
   })
 })

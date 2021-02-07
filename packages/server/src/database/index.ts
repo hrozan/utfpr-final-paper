@@ -11,7 +11,7 @@ export type Db = {
 
 const connectedState = 1
 
-export const connectDb = async (): Promise<Db> => {
+export const connect = async (): Promise<Db> => {
   const { databaseUri } = config
   const database = await mongoose.connect(databaseUri, {
     useNewUrlParser: true,
@@ -25,7 +25,7 @@ export const connectDb = async (): Promise<Db> => {
   }
 }
 
-export const disconnectDb = async (db: Db): Promise<void> => {
+export const disconnect = async (db: Db): Promise<void> => {
   await db.mongoose.connection.close()
   debug("close successfully")
 }

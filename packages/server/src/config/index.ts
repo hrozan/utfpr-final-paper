@@ -1,14 +1,14 @@
-import Debug from "debug";
+import Debug from "debug"
 
 const debug = Debug("app:config")
 
 export enum Env {
   dev,
   prod,
-  test
+  test,
 }
 
-export type Config = {
+export type Index = {
   port: number
   databaseName?: string
   databaseUri: string
@@ -24,21 +24,21 @@ const getEnvVar = (envVar: any) => {
 
 const parseNodeEnv = (nodeEnv: string | undefined): Env => {
   switch (nodeEnv) {
-    case 'production':
+    case "production":
       return Env.prod
-    case 'development':
+    case "development":
       return Env.dev
     default:
       return Env.dev
   }
 }
 
-export let config: Config;
+export let config: Index
 
 const nodeEnv = parseNodeEnv(process.env.NODE_ENV)
 if (nodeEnv === Env.prod) {
   debug("production")
-  const {env} = process
+  const { env } = process
   const databaseName = getEnvVar(env.DB_NAME)
 
   config = {
@@ -46,7 +46,7 @@ if (nodeEnv === Env.prod) {
     databaseUri: getEnvVar(env.MONGO_URL),
     env: nodeEnv,
     jwtKey: getEnvVar(env.JWT_KEY),
-    port: getEnvVar(env.PORT)
+    port: getEnvVar(env.PORT),
   }
 } else {
   debug("development")
@@ -60,5 +60,3 @@ if (nodeEnv === Env.prod) {
     port: parseInt(process.env.PORT || "3000", 10),
   }
 }
-
-

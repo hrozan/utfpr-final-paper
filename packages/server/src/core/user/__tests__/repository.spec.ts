@@ -1,18 +1,17 @@
-import {User} from "../repository"
+import { User } from "../repository"
 import * as model from "../repository"
 import * as fake from "./user.mock"
-import {connectDb, disconnectDb, Db} from "../../../infra/database"
+import { connect, disconnect, Db } from "../../../database"
 
 describe("User.Model", () => {
-  let db: Db | null = null;
+  let db: Db | null = null
 
   beforeAll(async () => {
-    db = await connectDb()
+    db = await connect()
   })
 
   afterAll(async () => {
-    if (db)
-      await disconnectDb(db)
+    if (db) await disconnect(db)
   })
 
   beforeAll(async () => {
@@ -45,7 +44,7 @@ describe("User.Model", () => {
   })
 
   it("should fetch User by email", async () => {
-    const {email} = await fake.createUserMockAndSave()
+    const { email } = await fake.createUserMockAndSave()
 
     const user = await model.findUserByEmail(email)
 
