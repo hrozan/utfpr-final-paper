@@ -14,8 +14,8 @@ jobs:
         with:
           node-version: "14.15"
       - name: Build
-        shell: bash
         run: ./.github/scripts/build.sh
+        shell: bash
         env:
           CI: true
       - name: Save Files
