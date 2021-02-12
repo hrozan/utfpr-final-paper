@@ -1,9 +1,9 @@
 name: Server Deploy
 
 on:
-  pull_request:
+  push:
     branches:
-      - main 
+      - "feat/*"
 
 jobs:
   build:
@@ -13,11 +13,9 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: "14.15"
-      - name:  Build
-        run: |
-          cd packages/server/
-          npm ci
-          npm run build
+      - name: Build
+        shell: bash
+        run: ./.github/scripts/build.sh
         env:
           CI: true
       - name: Save Files
