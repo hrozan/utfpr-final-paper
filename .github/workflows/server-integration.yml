@@ -14,6 +14,6 @@ jobs:
         with:
           node-version: "14.15"
       - name: Install and Test
-        run: ./.github/scripts/test.sh
+        run: bash ./.github/scripts/test.sh
         env:
           CI: true
