@@ -38,5 +38,6 @@
   },
   "lint-staged": {
     "*.js": "eslint --cache --fix"
-  }
+  },
+  "dependencies": {}
 }
