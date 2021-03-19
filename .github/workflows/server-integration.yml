@@ -3,8 +3,9 @@ name: Server Integration
 on:
   push:
     branches:
-      - "feat/**"
-      - "fix/**"
+      - main
+      - "feat/*"
+      - "fix/*"
 
 jobs:
   test:
@@ -15,9 +16,6 @@ jobs:
         with:
           node-version: "14.15"
       - name: Install and Test
-        run: |
-          cd core/server/
-          npm ci
-          npm test
+        run: bash ./.github/scripts/test.sh
         env:
           CI: true
