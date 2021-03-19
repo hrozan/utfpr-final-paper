@@ -2,6 +2,6 @@
 
 set -eu
 
-cd packages/server/
+cd domains/server/
 npm ci
 npm test

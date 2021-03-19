@@ -10,7 +10,7 @@
     "build:watch": "tsc --watch",
     "test": "jest",
     "test:dev": "jest --watch --verbose=true --silent=false",
-    "prettier-fix" : "eslint --fix --ext .ts src/"
+    "prettier-fix": "eslint --fix --ext .ts src/"
   },
   "dependencies": {
     "@koa/cors": "^2.2.3",
