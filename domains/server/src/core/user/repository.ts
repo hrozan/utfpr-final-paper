@@ -2,7 +2,7 @@ import mongoose, { Document, Schema } from "mongoose"
 import bcrypt from "bcrypt"
 
 export interface User {
-  _id?: unknown
+  _id: string
   userName: string
   email: string
   password: string
