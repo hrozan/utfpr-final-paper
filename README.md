@@ -1,6 +1,5 @@
 # :computer: Computer Engineer Final Paper
-
-[![Unit Test](https://github.com/hrozan/utfpr-final-paper/actions/workflows/unit-test.yml/badge.svg)](https://github.com/hrozan/utfpr-final-paper/actions/workflows/unit-test.yml)
+[![Integration](https://github.com/hrozan/utfpr-final-paper/actions/workflows/integration.yml/badge.svg)](https://github.com/hrozan/utfpr-final-paper/actions/workflows/integration.yml)
 
 ## :mortar_board: UTFPR - Universidade Tecnológica Federal do Paraná
 
