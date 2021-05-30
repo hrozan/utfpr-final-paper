@@ -19,5 +19,7 @@ jobs:
         run: npm ci
         env:
           CI: true
+      - name: Bootstrap
+        run: npx lerna bootstrap
       - name: Run Unit Test
         run: npm test
