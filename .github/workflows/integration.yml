@@ -1,22 +1,25 @@
 name: Integration
-
 on: push
-
 jobs:
-  unit-test:
+  integration:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+
       - uses: actions/setup-node@v1
         with:
           node-version: "15.14.0"
-      - name: Install Packages
+
+      - name: Install Packages for Root
         run: npm ci
         env:
           CI: true
-      - name: Bootstrap
+
+      - name: Bootstrap Dependencies
         run: npx lerna bootstrap
-      - name: Eslint
+
+      - name: Run Eslint
         run: npm run lint
+
       - name: Run Unit Test
         run: npm test
