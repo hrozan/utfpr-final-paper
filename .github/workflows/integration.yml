@@ -1,11 +1,6 @@
-name: Unit Test
+name: Integration
 
-on:
-  push:
-    branches:
-      - main
-      - "feat/*"
-      - "fix/*"
+on: push
 
 jobs:
   unit-test:
