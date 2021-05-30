@@ -1,24 +1,30 @@
-import { createContext } from "react"
-import { saveToken, clearToken } from "../../infra/provider/token"
+import { createContext } from 'react'
+import { saveToken, clearToken } from '../../infra/provider/token'
 
 const user = {
-  isAuth: false,
-  login: async (token: string) => {},
-  logout: async () => {},
+	isAuth: false,
+	login: async (token: string) => {
+		console.log(token)
+	},
+	logout: async () => {
+		console.log('logout')
+	},
 }
 
 export const AuthContext = createContext(user)
 export const AuthProvider = AuthContext.Provider
 export const AuthConsumer = AuthContext.Consumer
 
-export const login = (updateState: Function) => async (token: string) => {
-  await saveToken(token)
-  updateState(true)
-  console.log("Login Successfully")
+type UpdateFunction = (state: boolean) => void
+
+export const login = (updateState: UpdateFunction) => async (token: string) => {
+	await saveToken(token)
+	updateState(true)
+	console.log('Login Successfully')
 }
 
-export const logout = (updateState: Function) => async () => {
-  await clearToken()
-  updateState(false)
-  console.log("Logout Successfully")
+export const logout = (updateState: UpdateFunction) => async () => {
+	await clearToken()
+	updateState(false)
+	console.log('Logout Successfully')
 }

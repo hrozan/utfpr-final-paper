@@ -21,5 +21,7 @@ jobs:
           CI: true
       - name: Bootstrap
         run: npx lerna bootstrap
+      - name: Eslint
+        run: npm run lint
       - name: Run Unit Test
         run: npm test

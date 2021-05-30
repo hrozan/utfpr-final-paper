@@ -1,5 +1,5 @@
 describe('UserController', () => {
-  it('should pass', () => {
-    expect(2 + 2).toBe(4);
-  });
-});
+	it('should pass', () => {
+		expect(2 + 2).toBe(4)
+	})
+})

@@ -1,5 +1,5 @@
-describe("Login", () => {
-  test("should pass", () => {
-    expect(2 + 2).toBe(4);
-  });
-});
+describe('Login', () => {
+	test('should pass', () => {
+		expect(2 + 2).toBe(4)
+	})
+})

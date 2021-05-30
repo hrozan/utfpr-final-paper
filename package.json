@@ -4,7 +4,10 @@
   "description": "This is repo contains all source code from my implementation",
   "main": "index.js",
   "scripts": {
-    "test": "lerna run test"
+    "test": "lerna run test",
+    "format": "prettier --write packages/**/*.ts",
+    "lint": "eslint \"{packages/dash/**/*.ts,packages/server/**/*.ts,packages/mobile/**/*.ts}\" --fix ",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -17,6 +20,15 @@
   },
   "homepage": "https://github.com/hrozan/utfpr-final-paper#readme",
   "dependencies": {
-    "lerna": "^4.0.0"
+    "lerna": "^4.0.0",
+    "prettier": "^2.3.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.25.0",
+    "@typescript-eslint/parser": "^4.25.0",
+    "eslint": "^7.27.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-vue": "^7.10.0",
+    "husky": "^6.0.0"
   }
 }
