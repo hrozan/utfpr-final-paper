@@ -1,0 +1,22 @@
+{
+  "name": "@utfpr-final-paper/root",
+  "version": "1.0.0",
+  "description": "This is repo contains all source code from my implementation",
+  "main": "index.js",
+  "scripts": {
+    "test": "lerna run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hrozan/utfpr-final-paper.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hrozan/utfpr-final-paper/issues"
+  },
+  "homepage": "https://github.com/hrozan/utfpr-final-paper#readme",
+  "dependencies": {
+    "lerna": "^4.0.0"
+  }
+}

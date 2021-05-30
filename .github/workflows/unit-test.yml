@@ -1,0 +1,21 @@
+name: Unit Test
+
+on:
+  push:
+    branches:
+      - main
+      - "feat/*"
+      - "fix/*"
+
+jobs:
+  unit-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "15.14.0"
+      - name: Running Test Script
+        run: sh ./.github/scripts/test.sh
+        env:
+          CI: true
