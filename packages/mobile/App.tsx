@@ -4,7 +4,7 @@ import { NativeRouter as Router, Route } from "react-router-native"
 
 import { Login } from "./app/components/pages/Login"
 import { Home } from "./app/components/pages/Home"
-import PrivateRoute from "./app/components/lib/PrivateRoute"
+import { PrivateRoute } from "./app/components/lib/PrivateRoute"
 
 const App: React.FC = () => {
 	return (

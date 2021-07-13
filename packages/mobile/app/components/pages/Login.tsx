@@ -1,12 +1,12 @@
-import React, { useContext, useState } from "react"
+import React, { useState } from "react"
 import { useHistory } from "react-router-native"
 import { ToastAndroid } from "react-native"
 import { Button } from "../layout/Button"
 import { Card } from "../layout/Card"
 import { TextField } from "../layout/TextField"
 import { Content } from "native-base"
-import { AuthContext } from "../lib/Auth"
 import { httpPost } from "../../client/http"
+import { login } from "../lib/PrivateRoute/auth"
 
 export interface Credentials {
 	email: string
@@ -21,7 +21,6 @@ const getTokenFromApi = async (credentials: Credentials): Promise<string> => {
 
 export const Login: React.FC = () => {
 	const history = useHistory()
-	const authContext = useContext(AuthContext)
 	const [email, onChangeEmail] = useState("")
 	const [password, onChangePassword] = useState("")
 
@@ -32,7 +31,7 @@ export const Login: React.FC = () => {
 				ToastAndroid.show("Error On Login", ToastAndroid.SHORT)
 			}
 
-			await authContext.login(token)
+			await login(token)
 			history.push("/")
 		} catch (e) {
 			ToastAndroid.show("Error On Login", ToastAndroid.SHORT)

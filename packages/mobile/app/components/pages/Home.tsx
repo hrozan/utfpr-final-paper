@@ -2,14 +2,13 @@ import React, { useContext, useEffect, useState } from "react"
 import { Content, H1, Text } from "native-base"
 import { Card } from "../layout/Card"
 import { Button } from "../layout/Button"
-import { AuthContext } from "../lib/Auth"
+import { getToken, logout } from "../lib/PrivateRoute/auth"
 import { mqttConnect, mqttDisconnect } from "../../client/mqtt"
-import { getToken } from "../../provider/token"
 import { httpPrivateGet } from "../../client/http"
 
 const brokerUrl = "/broker"
 const getBrokerCredential = async () => {
-	const token = (await getToken()) || ""
+	const token = await getToken()
 	const response = await httpPrivateGet(brokerUrl, token)
 	const userName = response.data.user as string
 	const password = response.data.password as string
@@ -29,9 +28,8 @@ export function Home(): JSX.Element {
 		setMemory(data.memory)
 	}
 
-	const authContext = useContext(AuthContext)
-	const onLogout = () => {
-		authContext.logout()
+	const onLogout = async () => {
+		await logout()
 		mqttDisconnect()
 	}
 
