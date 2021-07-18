@@ -9,21 +9,6 @@ services:
       - POSTGRES_USER=FinalPaper
       - POSTGRES_PASSWORD=FinalPaper
     ports:
-      - '5442:5432'
+      - '5444:5432'
 
-  db-test:
-    image: postgres
-    restart: 'always'
-    environment:
-      - POSTGRES_DB=FinalPaperTest
-      - POSTGRES_USER=FinalPaperTest
-      - POSTGRES_PASSWORD=FinalPaperTest
-    ports:
-      - '5443:5432'
-  db-mongo:
-    image: mongo
-    restart: 'always'
-    environment:
-      - MONGO_INITDB_DATABASE=FinalPapper
-    ports:
-      - '27017:27017'
+

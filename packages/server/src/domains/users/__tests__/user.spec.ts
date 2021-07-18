@@ -1,9 +1,9 @@
 import { agent as request } from "supertest"
-import { Application } from "../src/app"
+import { Application } from "../../../app"
 import { StatusCodes } from "http-status-codes"
 import { Server } from "http"
-import { Env } from "../src/config"
-import { UsersDto } from "../src/domains/users/users.dto"
+import { Env } from "../../../config"
+import { UsersDto } from "../users.dto"
 
 describe("User", () => {
 	let app: Application

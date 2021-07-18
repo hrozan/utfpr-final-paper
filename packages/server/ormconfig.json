@@ -1,0 +1,14 @@
+{
+	"type": "postgres",
+	"host": "localhost",
+	"port": 5444,
+	"username": "FinalPaper",
+	"password": "FinalPaper",
+	"database": "FinalPaper",
+	"logging": false,
+	"entities": ["src/domains/**/*.entity.ts"],
+	"migrations": ["src/database/migration/**/*.ts"],
+	"cli": {
+		"migrationsDir": "src/database/migration"
+	}
+}

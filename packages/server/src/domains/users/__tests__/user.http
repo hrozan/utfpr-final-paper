@@ -1,0 +1,29 @@
+// List all user
+http://localhost:3000/users
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIyMTdjMzA5My0zODg1LTRlYWUtYWIwNy1jNGIwMzQ3ZTM0NjYiLCJpYXQiOjE2MjY1ODU5Mjh9.EbKxTI61RPvrLdGznG66MJab5izVNQZxF5grCs3Tj_o
+###
+
+http://localhost:3000/broker
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIyMTdjMzA5My0zODg1LTRlYWUtYWIwNy1jNGIwMzQ3ZTM0NjYiLCJpYXQiOjE2MjY1ODU5Mjh9.EbKxTI61RPvrLdGznG66MJab5izVNQZxF5grCs3Tj_o
+
+###
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "userName": "hrozan",
+  "password": "passs",
+  "email": "hrozan@gmail.com"
+}
+
+###
+
+
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "password": "passs",
+  "email": "hrozan@gmail.com"
+}
+
