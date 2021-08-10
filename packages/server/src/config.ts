@@ -52,7 +52,7 @@ export class Config {
 		} else {
 			debug("development")
 			const databaseName = process.env.DB_NAME || "FinalPaper"
-			this.brokerCredential = process.env.BROKER_CREDENTIAL || "users.pass123"
+			this.brokerCredential = process.env.BROKER_CREDENTIAL || "user.pass123"
 			this.databaseUri = process.env.MONGO_URL || `mongodb://localhost:27017/${databaseName}`
 			this.jwtKey = process.env.JWT_KEY || "test-key"
 			this.port = parseInt(process.env.PORT || "3000", 10)

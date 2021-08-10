@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Content, H1, Text } from "native-base"
 import { Card } from "../layout/Card"
 import { Button } from "../layout/Button"
@@ -38,18 +38,18 @@ export function Home(): JSX.Element {
 		mqttConnect({ ...credentials, onUpdate })
 	}
 	useEffect(() => {
-		onStart()
+		onStart().catch((e) => console.error(e))
 	}, [])
 
 	return (
 		<Content>
 			<Card>
 				<H1>CPU</H1>
-				<Text>{cpu}</Text>
+				<Text>{cpu} %</Text>
 			</Card>
 			<Card>
 				<H1>Memory</H1>
-				<Text>{memory}</Text>
+				<Text>{memory} %</Text>
 			</Card>
 			<Card>
 				<Button title="Logout" onPress={onLogout} />

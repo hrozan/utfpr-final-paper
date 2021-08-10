@@ -7,7 +7,7 @@ export interface MqttConfig {
 }
 
 const BROKER_URI = "hrozan.xyz"
-const client = new mqtt.Client(BROKER_URI, 8083, "clientId")
+const client = new mqtt.Client(BROKER_URI, 8083, "3bd0aa83-ce73-4346-93a1-b04458448e54")
 
 export const mqttConnect = (config: MqttConfig) => {
 	client.onMessageArrived = (message) => {
@@ -21,6 +21,9 @@ export const mqttConnect = (config: MqttConfig) => {
 
 	const connectionOptions: ConnectionOptions = {
 		onSuccess,
+		onFailure: (e) => {
+			console.log(e)
+		},
 		useSSL: true,
 		userName: config.userName,
 		password: config.password,

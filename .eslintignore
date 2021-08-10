@@ -1,1 +1,1 @@
-packages/server/src/db/**/*.ts
+packages/server/src/database/**/*.ts

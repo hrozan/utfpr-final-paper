@@ -8,4 +8,5 @@ const request = async (config: AxiosRequestConfig) => {
 
 export const httpPost = async (url: string, payload: any) => request({ method: "POST", url, data: payload })
 
-export const httpPrivateGet = async (url: string, token: string) => request({ method: "GET", url, headers: { token } })
+export const httpPrivateGet = async (url: string, token: string) =>
+	request({ method: "GET", url, headers: { authorization: token } })

@@ -12,7 +12,8 @@
     "test:dev": "jest --watch --verbose=true --silent=false",
     "lint": "eslint --fix --ext .ts src",
     "db:migration:generate": "ts-node ./node_modules/typeorm/cli.js migration:generate -n",
-    "db:migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run"
+    "db:migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run",
+    "db:seed": "ts-node ./src/database/seed/create-admin.ts"
   },
   "dependencies": {
     "@koa/cors": "^2.2.3",
