@@ -1,10 +1,7 @@
-# :computer: Computer Engineer Final Paper
-[![Integration](https://github.com/hrozan/utfpr-final-paper/actions/workflows/integration.yml/badge.svg)](https://github.com/hrozan/utfpr-final-paper/actions/workflows/integration.yml)
+# Computer Engineer Degree Final Paper
 
-## :mortar_board: UTFPR - Universidade Tecnológica Federal do Paraná
+> [Universidade Tecnológica Federal do Paraná (UTFPR)](http://www.utfpr.edu.br/)
 
-This is repo contains all source code from my implementation
+This is repository contains all source code from a proof of concept of a IoT application
 
-### :page_facing_up: License
-
-This project is licensed under the terms of the [MIT license](/LICENSE)
+__License:__ [MIT license](/LICENSE)
